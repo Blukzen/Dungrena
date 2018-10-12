@@ -13,7 +13,7 @@ public class DungeonManager : MonoBehaviour {
 
     public GameEvent dungeonGeneratedEvent;
 
-    private int numRooms = 10;
+    private int numRooms = 15;
     private int dungeonSize = 10;
 
     private int[,] maze;
