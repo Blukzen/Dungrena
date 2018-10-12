@@ -85,7 +85,7 @@ MonoBehaviour:
   attackSpeed: 0.2
   secondaryAttackManaCost: 2
   lastAttackTime: 0
-  projectileSpeed: 6
+  projectileSpeed: 59
   projectile: {fileID: 114241000520155260, guid: 808421634b79c0a44ae40155637cfc73,
     type: 2}
   firePosition: {fileID: 4178554061409498}

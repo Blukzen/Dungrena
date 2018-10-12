@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour 
 {
-    public void Init() 
-    {
-        var dungeonManager = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
-        var spawnRoom = dungeonManager.SpawnRoom;
+    [Range(0, 10)]
+    public float damping;
+    private Vector2 targetPosition;
 
-        transform.position = new Vector3(spawnRoom.transform.position.x, spawnRoom.transform.position.y, -10);
+    private void Update() 
+    {
+        transform.position = Vector3.Lerp(this.transform.position, new Vector3(targetPosition.x, targetPosition.y, -10), damping);
+    }
+
+    public void MoveTo(Vector2 newPosition) 
+    {
+        targetPosition = newPosition;
     }
 }
