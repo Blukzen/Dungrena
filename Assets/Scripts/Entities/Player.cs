@@ -15,13 +15,16 @@ public class Player : AbstractEntity
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0))
-            currentWeapon.Attack();
+            if (currentWeapon != null)
+                currentWeapon.Attack();
         else if (Input.GetMouseButtonDown(1))
-            currentWeapon.SecondaryAttack(this);
+            if (currentWeapon != null)
+                currentWeapon.SecondaryAttack(this);
     }
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate () 
+    {
 
         Vector2 targetVeloctiy = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Move(targetVeloctiy);

@@ -117,6 +117,16 @@ public class DungeonManager : MonoBehaviour {
                 }
             }
         }
+
+        SpawnRoom.roomType = RoomType.SPAWN;
+        ShopRoom.roomType = RoomType.SHOP;
+        BossRoom.roomType = RoomType.BOSS;
+
+        foreach (var room in dungeon) 
+        {
+            if (room != null)
+                room.Init();
+        }
     }
 
     // Picks and returns a roomtype that will fit the position x, y.

@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     public static Player player;
     public Player playerPrefab;
 
-    private DungeonManager dungeonManager;
+    public static DungeonManager dungeonManager;
     private Camera mainCamera;
 
     public int score = 0;
@@ -28,5 +28,10 @@ public class GameManager : Singleton<GameManager>
     {
         dungeonManager = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         SpawnPlayer();
+    }
+
+    public void RegenerateDungeon() 
+    {
+        dungeonManager.Regenerate();
     }
 }
