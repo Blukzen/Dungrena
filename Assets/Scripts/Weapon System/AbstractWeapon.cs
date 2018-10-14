@@ -4,19 +4,26 @@ using UnityEngine;
 
 public abstract class AbstractWeapon : MonoBehaviour 
 {
-    public int damageAmount;
+    public int attackDamage;
     public float attackSpeed;
     public int secondaryAttackManaCost;
+
     [HideInInspector]
-    public float lastAttackTime;
+    public AbstractEntity Owner;
+
+    private float lastAttackTime;
 
     public abstract void Attack();
 
-    public abstract void SecondaryAttack(Player player);
+    public abstract void SecondaryAttack();
 
-    public bool CanAttack() {
-        Debug.Log(lastAttackTime + " : " + attackSpeed + " <= " + Time.time);
-        return (lastAttackTime + attackSpeed <= Time.time); }
+    public bool CanAttack() 
+    {
+        var canAttack = lastAttackTime + attackSpeed <= Time.time;
 
-    public int GetDamage() { return damageAmount; }
+        if (canAttack) lastAttackTime = Time.time;
+        return canAttack;
+    }
+
+    public int GetDamage() { return attackDamage; }
 }

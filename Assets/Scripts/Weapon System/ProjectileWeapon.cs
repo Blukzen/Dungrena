@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileWeapon : AbstractWeapon 
+public abstract class ProjectileWeapon : AbstractWeapon 
 {
 
     [SerializeField]
@@ -12,7 +12,7 @@ public class ProjectileWeapon : AbstractWeapon
     [SerializeField]
     private Transform firePosition;
 
-    public override void Attack() 
+    /**public override void Attack() 
     {
         if (!CanAttack())
             return;
@@ -49,9 +49,9 @@ public class ProjectileWeapon : AbstractWeapon
         proj.Owner = transform.parent.parent.GetComponent<AbstractEntity>();
         proj.Speed = projectileSpeed;
         proj.Damage = GetDamage();
-    }
+    }**/
 
-    private Quaternion DirectionToMouse(int rot) 
+    protected Quaternion DirectionToMouse(int rot) 
     {
         Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePosition.position;
         diff.Normalize();

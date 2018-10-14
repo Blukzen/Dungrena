@@ -14,12 +14,13 @@ public class Player : AbstractEntity
 
     private void Update() 
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) {
+            if (currentWeapon != null) currentWeapon.Attack();
+        } else if (Input.GetMouseButtonDown(1)) {
+            Debug.Log("ERight CLick");
             if (currentWeapon != null)
-                currentWeapon.Attack();
-        else if (Input.GetMouseButtonDown(1))
-            if (currentWeapon != null)
-                currentWeapon.SecondaryAttack(this);
+                currentWeapon.SecondaryAttack();
+        }
     }
 	
 	// Update is called once per frame

@@ -26,4 +26,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable, IMoveable {
     public void Move(Vector2 direction) {
         rb2d.velocity = (direction * moveSpeed);
     }
+
+    public void AddForce(Vector2 direction, float strength) {
+        rb2d.AddForce(direction.normalized * strength);
+    }
 }

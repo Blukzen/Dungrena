@@ -2,15 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeWeapon : MonoBehaviour {
+[RequireComponent(typeof(CircleCollider2D), typeof(Animator))]
+public abstract class MeleeWeapon : AbstractWeapon 
+{
+    public int secondaryAttackDamage;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public LayerMask collisionMask; // Collision layer to look for enemies to attack.
+    public float knockBackForce; // Knockback force applied to hit enemy.
+    public GameObject hitEffect; // Prefab of particle effect for hitting enemy.
+
+    [Header("Animations")]
+    // Name of animation states for attacks in animator controller.
+    public string mainAttackAnimation = "Default";
+    public string secondaryAttackAnimation = "Default";
+
+    protected Animator animator;
+    protected CircleCollider2D hitCollider;
+
+    protected int currentDamage; // This value is the damage of the current attack/damage applied on hit.
+
+    private void Awake() {
+        hitCollider = GetComponent<CircleCollider2D>();
+        hitCollider.isTrigger = true;
+        hitCollider.enabled = false;
+
+        animator = GetComponent<Animator>();
+
+        currentDamage = attackDamage;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collider) {
+        // if the collider the melee weapon is colliding with is not on the targeted layer mask, we do nothing.
+        if ((collisionMask.value & (1 << collider.gameObject.layer)) == 0) {
+            return;
+        }
+
+        // if the collider the melee weapon is colliding with is its owner (the player), we do nothing.
+        var isOwner = collider.gameObject == Owner;
+        if (isOwner) {
+            return;
+        }
+
+        // if the collider hits a entity apply damage, knockback and spawn hit effect.
+        var entity = collider.GetComponent<AbstractEntity>();
+        if (entity != null) {
+            entity.Damage(currentDamage);
+
+            var knockbackDirection = entity.transform.position - transform.position;
+            entity.AddForce(knockbackDirection, knockBackForce);
+
+            var effect = Instantiate(hitEffect, collider.transform.position, collider.transform.rotation);
+            effect.transform.parent = entity.transform;
+            return;
+        }
+    }
+
+    // Called to do a generic attack. string animation is the name of the animation to play on attack.
+    protected void MeleeAttack(string animation) {
+        if (!CanAttack()) return;
+        animator.Play(animation);
+    }
+
+    // Enables hitCollider to start attack. Used in animation events.
+    protected void AttackBegin() {
+        hitCollider.enabled = true;
+    }
+
+    // Disables hitCollider to end attack. Used in animation events.
+    protected void AttackEnd() {
+        hitCollider.enabled = false;
+    }
 }

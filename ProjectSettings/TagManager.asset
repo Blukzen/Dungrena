@@ -14,11 +14,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Entities
   - AttackHitBoxes
   - Projectiles
   - IgnoreCollisions
-  - 
+  - World
   - 
   - 
   - 
