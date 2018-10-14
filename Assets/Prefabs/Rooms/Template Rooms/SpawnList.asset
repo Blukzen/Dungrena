@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a8aba7cf5810f42a0fdbab3278e3e4, type: 3}
+  m_Name: SpawnList
+  m_EditorClassIdentifier: 
+  common: {fileID: 114555841191532290, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+  uncommon: {fileID: 114555841191532290, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+  rare: {fileID: 114555841191532290, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+  special: {fileID: 114555841191532290, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}

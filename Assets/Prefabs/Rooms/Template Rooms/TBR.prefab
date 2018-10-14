@@ -353,9 +353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exits: 000000000100000003000000
-  roomType: 0
-  entities:
-  - {fileID: 114555841191532290, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
   difficulty: 0
 --- !u!19719996 &2113883507210047574
 TilemapCollider2D:

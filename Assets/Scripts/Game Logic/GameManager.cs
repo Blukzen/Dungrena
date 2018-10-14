@@ -8,9 +8,14 @@ public class GameManager : Singleton<GameManager>
     public Player playerPrefab;
 
     public static DungeonManager dungeonManager;
+    public static EnemySpawner enemySpawner;
     private Camera mainCamera;
 
     public int score = 0;
+
+    public void Start() {
+        enemySpawner = GetComponent<EnemySpawner>();
+    }
 
     private void SpawnPlayer() 
     {
@@ -21,7 +26,10 @@ public class GameManager : Singleton<GameManager>
 
         player.transform.position = spawnRoom.transform.position;
 
-        Camera.main.GetComponent<CameraController>().MoveTo(new Vector2(player.transform.position.x, player.transform.position.y));
+        Camera.main.GetComponent<CameraController>().MoveTo(new Vector2(spawnRoom.transform.position.x, spawnRoom.transform.position.y));
+        Camera.main.transform.position = player.transform.position;
+
+        LevelChanger.LevelReady();
     }
 
     public void DungeonGenerated() 
@@ -32,6 +40,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RegenerateDungeon() 
     {
+        enemySpawner.KillAll();
         dungeonManager.Regenerate();
     }
 }

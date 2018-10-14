@@ -11,6 +11,9 @@ public class DungeonManager : MonoBehaviour {
     public int roomHeight = 10;
     public int roomWidth = 18;
 
+    public int maxDifficulty = 1;
+    public int minDifficulty = 1;
+
     public GameEvent dungeonGeneratedEvent;
 
     private int numRooms = 15;
@@ -86,7 +89,7 @@ public class DungeonManager : MonoBehaviour {
                 pos.y -= 1;
 
             // Mark room location in maze array.
-            maze.SetValue(1, (int) pos.x, (int) pos.y);
+            maze.SetValue(Random.Range(minDifficulty, maxDifficulty), (int) pos.x, (int) pos.y);
 
             // Keep reference to special rooms.
             if (i == 0)
@@ -106,26 +109,32 @@ public class DungeonManager : MonoBehaviour {
             for (int row = 0; row < maze.GetLength(1); row++) 
             {
                 // If co-ord has been marked as a room location
-                if (maze[col, row].Equals(1)) {
+                if (maze[col, row] != 0) {
                     var roomPrefab = GetRoomPrefab(col, row);
                     var room = Instantiate(roomPrefab);
 
                     room.transform.position = new Vector2(col * roomWidth, row * roomHeight);
                     room.transform.SetParent(transform);
+                    room.difficulty = maze[col, row];
 
                     dungeon.SetValue(room, col, row);
                 }
             }
         }
 
-        SpawnRoom.roomType = RoomType.SPAWN;
-        ShopRoom.roomType = RoomType.SHOP;
-        BossRoom.roomType = RoomType.BOSS;
+        SpawnRoom.Type = RoomType.SPAWN;
+        ShopRoom.Type = RoomType.SHOP;
+        BossRoom.Type = RoomType.BOSS;
 
         foreach (var room in dungeon) 
         {
-            if (room != null)
+            if (room != null) 
+            {
                 room.Init();
+
+                if (room.Type == RoomType.NORMAL)
+                    GameManager.enemySpawner.Spawn(room);
+            }
         }
     }
 
@@ -136,16 +145,16 @@ public class DungeonManager : MonoBehaviour {
 
         // Check which exits are needed.
         // Up
-        if (y + 1 < (dungeonSize * 2) && maze.GetValue(x, y + 1).Equals(1))
+        if (y + 1 < (dungeonSize * 2) && (int) maze.GetValue(x, y + 1) != 0)
             exits.Add(Exits.UP);
         // Left
-        if (x - 1 > 0 && maze.GetValue(x - 1, y).Equals(1))
+        if (x - 1 > 0 && (int)maze.GetValue(x - 1, y) != 0)
             exits.Add(Exits.LEFT);
         // Down
-        if (y - 1 > 0 && maze.GetValue(x, y - 1).Equals(1))
+        if (y - 1 > 0 && (int)maze.GetValue(x, y - 1) != 0)
             exits.Add(Exits.DOWN);
         // Right
-        if (x + 1 < (dungeonSize * 2) && maze.GetValue(x + 1, y).Equals(1))
+        if (x + 1 < (dungeonSize * 2) && (int) maze.GetValue(x + 1, y) != 0)
             exits.Add(Exits.RIGHT);
 
         // Hand over to room list to find room that meets the requirements.

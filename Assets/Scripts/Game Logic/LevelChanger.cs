@@ -5,13 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanger : Singleton<LevelChanger> 
 {
+    private static bool gameReady = false;
     private Animator animator;
     private int levelToLoad;
 
     private void Start() 
     {
         animator = GetComponent<Animator>();
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
+
+    private void Update() {
+        if (gameReady) {
+            animator.SetTrigger("FadeIn");
+            gameReady = false;
+        }
     }
 
     public void LoadNextScene() {
@@ -29,7 +36,7 @@ public class LevelChanger : Singleton<LevelChanger>
         SceneManager.LoadScene(levelToLoad);
     }
 
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1) {
-        animator.SetTrigger("FadeIn");
+    public static void LevelReady() {
+        gameReady = true;
     }
 }
