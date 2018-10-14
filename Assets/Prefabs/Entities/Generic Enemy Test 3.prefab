@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61082354577138590}
   - component: {fileID: 114555841191532290}
   m_Layer: 8
-  m_Name: Generic Enemy Test 2
+  m_Name: Generic Enemy Test 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6875, y: 0.9375}
+    oldSize: {x: 0.75, y: 1}
     newSize: {x: 0.6875, y: 0.9375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: -2124109051
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300124, guid: 75276f9e4a16ba045b21a389ebfcfdf4, type: 3}
+  m_Sprite: {fileID: 21300100, guid: 75276f9e4a16ba045b21a389ebfcfdf4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
