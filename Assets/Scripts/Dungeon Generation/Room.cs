@@ -18,7 +18,7 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collision.gameObject == GameManager.player.gameObject)
+        if (collision.gameObject.GetComponent<Player>() != null)
             Camera.main.GetComponent<CameraController>().MoveTo(transform.position);
     }
 
@@ -45,6 +45,8 @@ public class Room : MonoBehaviour
 
     private void InitNormalRoom() 
     {
+        if (GameManager.enemySpawner != null)
+            GameManager.enemySpawner.Spawn(this);
     }
 
     private void InitSpawnRoom() 

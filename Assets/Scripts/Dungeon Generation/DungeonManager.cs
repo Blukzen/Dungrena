@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class DungeonManager : MonoBehaviour {
     public int minDifficulty = 1;
 
     public GameEvent dungeonGeneratedEvent;
+    public AstarPath astarPrefab;
 
     private int numRooms = 15;
     private int dungeonSize = 10;
@@ -43,9 +45,13 @@ public class DungeonManager : MonoBehaviour {
         GenerateMaze();
         Debug.Log(TAG + "Building Dunegon...");
         BuildDungeon();
+        Debug.Log(TAG + "Scanning dungeon for pathfinding...");
+        AstarPath astar = Instantiate(astarPrefab);
+        astar.QueueGraphUpdates();
+        Debug.Log(TAG + "Dungeon Complete!");
+
         if (dungeonGeneratedEvent != null)
             dungeonGeneratedEvent.Raise();
-        Debug.Log(TAG + "Dungeon Complete!");
     }
 
     void GenerateMaze() 
@@ -129,12 +135,7 @@ public class DungeonManager : MonoBehaviour {
         foreach (var room in dungeon) 
         {
             if (room != null) 
-            {
                 room.Init();
-
-                if (room.Type == RoomType.NORMAL)
-                    GameManager.enemySpawner.Spawn(room);
-            }
         }
     }
 
@@ -175,5 +176,16 @@ public class DungeonManager : MonoBehaviour {
         }
 
         Initialize();
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.cyan;
+
+        Gizmos.DrawLine(new Vector3(0, 0), new Vector3((dungeonSize * 2) * roomWidth, 0));
+        Gizmos.DrawLine(new Vector3(0, 0), new Vector3(0, (dungeonSize * 2) * roomHeight));
+
+        Gizmos.DrawLine(new Vector3((dungeonSize * 2) * roomWidth, (dungeonSize * 2) * roomHeight), new Vector3(0, (dungeonSize * 2) * roomHeight));
+        Gizmos.DrawLine(new Vector3((dungeonSize * 2) * roomWidth, (dungeonSize * 2) * roomHeight), new Vector3((dungeonSize * 2) * roomWidth, 0));
+
     }
 }

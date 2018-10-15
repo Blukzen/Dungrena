@@ -362,7 +362,11 @@ MonoBehaviour:
   roomList: {fileID: 11400000, guid: 62683ad8c68552c45abeb0946ea4218b, type: 2}
   roomHeight: 10
   roomWidth: 18
+  maxDifficulty: 1
+  minDifficulty: 1
   dungeonGeneratedEvent: {fileID: 11400000, guid: 18b6a90f2a09bfb40a66b152d5917177,
+    type: 2}
+  astarPrefab: {fileID: 114622409332476072, guid: 029bd8c86938ab741b325550b85a35fb,
     type: 2}
 --- !u!4 &452407304
 Transform:
@@ -472,7 +476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1533742948}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: LevelManagers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
