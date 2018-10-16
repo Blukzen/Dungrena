@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Room : MonoBehaviour 
 {
@@ -14,17 +15,17 @@ public class Room : MonoBehaviour
         set { roomType = value; }
     }
 
-    private BoxCollider2D roomArea;
+    private BoxCollider2D spawnArea;
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collision.gameObject.GetComponent<Player>() != null)
+        if (collision.gameObject.tag == "Player")
             Camera.main.GetComponent<CameraController>().MoveTo(transform.position);
     }
 
     public void Init() 
     {
-        roomArea = GetComponent<BoxCollider2D>();
+        spawnArea = GetComponent<BoxCollider2D>();
 
         switch (roomType) 
         {
@@ -53,11 +54,17 @@ public class Room : MonoBehaviour
     {
         Debug.Log("Initializing Spawn Room");
 
+        // Set layer to world so enemys cant see into this room
+        gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
+
     }
 
     private void InitShopRoom() 
     {
         Debug.Log("Initializing Shop Room");
+
+        // Set layer to world to enemys cant see into this room
+        gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
 
     }
 
@@ -68,9 +75,9 @@ public class Room : MonoBehaviour
     }
 
     public Vector2 RandomPointInRoom() {
-        return (Vector2) roomArea.transform.position + new Vector2(
-           (Random.value - 0.5f) * roomArea.size.x,
-           (Random.value - 0.5f) * roomArea.size.y
+        return (Vector2) spawnArea.transform.position + new Vector2(
+           (Random.value - 0.5f) * spawnArea.bounds.size.x,
+           (Random.value - 0.5f) * spawnArea.bounds.size.y
         );
     }
 }
