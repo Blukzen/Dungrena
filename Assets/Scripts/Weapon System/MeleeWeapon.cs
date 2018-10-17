@@ -53,7 +53,7 @@ public abstract class MeleeWeapon : AbstractWeapon
             entity.Damage(currentDamage);
 
             var knockbackDirection = entity.transform.position - transform.position;
-            entity.AddForce(knockbackDirection, knockBackForce);
+            entity.AddVelocity(knockbackDirection, knockBackForce);
 
             var effect = Instantiate(hitEffect, collider.transform.position, collider.transform.rotation);
             effect.transform.parent = entity.transform;

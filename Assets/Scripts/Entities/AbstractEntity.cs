@@ -1,32 +1,128 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class AbstractEntity : MonoBehaviour, IDamageable, IMoveable {
+public abstract class AbstractEntity : MonoBehaviour, IDamageable
+{
 
+    [Header("Physics Values")]
+    public int maxSpeed = 7;
+    public float acceleration = 1;
+    public float friction = 1.9f;
+
+    private Vector2 moveDirection;
+
+    [Header("Player Stats")]
     [SerializeField]
     private int maxHealth;
     private int health;
-    [SerializeField]
-    private int moveSpeed;
 
     private Rigidbody2D rb2d;
     private Collider2D collider2d;
 
-    private void Awake() {
+    private void Awake()
+    {
         health = maxHealth;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    // TODO: Handle death event
-    public void Damage(int amount) {
+    public void UpdatePhysics()
+    {
+
+        // TODO: friction and acceleration multipliers
+        var _friction = friction;
+        var _acceleration = acceleration;
+
+        // Velocity updated
+        Vector2 newVel = rb2d.velocity;
+
+        // Movement
+
+        // Left
+        if (moveDirection.x < 0)
+        {
+            // Apply acceleration left
+            if (newVel.x > 0)
+                newVel.x = Approach(newVel.x, 0, _friction);
+            newVel.x = Approach(newVel.x, -maxSpeed, _acceleration);
+        }
+
+        // Right
+        if (moveDirection.x > 0)
+        {
+            // Apply acceleration right
+            if (newVel.x < 0)
+                newVel.x = Approach(newVel.x, 0, _friction);
+            newVel.x = Approach(newVel.x, maxSpeed, _acceleration);
+        }
+
+        // Down
+        if (moveDirection.y < 0)
+        {
+            // Apply acceleration down
+            if (newVel.y > 0)
+                newVel.y = Approach(newVel.y, 0, _friction);
+            newVel.y = Approach(newVel.y, -maxSpeed, _acceleration);
+        }
+
+        // Up
+        if (moveDirection.y > 0)
+        {
+            // Apply acceleration up
+            if (newVel.y < 0)
+                newVel.y = Approach(newVel.y, 0, _friction);
+            newVel.y = Approach(newVel.y, maxSpeed, _friction);
+        }
+
+        // Friction when not moving
+        if (moveDirection.x == 0)
+            newVel.x = Approach(newVel.x, 0, _friction);
+        if (moveDirection.y == 0)
+            newVel.y = Approach(newVel.y, 0, _friction);
+
+
+        Debug.Log(newVel);
+
+        rb2d.velocity = newVel;
+    }
+
+    // TODO: Handle death event.
+    public void Damage(int amount)
+    {
         health -= amount;
     }
 
-    public void Move(Vector2 direction) {
-        rb2d.velocity = (direction * moveSpeed);
+    // Set movement input
+    public void SetMovement(Vector2 direction)
+    {
+        moveDirection = direction;
     }
 
+    // For adding extra velocity without moveSpeed bounds to rb2d
+    public void AddVelocity(Vector2 direction, float speed)
+    {
+        rb2d.velocity += (direction.normalized * speed);
+    }
+
+    // For adding force to rb2d
     public void AddForce(Vector2 direction, float strength) {
         rb2d.AddForce(direction.normalized * strength);
+    }
+
+
+    // Approach end from start at an increment of shift
+    public float Approach(float start, float end, float shift)
+    {
+        float val = 0;
+
+        if (start < end)
+        {
+            val = Mathf.Min(start + shift, end);
+        }
+        else
+        {
+            val = Mathf.Max(start - shift, end);
+        }
+
+        return val;
     }
 }

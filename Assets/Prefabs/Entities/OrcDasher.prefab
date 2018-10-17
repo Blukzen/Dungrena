@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114681041545352206}
   - component: {fileID: 114889669255677034}
   - component: {fileID: 58952614500778366}
+  - component: {fileID: 114805103368521058}
   m_Layer: 8
   m_Name: OrcDasher
   m_TagString: Untagged
@@ -88,7 +89,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: d8951137673582e4995a5b8ad0a51c69, type: 2}
@@ -137,8 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19c8474211dcfc4b998d60887e7b538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 5
+  acceleration: 0.1
+  friction: 1
   maxHealth: 15
-  moveSpeed: 4
 --- !u!114 &114070595716914548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,9 +169,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
   repathRate: 0.5
-  nextWaypointDistance: 1
+  nextWaypointDistance: 0.5
   reachedEndOfPath: 0
   canSeePlayer: 0
+--- !u!114 &114805103368521058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868797904258820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 1
+  subdivisions: 2
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
 --- !u!114 &114889669255677034
 MonoBehaviour:
   m_ObjectHideFlags: 1

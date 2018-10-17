@@ -154,7 +154,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d8951137673582e4995a5b8ad0a51c69, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -182,7 +182,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1687475868900996}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d8951137673582e4995a5b8ad0a51c69, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -365,10 +365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429c3d91670646140acf1f7dc0a30e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 7
+  acceleration: 10
+  friction: 10
   maxHealth: 10
-  moveSpeed: 5
-  currentWeapon: {fileID: 0}
   maxMana: 10
+  currentWeapon: {fileID: 0}
 --- !u!114 &114771712804090922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,6 +414,7 @@ MonoBehaviour:
     m_Bits: 256
   knockBackForce: 400
   hitEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44, type: 2}
+  swordEffect: {fileID: 0}
   mainAttackAnimation: Default
   secondaryAttackAnimation: CleaverSwing
 --- !u!212 &212260260786268240

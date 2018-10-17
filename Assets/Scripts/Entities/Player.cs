@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Player : AbstractEntity
 {
-
-    [SerializeField]
-    private AbstractWeapon currentWeapon;
     public int maxMana;
     private int mana;
+
+    [Header("Extra")]
+    [SerializeField]
+    private AbstractWeapon currentWeapon;
+    public AbstractAbility currentAbility = new DashAbility();
 
     private void Start() { mana = maxMana; }
 
@@ -17,9 +19,8 @@ public class Player : AbstractEntity
         if (Input.GetMouseButtonDown(0)) {
             if (currentWeapon != null) currentWeapon.Attack();
         } else if (Input.GetMouseButtonDown(1)) {
-            Debug.Log("ERight CLick");
-            if (currentWeapon != null)
-                currentWeapon.SecondaryAttack();
+            if (currentAbility != null)
+                currentAbility.cast(this);
         }
     }
 	
@@ -27,10 +28,14 @@ public class Player : AbstractEntity
 	void FixedUpdate () 
     {
 
-        Vector2 targetVeloctiy = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Move(targetVeloctiy);
+        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        GetComponent<Animator>().SetFloat("Velocity", targetVeloctiy.magnitude);
+        Debug.Log("Moving in " + direction);
+        SetMovement(direction);
+        UpdatePhysics();    
+        
+
+        GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
 
     }
 

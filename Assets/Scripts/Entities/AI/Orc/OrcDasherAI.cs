@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class OrcDasherAI : AbstractEnemyAI
 {
-    private void Start() {
-    }
-
-    private void Update() {
+    private void FixedUpdate() {
         if (canSeePlayer) {
             targetPosition = GameObject.FindGameObjectWithTag("Player").transform;
-            MoveToTarget();
+            AstarMoveToTarget();
         } else {
             targetPosition = null;
+            entity.SetMovement(new Vector2());
         }
+
+        entity.UpdatePhysics();
     }
 }

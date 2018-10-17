@@ -7,7 +7,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
     public Transform targetPosition;
     public Path path;
 
-    private AbstractEntity entity;
+    protected AbstractEntity entity;
     private Seeker seeker;
 
     public float repathRate = 0.5f;
@@ -42,7 +42,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
         }
     }
 
-    public void MoveToTarget() 
+    public void AstarMoveToTarget() 
     {
         if (Time.time > lastRepath + repathRate && seeker.IsDone()) 
         {
@@ -96,7 +96,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
 
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        entity.Move(velocity);
+        entity.SetMovement(dir);
 
         // If you are writing a 2D game you may want to remove the CharacterController and instead modify the position directly
         // transform.position += velocity * Time.deltaTime;

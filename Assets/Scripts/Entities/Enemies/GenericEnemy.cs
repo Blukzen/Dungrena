@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GenericEnemy : AbstractEntity {
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+    private AbstractAbility attack;
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+        UpdatePhysics();
 	}
+
+    void Attack()
+    {
+        attack.cast(this);
+    }
 }
