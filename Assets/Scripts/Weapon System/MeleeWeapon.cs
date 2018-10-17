@@ -10,6 +10,7 @@ public abstract class MeleeWeapon : AbstractWeapon
     public LayerMask collisionMask; // Collision layer to look for enemies to attack.
     public float knockBackForce; // Knockback force applied to hit enemy.
     public GameObject hitEffect; // Prefab of particle effect for hitting enemy.
+    public TrailRenderer swordEffect;
 
     [Header("Animations")]
     // Name of animation states for attacks in animator controller.
@@ -25,6 +26,9 @@ public abstract class MeleeWeapon : AbstractWeapon
         hitCollider = GetComponent<CircleCollider2D>();
         hitCollider.isTrigger = true;
         hitCollider.enabled = false;
+
+        if (swordEffect)
+            swordEffect.enabled = false;
 
         animator = GetComponent<Animator>();
 
@@ -58,18 +62,25 @@ public abstract class MeleeWeapon : AbstractWeapon
     }
 
     // Called to do a generic attack. string animation is the name of the animation to play on attack.
-    protected void MeleeAttack(string animation) {
+    protected void MeleeAttack(string animation) 
+    {
         if (!CanAttack()) return;
         animator.Play(animation);
     }
 
     // Enables hitCollider to start attack. Used in animation events.
-    protected void AttackBegin() {
+    protected void AttackBegin() 
+    {
         hitCollider.enabled = true;
+        if (swordEffect)
+            swordEffect.enabled = true;
     }
 
     // Disables hitCollider to end attack. Used in animation events.
-    protected void AttackEnd() {
+    protected void AttackEnd() 
+    {
         hitCollider.enabled = false;
+        if (swordEffect)
+            swordEffect.enabled = false;
     }
 }
