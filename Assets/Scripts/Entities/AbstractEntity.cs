@@ -16,8 +16,13 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     private int maxHealth;
     private int health;
 
+    private float pickUpRange = 1.5f;
+    private Vector3 pickUpOffset = new Vector2(0, 0.5f);
+
     private Rigidbody2D rb2d;
     private Collider2D collider2d;
+
+    public LayerMask layerMask;
 
     private void Awake()
     {
@@ -79,9 +84,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         if (moveDirection.y == 0)
             newVel.y = Approach(newVel.y, 0, _friction);
 
-
-        Debug.Log(newVel);
-
         rb2d.velocity = newVel;
     }
 
@@ -108,7 +110,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         rb2d.AddForce(direction.normalized * strength);
     }
 
-
     // Approach end from start at an increment of shift
     public float Approach(float start, float end, float shift)
     {
@@ -124,5 +125,43 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         }
 
         return val;
+    }
+
+    // Pick up nearest item within pickup range
+    public void pickupItem()
+    {
+        IPickupable closestItem = null;
+        float distanceToItem = pickUpRange + 1; // Max range
+
+        // Search for nearby items
+        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position + pickUpOffset, pickUpRange, layerMask);
+
+        // No items
+        if (items.Length == 0)
+            return;
+
+        // Find closest item
+        foreach (var item in items)
+        {
+            float distance = Vector2.Distance(transform.position + pickUpOffset, item.transform.position);
+
+            if (closestItem == null)
+            {
+                closestItem = item.GetComponent<IPickupable>();
+                distanceToItem = distance;
+            } else if (distance < distanceToItem)
+            {
+                closestItem = item.GetComponent<IPickupable>();
+                distanceToItem = distance;
+            }
+        }
+
+        // Pickup closes
+        closestItem.pickup(this);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position + pickUpOffset, pickUpRange);
     }
 }

@@ -10,33 +10,36 @@ public class Player : AbstractEntity
     [Header("Extra")]
     [SerializeField]
     private AbstractWeapon currentWeapon;
-    public AbstractAbility currentAbility = new DashAbility();
 
-    private void Start() { mana = maxMana; }
+    private void Start() {
+        mana = maxMana;
+    }
 
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0)) {
             if (currentWeapon != null) currentWeapon.Attack();
         } else if (Input.GetMouseButtonDown(1)) {
-            if (currentAbility != null)
-                currentAbility.cast(this);
+            if (currentWeapon != null)
+                currentWeapon.SecondaryAttack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            pickupItem();
         }
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () 
     {
-
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        Debug.Log("Moving in " + direction);
         SetMovement(direction);
         UpdatePhysics();    
         
 
         GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
-
     }
 
     public bool UseMana(int amount) 
@@ -46,5 +49,14 @@ public class Player : AbstractEntity
 
         mana -= amount;
         return true;
+    }
+
+    public void EquipWeapon(AbstractWeapon weapon)
+    {
+        if (currentWeapon != null)
+            currentWeapon.Drop(weapon.transform.position);
+
+        weapon.transform.parent = transform.Find("Weapon");
+        currentWeapon = weapon;
     }
 }

@@ -24,18 +24,22 @@ public abstract class MeleeWeapon : AbstractWeapon
 
     private void Awake() {
         hitCollider = GetComponent<CircleCollider2D>();
-        hitCollider.isTrigger = true;
-        hitCollider.enabled = false;
+        //hitCollider.isTrigger = true;
+        //hitCollider.enabled = false;
 
         if (swordEffect)
             swordEffect.enabled = false;
 
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
         currentDamage = attackDamage;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collider) {
+        // Dont do anything if the items dropped on the ground
+        if (onGround)
+            return;
+
         // if the collider the melee weapon is colliding with is not on the targeted layer mask, we do nothing.
         if ((collisionMask.value & (1 << collider.gameObject.layer)) == 0) {
             return;
@@ -82,5 +86,19 @@ public abstract class MeleeWeapon : AbstractWeapon
         hitCollider.enabled = false;
         if (swordEffect)
             swordEffect.enabled = false;
+    }
+
+    public override void pickup(AbstractEntity entity)
+    {
+        base.pickup(entity);
+        animator.enabled = true;
+        hitCollider.enabled = false;
+    }
+
+    public override void Drop(Vector2 position)
+    {
+        base.Drop(position);
+        animator.enabled = false;
+        hitCollider.enabled = true;
     }
 }

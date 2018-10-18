@@ -9,17 +9,36 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1560234297768740}
+  m_RootGameObject: {fileID: 1105943549440404}
   m_IsPrefabAsset: 1
---- !u!1 &1533759339117608
+--- !u!1 &1105943549440404
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4589459979819686}
-  - component: {fileID: 96563048836712614}
+  - component: {fileID: 4146245958792564}
+  - component: {fileID: 212401765911758816}
+  - component: {fileID: 95970306174826056}
+  - component: {fileID: 58611564210538456}
+  - component: {fileID: 114699376929006788}
+  m_Layer: 11
+  m_Name: Katana
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1195454047130386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4524487660688840}
+  - component: {fileID: 96792619584697078}
   m_Layer: 11
   m_Name: Effects
   m_TagString: Untagged
@@ -27,74 +46,55 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1560234297768740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4599828083037958}
-  - component: {fileID: 212322710210115554}
-  - component: {fileID: 95876779914079372}
-  - component: {fileID: 58792044447087102}
-  - component: {fileID: 114746445673159950}
-  m_Layer: 11
-  m_Name: The Cleaver
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4589459979819686
+--- !u!4 &4146245958792564
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533759339117608}
+  m_GameObject: {fileID: 1105943549440404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.235, y: 0.998, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4599828083037958}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4599828083037958
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560234297768740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8527517, y: 0.711, z: 0}
+  m_LocalPosition: {x: 2.276, y: 0.701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4589459979819686}
+  - {fileID: 4524487660688840}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58792044447087102
+--- !u!4 &4524487660688840
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195454047130386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.042, y: 0.998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4146245958792564}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &58611564210538456
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560234297768740}
+  m_GameObject: {fileID: 1105943549440404}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.01}
+  m_Offset: {x: 0, y: 0.94}
   serializedVersion: 2
-  m_Radius: 0.73249984
---- !u!95 &95876779914079372
+  m_Radius: 0.67
+--- !u!95 &95970306174826056
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560234297768740}
+  m_GameObject: {fileID: 1105943549440404}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2ac08f80fc799814da9ab8a159cca763, type: 2}
@@ -106,13 +106,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!96 &96563048836712614
+--- !u!96 &96792619584697078
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533759339117608}
+  m_GameObject: {fileID: 1195454047130386}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -207,12 +207,12 @@ TrailRenderer:
   m_MinVertexDistance: 0.5
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &114746445673159950
+--- !u!114 &114699376929006788
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560234297768740}
+  m_GameObject: {fileID: 1105943549440404}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fad9ab7a6b9abfa4b82b0e9edadc2de4, type: 3}
@@ -228,15 +228,15 @@ MonoBehaviour:
     m_Bits: 256
   knockBackForce: 400
   hitEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44, type: 2}
-  swordEffect: {fileID: 96563048836712614}
+  swordEffect: {fileID: 96792619584697078}
   mainAttackAnimation: Default
   secondaryAttackAnimation: CleaverSwing
---- !u!212 &212322710210115554
+--- !u!212 &212401765911758816
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560234297768740}
+  m_GameObject: {fileID: 1105943549440404}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -266,7 +266,7 @@ SpriteRenderer:
   m_SortingLayerID: 815372455
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300020, guid: 4c8723f2b62111d42854cc33853b6662, type: 3}
+  m_Sprite: {fileID: 21300016, guid: 4c8723f2b62111d42854cc33853b6662, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
