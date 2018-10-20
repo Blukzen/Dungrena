@@ -127,37 +127,31 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         return val;
     }
 
-    // Pick up nearest item within pickup range
+    // Pick up 
     public void pickupItem()
     {
-        IPickupable closestItem = null;
-        float distanceToItem = pickUpRange + 1; // Max range
+        IPickupable itemToPickup = null;
 
         // Search for nearby items
-        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position + pickUpOffset, pickUpRange, layerMask);
+        Collider2D[] items = Physics2D.OverlapPointAll(Input.mousePosition, layerMask);
 
         // No items
         if (items.Length == 0)
             return;
 
-        // Find closest item
+        // Find eligible item
         foreach (var item in items)
         {
-            float distance = Vector2.Distance(transform.position + pickUpOffset, item.transform.position);
+            float distance = Vector2.Distance(transform.position, item.transform.position);
 
-            if (closestItem == null)
-            {
-                closestItem = item.GetComponent<IPickupable>();
-                distanceToItem = distance;
-            } else if (distance < distanceToItem)
-            {
-                closestItem = item.GetComponent<IPickupable>();
-                distanceToItem = distance;
-            }
+            if (distance > pickUpRange)
+                continue;
+
+            itemToPickup = item.GetComponent<IPickupable>();
         }
 
         // Pickup closes
-        closestItem.pickup(this);
+        itemToPickup.pickup(this);
     }
 
     private void OnDrawGizmosSelected()

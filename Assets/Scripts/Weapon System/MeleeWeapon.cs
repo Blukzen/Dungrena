@@ -17,20 +17,18 @@ public abstract class MeleeWeapon : AbstractWeapon
     public string mainAttackAnimation = "Default";
     public string secondaryAttackAnimation = "Default";
 
-    protected Animator animator;
     protected CircleCollider2D hitCollider;
 
     protected int currentDamage; // This value is the damage of the current attack/damage applied on hit.
 
-    private void Awake() {
+    private void Start()
+    {
         hitCollider = GetComponent<CircleCollider2D>();
         //hitCollider.isTrigger = true;
         //hitCollider.enabled = false;
 
         if (swordEffect)
             swordEffect.enabled = false;
-
-        //animator = GetComponent<Animator>();
 
         currentDamage = attackDamage;
     }
@@ -65,6 +63,19 @@ public abstract class MeleeWeapon : AbstractWeapon
         }
     }
 
+    private void OnMouseEnter()
+    {
+        if (!onGround)
+            return;
+
+        GetComponent<SpriteRenderer>().material = outlineMaterial;
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().material = defaultMaterial;
+    }
+
     // Called to do a generic attack. string animation is the name of the animation to play on attack.
     protected void MeleeAttack(string animation) 
     {
@@ -93,6 +104,7 @@ public abstract class MeleeWeapon : AbstractWeapon
         base.pickup(entity);
         animator.enabled = true;
         hitCollider.enabled = false;
+        transform.localScale = new Vector3(1, 1);
     }
 
     public override void Drop(Vector2 position)
@@ -100,5 +112,6 @@ public abstract class MeleeWeapon : AbstractWeapon
         base.Drop(position);
         animator.enabled = false;
         hitCollider.enabled = true;
+        transform.localScale = new Vector3(1, 1);
     }
 }

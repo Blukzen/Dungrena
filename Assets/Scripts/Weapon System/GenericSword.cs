@@ -10,7 +10,6 @@ public class GenericSword : MeleeWeapon {
     }
 
     public override void SecondaryAttack() {
-        Debug.Log("Secondary Attack");
         currentDamage = secondaryAttackDamage;
         MeleeAttack(secondaryAttackAnimation);
     }

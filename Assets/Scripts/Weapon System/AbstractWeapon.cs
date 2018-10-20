@@ -14,9 +14,23 @@ public abstract class AbstractWeapon : MonoBehaviour, IPickupable
     private float lastAttackTime;
 
     protected bool onGround = true;
+    protected Animator animator;
+    protected static Material outlineMaterial;
+    protected static Material defaultMaterial;
 
     public abstract void Attack();
     public abstract void SecondaryAttack();
+
+    private void Awake()
+    {
+        if (outlineMaterial == null)
+            outlineMaterial = new Material(Shader.Find("Custom/Sprite Outline"));
+
+        if (defaultMaterial == null)
+            defaultMaterial = new Material(Shader.Find("Sprites/Default"));
+
+        animator = GetComponent<Animator>();
+    }
 
     public bool CanAttack() 
     {
