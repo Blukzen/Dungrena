@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 114889669255677034}
   - component: {fileID: 58952614500778366}
   - component: {fileID: 114805103368521058}
+  - component: {fileID: 114665394144560518}
+  - component: {fileID: 114073370192230380}
   m_Layer: 8
   m_Name: OrcDasher
   m_TagString: Untagged
@@ -57,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 142.49306, y: 69.99364, z: 0}
+  m_LocalPosition: {x: 146.47812, y: 51.089664, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4903381131860694}
@@ -140,8 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   acceleration: 0.1
-  friction: 1
+  friction: 0.1
   maxHealth: 15
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114070595716914548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +161,31 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 2560
+--- !u!114 &114073370192230380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868797904258820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b2fb1ee01299e479898d91b237995f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 10
+  maxPatrolInterval: 10
+--- !u!114 &114665394144560518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868797904258820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2b772ce7ac2b6459d66ac7863af077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeIdle: 0
 --- !u!114 &114681041545352206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,11 +197,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2528d173961b02649854f4da8dc2408a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {fileID: 0}
+  targetPosition: {x: 0, y: 0}
   repathRate: 0.5
   nextWaypointDistance: 0.5
   reachedEndOfPath: 0
   canSeePlayer: 0
+  currentState: {fileID: 0}
+  lastState: {fileID: 0}
+  idleState: {fileID: 0}
+  patrolState: {fileID: 0}
 --- !u!114 &114805103368521058
 MonoBehaviour:
   m_ObjectHideFlags: 1

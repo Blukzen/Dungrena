@@ -4,7 +4,7 @@ using Pathfinding;
 [RequireComponent(typeof(Seeker))]
 public abstract class AbstractAstarAI : MonoBehaviour
 {
-    public Transform targetPosition;
+    public Vector2 targetPosition;
     public Path path;
 
     protected AbstractEntity entity;
@@ -50,7 +50,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
 
             // Start a new path to the targetPosition, call the the OnPathComplete function
             // when the path has been calculated (which may take a few frames depending on the complexity)
-            seeker.StartPath(transform.position, targetPosition.position, OnPathComplete);
+            seeker.StartPath(transform.position, targetPosition, OnPathComplete);
         }
 
         if (path == null) 
@@ -90,15 +90,15 @@ public abstract class AbstractAstarAI : MonoBehaviour
 
         // Direction to the next waypoint
         // Normalize it so that it has a length of 1 world unit
-        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+        Vector2 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         // Multiply the direction by our desired speed to get a velocity
         Vector3 velocity = dir * speedFactor;
 
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        entity.SetMovement(dir);
-
+        entity.SetMovement(velocity);
+        //entity.AddVelocity(dir, entity.maxSpeed);
         // If you are writing a 2D game you may want to remove the CharacterController and instead modify the position directly
-        // transform.position += velocity * Time.deltaTime;
+        //transform.position += velocity * Time.deltaTime;
     }
 }

@@ -9,7 +9,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public float acceleration = 1;
     public float friction = 1.9f;
 
-    private Vector2 moveDirection;
+    protected Vector2 moveDirection;
 
     [Header("Player Stats")]
     [SerializeField]
@@ -19,7 +19,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     private float pickUpRange = 1.5f;
     private Vector3 pickUpOffset = new Vector2(0, 0.5f);
 
-    private Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
     private Collider2D collider2d;
 
     public LayerMask layerMask;
@@ -30,7 +30,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    public void UpdatePhysics()
+    public virtual void UpdatePhysics()
     {
 
         // TODO: friction and acceleration multipliers
