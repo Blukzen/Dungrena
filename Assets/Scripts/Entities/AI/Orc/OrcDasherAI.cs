@@ -11,11 +11,16 @@ public class OrcDasherAI : AbstractEnemyAI
     [HideInInspector]
     public ChaseState chaseState;
 
+    private Animator animator;
+
     private void Start()
     {
         idleState = GetComponent<IdleState>();
         patrolState = GetComponent<PatrolState>();
         chaseState = GetComponent<ChaseState>();
+
+        animator = GetComponent<Animator>();
+
         currentState = idleState;
     }
 
@@ -25,6 +30,13 @@ public class OrcDasherAI : AbstractEnemyAI
             UpdateState();
 
         currentState.execute(this);
+
+        if (currentState == idleState)
+            animator.SetTrigger("Idle");
+
+        if (currentState == patrolState || currentState == chaseState)
+            animator.SetTrigger("Walking");
+            
 
         /**
         if (canSeePlayer) {

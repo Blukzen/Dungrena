@@ -27,6 +27,7 @@ public abstract class AbstractEnemy : AbstractEntity
         // Left
         if (moveDirection.x < 0)
         {
+            transform.localScale = new Vector3(-1, 1);
             // Apply acceleration left
             if (newVel.x > 0)
                 newVel.x = Approach(newVel.x, 0, _friction);
@@ -36,6 +37,7 @@ public abstract class AbstractEnemy : AbstractEntity
         // Right
         if (moveDirection.x > 0)
         {
+            transform.localScale = new Vector3(1, 1);
             // Apply acceleration right
             if (newVel.x < 0)
                 newVel.x = Approach(newVel.x, 0, _friction);

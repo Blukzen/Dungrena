@@ -36,6 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4280663923404518}
   - component: {fileID: 212276279343060298}
+  - component: {fileID: 95560462452210774}
   - component: {fileID: 50974215908597602}
   - component: {fileID: 114062569597294482}
   - component: {fileID: 114681041545352206}
@@ -59,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 146.47812, y: 51.089664, z: 0}
+  m_LocalPosition: {x: 173.04808, y: 89.474495, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4903381131860694}
@@ -114,6 +115,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3125
+--- !u!95 &95560462452210774
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868797904258820}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb5999f20672f2c459a574f44b9e982c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114062569597294482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +148,9 @@ MonoBehaviour:
   acceleration: 0.2
   friction: 1
   maxHealth: 15
+  canMove: 1
+  applyFriction: 1
+  attacking: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -286,7 +308,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2124109051
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300016, guid: 75276f9e4a16ba045b21a389ebfcfdf4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
