@@ -20,9 +20,7 @@ public class Player : AbstractEntity
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0)) {
-            ability.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ability.cast();
-            //if (currentWeapon != null) currentWeapon.Attack();
+            if (currentWeapon != null) currentWeapon.Attack();
         } else if (Input.GetMouseButtonDown(1)) {
             if (currentWeapon != null)
                 currentWeapon.SecondaryAttack();

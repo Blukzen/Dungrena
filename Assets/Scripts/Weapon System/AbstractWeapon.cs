@@ -54,4 +54,17 @@ public abstract class AbstractWeapon : MonoBehaviour, IPickupable
         transform.position = position;
         onGround = true;
     }
+
+    private void OnMouseEnter()
+    {
+        if (!onGround)
+            return;
+
+        GetComponent<SpriteRenderer>().material = outlineMaterial;
+    }
+
+    private void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().material = defaultMaterial;
+    }
 }

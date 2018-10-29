@@ -30,7 +30,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     protected Collider2D collider2d;
     protected GameEvent onCollision;
 
-    public LayerMask layerMask;
+    public LayerMask layerMask; // TODO: Remove layermask from public variables
 
     private void Awake()
     {
@@ -150,10 +150,13 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     // Pick up 
     public void pickupItem()
     {
+        Debug.Log("Picking up Item");
         IPickupable itemToPickup = null;
 
         // Search for nearby items
-        Collider2D[] items = Physics2D.OverlapPointAll(Input.mousePosition, layerMask);
+        Collider2D[] items = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
+
+        Debug.Log(items.Length);
 
         // No items
         if (items.Length == 0)

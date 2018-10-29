@@ -63,19 +63,6 @@ public abstract class MeleeWeapon : AbstractWeapon
         }
     }
 
-    private void OnMouseEnter()
-    {
-        if (!onGround)
-            return;
-
-        GetComponent<SpriteRenderer>().material = outlineMaterial;
-    }
-
-    private void OnMouseExit()
-    {
-        GetComponent<SpriteRenderer>().material = defaultMaterial;
-    }
-
     // Called to do a generic attack. string animation is the name of the animation to play on attack.
     protected void MeleeAttack(string animation) 
     {
