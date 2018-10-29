@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 95254751253374828}
   - component: {fileID: 114771712804090922}
   - component: {fileID: 114811158005557748}
+  - component: {fileID: 114233972482496202}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -151,13 +152,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 7
   acceleration: 10
-  friction: 10
+  friction: 1
   maxHealth: 10
+  canMove: 1
+  applyFriction: 1
+  attacking: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 2048
   maxMana: 10
   currentWeapon: {fileID: 0}
+--- !u!114 &114233972482496202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1687475868900996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f597b24e621884989e88ce84fcd16f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 0
+  target: {x: 0, y: 0}
+  DashPower: 40
+  DashDistance: 5
 --- !u!114 &114771712804090922
 MonoBehaviour:
   m_ObjectHideFlags: 1

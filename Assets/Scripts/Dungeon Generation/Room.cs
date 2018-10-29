@@ -52,7 +52,8 @@ public class Room : MonoBehaviour
 
     private void InitSpawnRoom() 
     {
-        Debug.Log("Initializing Spawn Room");
+        name = "Spawn Room";
+        Debug.Log("[" + name + "]" + " Initializing Spawn Room");
 
         // Set layer to world so enemys cant see into this room
         gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
@@ -61,7 +62,8 @@ public class Room : MonoBehaviour
 
     private void InitShopRoom() 
     {
-        Debug.Log("Initializing Shop Room");
+        name = "Shop Room";
+        Debug.Log("[" + name + "]" + " Initializing Shop Room");
 
         // Set layer to world to enemys cant see into this room
         gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
@@ -70,7 +72,8 @@ public class Room : MonoBehaviour
 
     private void InitBossRoom() 
     {
-        Debug.Log("Initializing Boss Room");
+        name = "Boss Room";
+        Debug.Log("[" + name + "]" + " Initializing Boss Room");
 
     }
 

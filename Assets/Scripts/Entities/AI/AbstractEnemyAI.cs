@@ -22,4 +22,9 @@ public class AbstractEnemyAI : AbstractAstarAI, ISearcher
     {
         entity.SetMovement(dir);
     }
+
+    public void Attack()
+    {
+        entity.Attack();
+    }
 }

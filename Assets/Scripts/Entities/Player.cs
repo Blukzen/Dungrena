@@ -10,15 +10,19 @@ public class Player : AbstractEntity
     [Header("Extra")]
     [SerializeField]
     private AbstractWeapon currentWeapon;
+    private AbstractAbility ability;
 
     private void Start() {
         mana = maxMana;
+        ability = GetComponent<AbstractAbility>();
     }
 
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0)) {
-            if (currentWeapon != null) currentWeapon.Attack();
+            ability.target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            ability.cast();
+            //if (currentWeapon != null) currentWeapon.Attack();
         } else if (Input.GetMouseButtonDown(1)) {
             if (currentWeapon != null)
                 currentWeapon.SecondaryAttack();

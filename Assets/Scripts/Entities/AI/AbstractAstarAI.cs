@@ -7,7 +7,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
     public Vector2 targetPosition;
     public Path path;
 
-    protected AbstractEntity entity;
+    protected AbstractEnemy entity;
     private Seeker seeker;
 
     public float repathRate = 0.5f;
@@ -21,7 +21,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
     public void Awake() 
     {
         seeker = GetComponent<Seeker>();
-        entity = GetComponent<AbstractEntity>();
+        entity = GetComponent<AbstractEnemy>();
     }
 
     public void OnPathComplete(Path p) 

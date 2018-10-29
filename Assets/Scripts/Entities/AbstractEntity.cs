@@ -19,8 +19,16 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     private float pickUpRange = 1.5f;
     private Vector3 pickUpOffset = new Vector2(0, 0.5f);
 
+    [HideInInspector]
+    public bool canMove = true;
+    [HideInInspector]
+    public bool applyFriction = true;
+    [HideInInspector]
+    public bool attacking = false;
+
     protected Rigidbody2D rb2d;
-    private Collider2D collider2d;
+    protected Collider2D collider2d;
+    protected GameEvent onCollision;
 
     public LayerMask layerMask;
 
@@ -37,18 +45,31 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         var _friction = friction;
         var _acceleration = acceleration;
 
-        // Velocity updated
         Vector2 newVel = rb2d.velocity;
 
-        // Movement
+        if (canMove) { newVel = UpdateMovement(newVel); }
 
+        if (applyFriction)
+        {
+            // Friction when not moving
+            if (moveDirection.x == 0)
+                newVel.x = Approach(newVel.x, 0, _friction / 2);
+            if (moveDirection.y == 0)
+                newVel.y = Approach(newVel.y, 0, _friction / 2);
+        }
+
+        rb2d.velocity = newVel;
+    }
+
+    public virtual Vector2 UpdateMovement(Vector2 newVel)
+    {
         // Left
         if (moveDirection.x < 0)
         {
             // Apply acceleration left
             if (newVel.x > 0)
-                newVel.x = Approach(newVel.x, 0, _friction);
-            newVel.x = Approach(newVel.x, -maxSpeed, _acceleration);
+                newVel.x = Approach(newVel.x, 0, friction);
+            newVel.x = Approach(newVel.x, moveDirection.x * maxSpeed, acceleration);
         }
 
         // Right
@@ -56,8 +77,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         {
             // Apply acceleration right
             if (newVel.x < 0)
-                newVel.x = Approach(newVel.x, 0, _friction);
-            newVel.x = Approach(newVel.x, maxSpeed, _acceleration);
+                newVel.x = Approach(newVel.x, 0, friction);
+            newVel.x = Approach(newVel.x, moveDirection.x * maxSpeed, acceleration);
         }
 
         // Down
@@ -65,8 +86,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         {
             // Apply acceleration down
             if (newVel.y > 0)
-                newVel.y = Approach(newVel.y, 0, _friction);
-            newVel.y = Approach(newVel.y, -maxSpeed, _acceleration);
+                newVel.y = Approach(newVel.y, 0, friction);
+            newVel.y = Approach(newVel.y, moveDirection.y * maxSpeed, acceleration);
         }
 
         // Up
@@ -74,17 +95,11 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         {
             // Apply acceleration up
             if (newVel.y < 0)
-                newVel.y = Approach(newVel.y, 0, _friction);
-            newVel.y = Approach(newVel.y, maxSpeed, _friction);
+                newVel.y = Approach(newVel.y, 0, friction);
+            newVel.y = Approach(newVel.y, moveDirection.y * maxSpeed, friction);
         }
 
-        // Friction when not moving
-        if (moveDirection.x == 0)
-            newVel.x = Approach(newVel.x, 0, _friction);
-        if (moveDirection.y == 0)
-            newVel.y = Approach(newVel.y, 0, _friction);
-
-        rb2d.velocity = newVel;
+        return newVel;
     }
 
     // TODO: Handle death event.
@@ -108,6 +123,12 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     // For adding force to rb2d
     public void AddForce(Vector2 direction, float strength) {
         rb2d.AddForce(direction.normalized * strength);
+    }
+
+    // Reset velocity
+    public void ResetVelocity()
+    {
+        rb2d.velocity = Vector2.zero;
     }
 
     // Approach end from start at an increment of shift

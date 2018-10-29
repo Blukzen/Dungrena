@@ -1,4 +1,4 @@
 ﻿public interface IAbility 
 {
-    void cast(AbstractEntity caster);
+    void cast();
 }
