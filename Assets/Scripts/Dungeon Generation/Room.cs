@@ -46,8 +46,7 @@ public class Room : MonoBehaviour
 
     private void InitNormalRoom() 
     {
-        if (GameManager.enemySpawner != null)
-            GameManager.enemySpawner.Spawn(this);
+        GameManager.enemySpawner.Spawn(this);
     }
 
     private void InitSpawnRoom() 

@@ -21,7 +21,7 @@ public class DashAbility : AbstractAbility
 
         lastCastTime = Time.time;
 
-        if (target == null || target == Vector2.zero)
+        if (target == Vector2.zero)
         {
             Debug.Log("[" + caster.name + "] " + "DashAbility target was not set");
         }

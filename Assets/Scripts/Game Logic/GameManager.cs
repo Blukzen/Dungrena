@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -13,8 +14,25 @@ public class GameManager : Singleton<GameManager>
 
     public int score = 0;
 
-    public void Start() {
-        enemySpawner = GetComponent<EnemySpawner>();
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        if (scene.buildIndex > 0)
+        {
+            dungeonManager = GameObject.Find(DungeonManager.TAG).GetComponent<DungeonManager>();
+            enemySpawner = GetComponent<EnemySpawner>();
+
+            dungeonManager.Initialize();
+        }
     }
 
     private void SpawnPlayer() 
@@ -34,7 +52,6 @@ public class GameManager : Singleton<GameManager>
 
     public void DungeonGenerated() 
     {
-        dungeonManager = GameObject.Find("DungeonManager").GetComponent<DungeonManager>();
         SpawnPlayer();
     }
 

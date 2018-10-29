@@ -468,7 +468,7 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 501332186}
   m_CullTransparentMesh: 0
---- !u!1001 &959230271
+--- !u!1001 &970486449
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -507,7 +507,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114021624770963874, guid: 529581e9d4259a94cbd0904cbbc9348c, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 529581e9d4259a94cbd0904cbbc9348c, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1533742947

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DungeonManager : MonoBehaviour {
 
-    private static string TAG = "[Dungeon Manager] ";
+    public static string TAG = "DungeonManager";
 
     public RoomList roomList;
 
@@ -37,23 +37,23 @@ public class DungeonManager : MonoBehaviour {
 
     private void Start() 
     {
-        Initialize();
+        //Initialize();
     }
 
-    private void Initialize() 
+    public void Initialize() 
     {
-        Debug.Log(TAG + "Generating Maze...");
+        Debug.Log("[" + TAG + "]" + "Generating Maze...");
         GenerateMaze();
 
-        Debug.Log(TAG + "Building Dunegon...");
+        Debug.Log("[" + TAG + "]" + "Building Dunegon...");
         BuildDungeon();
 
-        Debug.Log(TAG + "Scanning dungeon for pathfinding...");
+        Debug.Log("[" + TAG + "]" + "Scanning dungeon for pathfinding...");
         if (astarPath == null)
             astarPath = Instantiate(astarPrefab);
         astarPath.QueueGraphUpdates();
 
-        Debug.Log(TAG + "Dungeon Complete!");
+        Debug.Log("[" + TAG + "]" + "Dungeon Complete!");
 
         if (dungeonGeneratedEvent != null)
             dungeonGeneratedEvent.Raise();

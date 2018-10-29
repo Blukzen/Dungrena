@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour, ISpawner 
 {
-
     [SerializeField]
     private SpawnList spawnList; // Potential entities that can spawn along with their spawn chance.
 
-    private List<AbstractEntity> enemies; // Reference to spawned enemies
+    private GameObject enemiesParent;
 
     private int maxEntities = 0;
     private int minEntities = 0;
@@ -15,9 +14,11 @@ public class EnemySpawner : MonoBehaviour, ISpawner
 
     private Room room;
 
-    public void Start() 
+    public void OnEnable() 
     {
-        enemies = new List<AbstractEntity>();
+        enemiesParent = new GameObject();
+        enemiesParent.transform.parent = this.transform;
+        enemiesParent.name = "Enemies";
     }
 
     public void Spawn(Room _room) 
@@ -39,7 +40,7 @@ public class EnemySpawner : MonoBehaviour, ISpawner
         while (enemiesSpawned < numberToSpawn) {
             var chance = Random.value;
             var enemy = Instantiate(spawnList.GetRandEnemy(chance), room.RandomPointInRoom(), Quaternion.identity);
-            enemies.Add(enemy);
+            enemy.transform.parent = enemiesParent.transform;
 
             enemiesSpawned++;
         }
@@ -47,10 +48,8 @@ public class EnemySpawner : MonoBehaviour, ISpawner
 
     public void KillAll() 
     {
-        foreach (var enemy in enemies) {
+        foreach (Transform enemy in enemiesParent.transform) {
             Destroy(enemy.gameObject);
         }
-
-        enemies = new List<AbstractEntity>();
     }
 }

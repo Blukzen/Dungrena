@@ -43,7 +43,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
         // TODO: friction and acceleration multipliers
         var _friction = friction;
-        var _acceleration = acceleration;
 
         Vector2 newVel = rb2d.velocity;
 
