@@ -9,18 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1307912834580782}
+  m_RootGameObject: {fileID: 1991888636706354}
   m_IsPrefabAsset: 1
---- !u!1 &1307912834580782
+--- !u!1 &1991888636706354
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4521873293727266}
-  - component: {fileID: 114445848914604204}
-  - component: {fileID: 114922027818336078}
+  - component: {fileID: 4380703899609462}
+  - component: {fileID: 114051444630054470}
+  - component: {fileID: 114499278091898846}
+  - component: {fileID: 114931219299232990}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28,12 +29,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4521873293727266
+--- !u!4 &4380703899609462
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307912834580782}
+  m_GameObject: {fileID: 1991888636706354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 671.3815, y: 343.64053, z: -10.844968}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +42,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114445848914604204
+--- !u!114 &114051444630054470
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307912834580782}
+  m_GameObject: {fileID: 1991888636706354}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d046d7112632ac47a5ee03192ebad37, type: 3}
@@ -55,12 +56,24 @@ MonoBehaviour:
   playerPrefab: {fileID: 114121532482956252, guid: f2ed9678732f2df4f9233342373a88d9,
     type: 2}
   score: 0
---- !u!114 &114922027818336078
+--- !u!114 &114499278091898846
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1307912834580782}
+  m_GameObject: {fileID: 1991888636706354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3a6bd550b953946958d46769007fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnList: {fileID: 11400000, guid: 86d1ff42a01c53d4c8b037604bb3d30a, type: 2}
+--- !u!114 &114931219299232990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991888636706354}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0edc8a3ceb7978945899de818ef2265a, type: 3}
@@ -70,7 +83,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114445848914604204}
+      - m_Target: {fileID: 114051444630054470}
         m_MethodName: DungeonGenerated
         m_Mode: 1
         m_Arguments:

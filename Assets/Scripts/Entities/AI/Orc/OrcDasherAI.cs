@@ -8,11 +8,14 @@ public class OrcDasherAI : AbstractEnemyAI
     public IdleState idleState;
     [HideInInspector]
     public PatrolState patrolState;
+    [HideInInspector]
+    public ChaseState chaseState;
 
     private void Start()
     {
         idleState = GetComponent<IdleState>();
         patrolState = GetComponent<PatrolState>();
+        chaseState = GetComponent<ChaseState>();
         currentState = idleState;
     }
 
@@ -49,6 +52,9 @@ public class OrcDasherAI : AbstractEnemyAI
         {
             newState = patrolState;
         }
+
+        if (chaseState.conditionsMet(this) && currentState.Name != chaseState.Name)
+            newState = chaseState;
 
         if (newState != null && newState != currentState)
         {

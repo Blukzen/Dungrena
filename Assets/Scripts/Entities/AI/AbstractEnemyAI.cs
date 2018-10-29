@@ -2,8 +2,8 @@
 
 public class AbstractEnemyAI : AbstractAstarAI, ISearcher 
 {
-    [HideInInspector]
     public bool canSeePlayer;
+    public bool canAttackPlayer;
 
     public AbstractEnemyState currentState;
     public AbstractEnemyState lastState;

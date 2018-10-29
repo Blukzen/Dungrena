@@ -5,58 +5,56 @@ public class PlayerSensor : MonoBehaviour
 {
     public LayerMask layerMask;
     public ISearcher searcher;
+    public float viewDistance = 10;
 
     private GameObject player;
 
-    private bool playerInRange = false;
+    private bool playerWasInRange = false; // Player was in range last raycast
 
     private void Start() 
     {
         searcher = GetComponentInParent<ISearcher>();
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player") 
-        {
-            if (player == null)
-                player = collision.gameObject;
-
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) 
-    {
-        if (collision.gameObject.tag == "Player")
-            playerInRange = false;
-
+        player = GameManager.player.gameObject;
     }
 
     private void Update() 
     {
-        if (playerInRange)
+        if (player == null)
+            return;
+
+        if (Vector2.Distance(player.transform.position, transform.position) < viewDistance || playerWasInRange)
+        {
             raycastToPlayer(player);
+        }
     }
 
     private void raycastToPlayer(GameObject player)     
     {
-        if (player == null)
-            return;
-
         var raycastDir = player.transform.position - transform.position;
-        RaycastHit2D raycast = Physics2D.Raycast(transform.position, raycastDir, GetComponent<Collider2D>().bounds.size.magnitude, layerMask);
+        RaycastHit2D raycast = Physics2D.Raycast(transform.position, raycastDir, viewDistance, layerMask);
 
         Debug.DrawRay(transform.position, raycastDir);
 
         if (raycast.collider == null) {
             searcher.canSeeTarget(false);
+            playerWasInRange = false;
             return;
         }
 
         if (raycast.collider.gameObject.tag == "Player")
+        {
             searcher.canSeeTarget(true);
+            playerWasInRange = true;
+        }
         else
+        {
             searcher.canSeeTarget(false);
+            playerWasInRange = false;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, viewDistance);
     }
 }

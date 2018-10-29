@@ -17,6 +17,7 @@ public class DungeonManager : MonoBehaviour {
 
     public GameEvent dungeonGeneratedEvent;
     public AstarPath astarPrefab;
+    public AstarPath astarPath;
 
     private int numRooms = 15;
     private int dungeonSize = 10;
@@ -43,11 +44,15 @@ public class DungeonManager : MonoBehaviour {
     {
         Debug.Log(TAG + "Generating Maze...");
         GenerateMaze();
+
         Debug.Log(TAG + "Building Dunegon...");
         BuildDungeon();
+
         Debug.Log(TAG + "Scanning dungeon for pathfinding...");
-        AstarPath astar = Instantiate(astarPrefab);
-        astar.QueueGraphUpdates();
+        if (astarPath == null)
+            astarPath = Instantiate(astarPrefab);
+        astarPath.QueueGraphUpdates();
+
         Debug.Log(TAG + "Dungeon Complete!");
 
         if (dungeonGeneratedEvent != null)
