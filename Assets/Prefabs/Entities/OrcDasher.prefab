@@ -170,7 +170,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 18944
-  viewDistance: 10
+  viewDistance: 12
 --- !u!114 &114073370192230380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +200,8 @@ MonoBehaviour:
   DashKnockBack: 25
   DashSpeed: 20
   DashDistance: 5
+  DashEffect: {fileID: 1563650997319774, guid: 31ce080dcffccae4e9723de7cfb04bd0, type: 2}
+  chargingDash: 1
 --- !u!114 &114418581577789718
 MonoBehaviour:
   m_ObjectHideFlags: 1

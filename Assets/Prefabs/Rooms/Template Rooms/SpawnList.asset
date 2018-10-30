@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: SpawnList
   m_EditorClassIdentifier: 
   common: {fileID: 114062569597294482, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
-  uncommon: {fileID: 114555841191532290, guid: 1b22055b208e3814887caa41f8c67283, type: 2}
-  rare: {fileID: 114555841191532290, guid: 9f829ebaf3ba9264c8ed04f0494227ae, type: 2}
-  special: {fileID: 114555841191532290, guid: 58da08356d7df654e9b5285c1c29f89e, type: 2}
+  uncommon: {fileID: 114062569597294482, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+  rare: {fileID: 114062569597294482, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+  special: {fileID: 114062569597294482, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}

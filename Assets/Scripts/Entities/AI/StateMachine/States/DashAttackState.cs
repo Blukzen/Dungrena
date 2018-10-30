@@ -9,6 +9,8 @@ public class DashAttackState : AbstractEnemyAbilityState
     public float DashSpeed = 25;
     public float DashDistance = 4;
 
+    public GameObject DashEffect;
+
     private Vector2 direction;
     private Vector2 startPos;
 
@@ -36,6 +38,12 @@ public class DashAttackState : AbstractEnemyAbilityState
         caster.applyFriction = true;
         gameObject.layer = LayerMask.NameToLayer("Entities");
         Executing = false;
+    }
+
+    public void SpawnDashEffect()
+    {
+        if (DashEffect != null)
+            Instantiate(DashEffect, transform.position, Quaternion.identity);
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)

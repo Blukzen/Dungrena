@@ -15,6 +15,11 @@ public class Player : AbstractEntity
     private void Start() {
         mana = maxMana;
         ability = GetComponent<AbstractAbility>();
+
+        // Check if we started with a weapon in hand
+        var weapon = GetComponentInChildren<AbstractWeapon>();
+        if (weapon != null)
+            weapon.pickup(this);
     }
 
     private void Update() 

@@ -226,7 +226,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
-  knockBackForce: 35
+  knockBackForce: 25
   hitEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44, type: 2}
   swordEffect: {fileID: 96563048836712614}
   mainAttackAnimation: Default
