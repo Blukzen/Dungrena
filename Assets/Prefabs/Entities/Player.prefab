@@ -164,6 +164,8 @@ MonoBehaviour:
     type: 2}
   maxMana: 10
   currentWeapon: {fileID: 0}
+  defaultWeapon: {fileID: 114746445673159950, guid: 37262e04328214649b5f8cd80b1ccb52,
+    type: 2}
 --- !u!114 &114233972482496202
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -45,6 +45,7 @@ public abstract class AbstractWeapon : MonoBehaviour, IPickupable
     public virtual void pickup(AbstractEntity entity)
     {
         ((Player)entity).EquipWeapon(this);
+        Owner = entity;
         onGround = false;
     }
 

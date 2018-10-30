@@ -10,12 +10,20 @@ public class Player : AbstractEntity
     [Header("Extra")]
     [SerializeField]
     private AbstractWeapon currentWeapon;
+    [SerializeField]
+    private AbstractWeapon defaultWeapon;
     private AbstractAbility ability;
-    private float damageShakeAmount = 0.1f;
+    private float damageShakeAmount = 0.15f;
 
     private void Start() {
         mana = maxMana;
         ability = GetComponent<AbstractAbility>();
+
+        if (currentWeapon == null)
+        {
+            var weapon = Instantiate(defaultWeapon, transform.position, Quaternion.identity);
+           weapon.pickup(this);
+        }
     }
 
     private void Update() 

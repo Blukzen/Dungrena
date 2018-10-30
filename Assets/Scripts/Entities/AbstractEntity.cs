@@ -114,16 +114,14 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         Damage(damage);
 
         // Knockback
-        var knockbackDirection = attacker.transform.position - transform.position;
-        AddForce(knockbackDirection.normalized, knockback);
-
-        // TODO: Damage/Bleeding effect + Hit flash
+        var knockbackDirection = transform.position - attacker.transform.position;
+        AddVelocity(knockbackDirection.normalized, knockback);
         DamageEffectPlay();
     }
 
     public virtual void DamageEffectPlay()
     {
-        if (DamageEffect != null)
+        if (DamageEffect != null) { }
             Instantiate(DamageEffect, transform.position, Quaternion.identity);
     }
 

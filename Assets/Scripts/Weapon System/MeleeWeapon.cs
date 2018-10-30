@@ -33,8 +33,6 @@ public abstract class MeleeWeapon : AbstractWeapon
         currentDamage = attackDamage;
     }
 
-
-    // TODO: Change from entity.Damage() to entity.ApplyAttack()
     protected virtual void OnTriggerEnter2D(Collider2D collider) {
         // Dont do anything if the items dropped on the ground
         if (onGround)
@@ -54,14 +52,7 @@ public abstract class MeleeWeapon : AbstractWeapon
         // if the collider hits a entity apply damage, knockback and spawn hit effect.
         var entity = collider.GetComponent<AbstractEntity>();
         if (entity != null) {
-            entity.Damage(currentDamage);
-
-            var knockbackDirection = entity.transform.position - transform.position;
-            entity.AddVelocity(knockbackDirection, knockBackForce);
-
-            var effect = Instantiate(hitEffect, collider.transform.position, collider.transform.rotation);
-            effect.transform.parent = entity.transform;
-            return;
+            entity.ApplyAttack(currentDamage, knockBackForce, Owner);
         }
     }
 

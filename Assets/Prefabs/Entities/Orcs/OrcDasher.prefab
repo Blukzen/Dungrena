@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolDown: 5
   DashDamage: 2
-  DashKnockBack: 25
+  DashKnockBack: 15
   DashSpeed: 20
   DashDistance: 6
   DashEffect: {fileID: 1563650997319774, guid: 31ce080dcffccae4e9723de7cfb04bd0, type: 2}
