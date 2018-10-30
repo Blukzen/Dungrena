@@ -93,9 +93,13 @@ MonoBehaviour:
   acceleration: 1
   friction: 1.9
   maxHealth: 10
+  canMove: 1
+  applyFriction: 1
+  attacking: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  target: {fileID: 0}
 --- !u!212 &212276279343060298
 SpriteRenderer:
   m_ObjectHideFlags: 1

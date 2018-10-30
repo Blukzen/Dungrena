@@ -155,6 +155,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  DamageEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44,
+    type: 2}
   target: {fileID: 0}
 --- !u!114 &114070595716914548
 MonoBehaviour:
@@ -199,7 +201,7 @@ MonoBehaviour:
   DashDamage: 2
   DashKnockBack: 25
   DashSpeed: 20
-  DashDistance: 5
+  DashDistance: 6
   DashEffect: {fileID: 1563650997319774, guid: 31ce080dcffccae4e9723de7cfb04bd0, type: 2}
   chargingDash: 1
 --- !u!114 &114418581577789718

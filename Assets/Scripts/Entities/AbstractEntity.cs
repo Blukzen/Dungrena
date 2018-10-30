@@ -31,6 +31,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     protected GameEvent onCollision;
 
     public LayerMask layerMask; // TODO: Remove layermask from public variables
+    public GameObject DamageEffect;
 
     private void Awake()
     {
@@ -117,6 +118,13 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         AddForce(knockbackDirection.normalized, knockback);
 
         // TODO: Damage/Bleeding effect + Hit flash
+        DamageEffectPlay();
+    }
+
+    public virtual void DamageEffectPlay()
+    {
+        if (DamageEffect != null)
+            Instantiate(DamageEffect, transform.position, Quaternion.identity);
     }
 
     // Set movement input

@@ -11,15 +11,11 @@ public class Player : AbstractEntity
     [SerializeField]
     private AbstractWeapon currentWeapon;
     private AbstractAbility ability;
+    private float damageShakeAmount = 0.1f;
 
     private void Start() {
         mana = maxMana;
         ability = GetComponent<AbstractAbility>();
-
-        // Check if we started with a weapon in hand
-        var weapon = GetComponentInChildren<AbstractWeapon>();
-        if (weapon != null)
-            weapon.pickup(this);
     }
 
     private void Update() 
@@ -47,6 +43,15 @@ public class Player : AbstractEntity
         
 
         GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
+    }
+
+    public override void DamageEffectPlay()
+    {
+        base.DamageEffectPlay();
+
+        var CameraShake = Camera.main.GetComponent<CameraShake>();
+        if (CameraShake != null)
+            StartCoroutine(CameraShake.Shake(damageShakeAmount, 0.1f));
     }
 
     public bool UseMana(int amount) 
