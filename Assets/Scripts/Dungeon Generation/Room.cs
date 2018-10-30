@@ -54,8 +54,10 @@ public class Room : MonoBehaviour
         name = "Spawn Room";
         Debug.Log("[" + name + "]" + " Initializing Spawn Room");
 
-        // Set layer to world so enemys cant see into this room
-        gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
+        // Set layer to NoEnemyZone so enemys cant see into this room
+        var floor = gameObject.transform.Find("Floor");
+        floor.gameObject.layer = LayerMask.NameToLayer("NoEnemyZone");
+        floor.gameObject.GetComponent<TilemapCollider2D>().isTrigger = false;
 
     }
 
@@ -64,8 +66,10 @@ public class Room : MonoBehaviour
         name = "Shop Room";
         Debug.Log("[" + name + "]" + " Initializing Shop Room");
 
-        // Set layer to world to enemys cant see into this room
-        gameObject.transform.Find("Floor").gameObject.layer = LayerMask.NameToLayer("World");
+        // Set layer to NoEnemyZone so enemys cant see into this room
+        var floor = gameObject.transform.Find("Floor");
+        floor.gameObject.layer = LayerMask.NameToLayer("NoEnemyZone");
+        floor.gameObject.GetComponent<TilemapCollider2D>().isTrigger = false;
 
     }
 

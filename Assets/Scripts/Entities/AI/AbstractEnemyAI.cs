@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-public class AbstractEnemyAI : AbstractAstarAI, ISearcher 
+public abstract class AbstractEnemyAI : AbstractAstarAI, ISearcher 
 {
     public bool canSeePlayer;
-    public bool canAttackPlayer;
 
     public AbstractEnemyState currentState;
     public AbstractEnemyState lastState;
@@ -27,4 +26,6 @@ public class AbstractEnemyAI : AbstractAstarAI, ISearcher
     {
         entity.Attack();
     }
+
+    public abstract bool CanAttackTarget();
 }

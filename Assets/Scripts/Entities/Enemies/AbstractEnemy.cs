@@ -4,10 +4,12 @@ using System.Collections;
 public abstract class AbstractEnemy : AbstractEntity
 {
     private AbstractAbility attack;
+    public Player target;
 
     private void Start()
     {
         attack = GetComponent<AbstractAbility>();
+        target = GameManager.player;
     }
 
     // Update is called once per frame

@@ -13,8 +13,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     [Header("Player Stats")]
     [SerializeField]
-    private int maxHealth;
-    private int health;
+    private float maxHealth;
+    private float health;
 
     private float pickUpRange = 1.5f;
     private Vector3 pickUpOffset = new Vector2(0, 0.5f);
@@ -102,9 +102,21 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     }
 
     // TODO: Handle death event.
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
         health -= amount;
+    }
+
+    public void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
+    {
+        // Damage
+        Damage(damage);
+
+        // Knockback
+        var knockbackDirection = attacker.transform.position - transform.position;
+        AddForce(knockbackDirection.normalized, knockback);
+
+        // TODO: Damage/Bleeding effect + Hit flash
     }
 
     // Set movement input
@@ -155,8 +167,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
         // Search for nearby items
         Collider2D[] items = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
-
-        Debug.Log(items.Length);
 
         // No items
         if (items.Length == 0)

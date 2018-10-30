@@ -33,6 +33,8 @@ public abstract class MeleeWeapon : AbstractWeapon
         currentDamage = attackDamage;
     }
 
+
+    // TODO: Change from entity.Damage() to entity.ApplyAttack()
     protected virtual void OnTriggerEnter2D(Collider2D collider) {
         // Dont do anything if the items dropped on the ground
         if (onGround)

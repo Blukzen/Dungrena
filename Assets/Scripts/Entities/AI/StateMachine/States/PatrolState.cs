@@ -20,23 +20,23 @@ public class PatrolState : AbstractEnemyState
 
     public override void execute(AbstractEnemyAI enemyAI)
     {
-        enemyAI.AstarMoveToTarget();
-        enemyAI.UpdatePhysics();
-
-        if (enemyAI.reachedEndOfPath)
+        if (enemyAI.reachedEndOfPath || enemyAI.canSeePlayer)
         {
             Executing = false;
         }
+
+        enemyAI.AstarMoveToTarget();
+        enemyAI.UpdatePhysics();
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)
     {
-        if (enemyAI.currentState.Name == "Patrol")
+        if (enemyAI.currentState.Name == "Patrol" && !enemyAI.canSeePlayer)
         {
             if (!enemyAI.reachedEndOfPath)
                 return true;
         }
-        else if (enemyAI.currentState.Name == "Idle")
+        else if (enemyAI.currentState.Name == "Idle" && !enemyAI.canSeePlayer)
         {
             IdleState idleState = (IdleState) enemyAI.currentState;
 

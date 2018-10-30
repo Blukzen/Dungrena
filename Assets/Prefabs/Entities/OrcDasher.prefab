@@ -38,14 +38,15 @@ GameObject:
   - component: {fileID: 212276279343060298}
   - component: {fileID: 95560462452210774}
   - component: {fileID: 50974215908597602}
+  - component: {fileID: 58952614500778366}
   - component: {fileID: 114062569597294482}
   - component: {fileID: 114681041545352206}
   - component: {fileID: 114889669255677034}
-  - component: {fileID: 58952614500778366}
   - component: {fileID: 114805103368521058}
   - component: {fileID: 114665394144560518}
   - component: {fileID: 114073370192230380}
   - component: {fileID: 114418581577789718}
+  - component: {fileID: 114087512625321488}
   m_Layer: 8
   m_Name: OrcDasher
   m_TagString: Untagged
@@ -60,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 173.04808, y: 89.474495, z: 0}
+  m_LocalPosition: {x: 149.3, y: 89.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4903381131860694}
@@ -112,7 +113,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.3125}
   serializedVersion: 2
   m_Radius: 0.3125
 --- !u!95 &95560462452210774
@@ -154,6 +155,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  target: {fileID: 0}
 --- !u!114 &114070595716914548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 18944
   viewDistance: 10
 --- !u!114 &114073370192230380
 MonoBehaviour:
@@ -182,6 +184,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 10
   maxPatrolInterval: 10
+--- !u!114 &114087512625321488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868797904258820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6c562c562dbbb4eb579343e8e57b23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 5
+  DashDamage: 2
+  DashKnockBack: 25
+  DashSpeed: 20
+  DashDistance: 5
 --- !u!114 &114418581577789718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,12 +239,12 @@ MonoBehaviour:
   nextWaypointDistance: 0.5
   reachedEndOfPath: 0
   canSeePlayer: 0
-  canAttackPlayer: 0
   currentState: {fileID: 0}
   lastState: {fileID: 0}
   idleState: {fileID: 0}
   patrolState: {fileID: 0}
   chaseState: {fileID: 0}
+  dashAttackState: {fileID: 0}
 --- !u!114 &114805103368521058
 MonoBehaviour:
   m_ObjectHideFlags: 1

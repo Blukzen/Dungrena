@@ -19,9 +19,9 @@ TagManager:
   - Projectiles
   - Items
   - World
-  - 
-  - 
-  - 
+  - Obstacles
+  - NoEnemyZone
+  - IgnoreEntities
   - 
   - 
   - 

@@ -10,6 +10,8 @@ public class OrcDasherAI : AbstractEnemyAI
     public PatrolState patrolState;
     [HideInInspector]
     public ChaseState chaseState;
+    [HideInInspector]
+    public DashAttackState dashAttackState;
 
     private Animator animator;
 
@@ -18,6 +20,7 @@ public class OrcDasherAI : AbstractEnemyAI
         idleState = GetComponent<IdleState>();
         patrolState = GetComponent<PatrolState>();
         chaseState = GetComponent<ChaseState>();
+        dashAttackState = GetComponent<DashAttackState>();
 
         animator = GetComponent<Animator>();
 
@@ -36,23 +39,13 @@ public class OrcDasherAI : AbstractEnemyAI
 
         if (currentState == patrolState || currentState == chaseState)
             animator.SetTrigger("Walking");
-            
 
-        /**
-        if (canSeePlayer) {
-            targetPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            AstarMoveToTarget();
-        } else {
-            targetPosition = Vector2.zero;
-            entity.SetMovement(new Vector2());
-        }**/
-
-       // entity.UpdatePhysics();
+        if (currentState == dashAttackState)
+            animator.SetTrigger("Dashing");
     }
 
     private void UpdateState()
     {
-
         AbstractEnemyState newState = null;
 
         if (idleState.conditionsMet(this) && currentState.Name != idleState.Name)
@@ -68,11 +61,19 @@ public class OrcDasherAI : AbstractEnemyAI
         if (chaseState.conditionsMet(this) && currentState.Name != chaseState.Name)
             newState = chaseState;
 
+        if (dashAttackState.conditionsMet(this) && currentState.Name != dashAttackState.Name)
+            newState = dashAttackState;
+
         if (newState != null && newState != currentState)
         {
             newState.init();
             lastState = currentState;
             currentState = newState;
         }
+    }
+
+    public override bool CanAttackTarget()
+    {
+        return dashAttackState.conditionsMet(this);
     }
 }
