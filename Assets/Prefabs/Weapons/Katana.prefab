@@ -218,11 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad9ab7a6b9abfa4b82b0e9edadc2de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackSpeed: 0.5
-  secondaryAttackManaCost: 0
-  Owner: {fileID: 0}
-  secondaryAttackDamage: 0
+  ItemName: "Ry\u016Bjin"
+  ItemDescription: 
+  ItemSlug: katana
+  ItemType: 0
+  attackDamage: 10
+  attackSpeed: 1
+  secondaryAttackDamage: 15
+  secondaryAttackManaCost: 5
   collisionMask:
     serializedVersion: 2
     m_Bits: 256

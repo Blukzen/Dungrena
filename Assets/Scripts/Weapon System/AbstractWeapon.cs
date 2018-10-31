@@ -6,6 +6,7 @@ public abstract class AbstractWeapon : AbstractItem
 {
     public int attackDamage;
     public float attackSpeed;
+    public float secondaryAttackDamage;
     public int secondaryAttackManaCost;
 
     private float lastAttackTime;
@@ -24,5 +25,25 @@ public abstract class AbstractWeapon : AbstractItem
 
         if (canAttack) lastAttackTime = Time.time;
         return canAttack;
+    }
+
+    private void OnMouseEnter()
+    {
+    }
+
+    private void OnMouseOver()
+    {
+        if (!OnGround)
+            return;
+
+        UIManager.ShowWeaponInfo(this);
+    }
+
+    private void OnMouseExit()
+    {
+        if (!OnGround)
+            return;
+
+        UIManager.HideWeaponInfo();
     }
 }

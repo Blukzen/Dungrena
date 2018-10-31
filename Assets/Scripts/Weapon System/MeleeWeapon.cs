@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class MeleeWeapon : AbstractWeapon 
 {
-    public int secondaryAttackDamage;
-
     public LayerMask collisionMask; // Collision layer to look for enemies to attack.
     public float knockBackForce; // Knockback force applied to hit enemy.
     public GameObject hitEffect; // Prefab of particle effect for hitting enemy.
@@ -17,7 +15,7 @@ public abstract class MeleeWeapon : AbstractWeapon
     public string mainAttackAnimation = "Default";
     public string secondaryAttackAnimation = "Default";
 
-    protected int currentDamage; // This value is the damage of the current attack/damage applied on hit.
+    protected float currentDamage; // This value is the damage of the current attack/damage applied on hit.
 
     protected override void Start()
     {

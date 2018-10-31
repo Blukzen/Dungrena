@@ -175,8 +175,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         if (items.Length == 0)
             return;
 
-        Debug.Log("Pickup Item");
-
         AbstractItem closestItem = null;
         float closestDistance = -1;
 

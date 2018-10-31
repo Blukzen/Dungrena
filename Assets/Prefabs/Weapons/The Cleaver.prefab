@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 95876779914079372}
   - component: {fileID: 114746445673159950}
   - component: {fileID: 60296434790257708}
+  - component: {fileID: 50651868958647548}
   m_Layer: 11
   m_Name: The Cleaver
   m_TagString: Untagged
@@ -73,6 +74,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50651868958647548
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560234297768740}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &60296434790257708
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -234,14 +255,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad9ab7a6b9abfa4b82b0e9edadc2de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: The Cleaver
   ItemDescription: 
-  ItemSlug: 
+  ItemSlug: the_cleaver
   ItemType: 0
   attackDamage: 10
   attackSpeed: 0.5
-  secondaryAttackManaCost: 0
-  secondaryAttackDamage: 0
+  secondaryAttackDamage: 15
+  secondaryAttackManaCost: 10
   collisionMask:
     serializedVersion: 2
     m_Bits: 256

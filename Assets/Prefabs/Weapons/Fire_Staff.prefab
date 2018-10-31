@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4720775059119506}
   - component: {fileID: 212029376479007070}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fire_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4178554061409498}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: fire_position
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}

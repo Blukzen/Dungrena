@@ -11,6 +11,7 @@ public abstract class AbstractItem : MonoBehaviour
 
     protected PolygonCollider2D itemCollider;
     protected Animator animator;
+    protected new SpriteRenderer renderer;
 
     protected AbstractEntity Owner;
     protected bool OnGround = true;
@@ -20,6 +21,8 @@ public abstract class AbstractItem : MonoBehaviour
         itemCollider = GetComponent<PolygonCollider2D>();
         itemCollider.isTrigger = false;
         itemCollider.enabled = true;
+
+        renderer = GetComponent<SpriteRenderer>();
 
         animator = GetComponent<Animator>();
         animator.enabled = false;
@@ -36,6 +39,8 @@ public abstract class AbstractItem : MonoBehaviour
         itemCollider.isTrigger = true;
         animator.enabled = true;
 
+        renderer.sortingOrder = 5;
+
         return this;
     }
 
@@ -50,6 +55,10 @@ public abstract class AbstractItem : MonoBehaviour
         itemCollider.enabled = true;
 
         animator.enabled = false;
+
+        renderer.sortingOrder = 0;
+
+        transform.Rotate(0, 0, Random.Range(0, 360));
 
         transform.parent = null;
     }
