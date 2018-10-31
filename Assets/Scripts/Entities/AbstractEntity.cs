@@ -103,7 +103,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     }
 
-    public void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
+    public virtual void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
     {
         // Damage
         Damage(damage);

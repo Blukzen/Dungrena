@@ -3,6 +3,10 @@ guid: 3533040e84e9a7842ab6029d59909391
 TextureImporter:
   fileIDToRecycleName:
     21300000: InfoBubble
+    21300002: HealthBar
+    21300004: HealthBar_Fill
+    21300006: Bar
+    21300008: Bar_Fill
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -111,6 +115,86 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: af570f68649afd743aebc2eb87571689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealthBar
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 280
+        width: 64
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 22, y: 4, z: 23, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 123463f8a99c0b64ca6fb75cb610f1fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealthBar_Fill
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 267
+        width: 64
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 3, y: 4, z: 3, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5354e24b998d5dd4a92247a2fe6400e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 280
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 5, y: 5, z: 5, w: 5}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a179a938de685a34483ad9f016fd1084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bar_Fill
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 267
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38b62989728c12242be42e2b4fb6e341
       vertices: []
       indices: 
       edges: []

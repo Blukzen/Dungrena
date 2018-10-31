@@ -7,12 +7,18 @@ public class UIManager : Singleton<UIManager>
 
     protected static string TAG = "[UIManager] ";
     protected static ItemHoverInfo itemInfo;
+    protected static StatsBar healthBar;
+    protected static StatsBar manaBar;
 
     public ItemHoverInfo _itemInfo;
+    public StatsBar _healthBar;
+    public StatsBar _manaBar;
 
     private void Start()
     {
         itemInfo = _itemInfo;
+        healthBar = _healthBar;
+        manaBar = _manaBar;
 
         if (itemInfo != null && itemInfo.gameObject.activeSelf)
             itemInfo.gameObject.SetActive(false);
@@ -39,5 +45,25 @@ public class UIManager : Singleton<UIManager>
         }
 
         itemInfo.gameObject.SetActive(false);
+    }
+
+    public static void UpdateMana(float current, float max)
+    {
+        if (manaBar == null)
+        {
+            Debug.Log(TAG + "UI Mana bar does not exist");
+        }
+
+        manaBar.UpdateBar(current, max);
+    }
+
+    public static void UpdateHealth(float current, float max)
+    {
+        if (healthBar == null)
+        {
+            Debug.Log(TAG + "UI Health bar does not exist");
+        }
+
+        healthBar.UpdateBar(current, max);
     }
 }

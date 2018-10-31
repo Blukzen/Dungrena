@@ -63,6 +63,12 @@ public class Player : AbstractEntity
         GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
     }
 
+    public override void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
+    {
+        base.ApplyAttack(damage, knockback, attacker);
+        UIManager.UpdateHealth(health, maxHealth);
+    }
+
     public override void DamageEffectPlay()
     {
         base.DamageEffectPlay();
@@ -77,6 +83,9 @@ public class Player : AbstractEntity
             return false;
 
         mana -= amount;
+
+        UIManager.UpdateMana(mana, maxMana);
+
         return true;
     }
 
