@@ -234,11 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22a54cd6007afe468d9f5540536538f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomList: {fileID: 11400000, guid: 62683ad8c68552c45abeb0946ea4218b, type: 2}
   roomHeight: 10
   roomWidth: 18
   maxDifficulty: 1
   minDifficulty: 1
+  roomList: {fileID: 11400000, guid: 62683ad8c68552c45abeb0946ea4218b, type: 2}
+  starterWeapon: {fileID: 114746445673159950, guid: 37262e04328214649b5f8cd80b1ccb52,
+    type: 2}
   dungeonGeneratedEvent: {fileID: 11400000, guid: 18b6a90f2a09bfb40a66b152d5917177,
     type: 2}
   astarPrefab: {fileID: 114622409332476072, guid: 029bd8c86938ab741b325550b85a35fb,
@@ -268,34 +270,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!1 &618529198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 618529199}
-  m_Layer: 0
-  m_Name: OrcDungeon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &618529199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 618529198}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1533742948}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &970486449
 Prefab:
   m_ObjectHideFlags: 0
@@ -333,7 +307,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4380703899609462, guid: 529581e9d4259a94cbd0904cbbc9348c, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114021624770963874, guid: 529581e9d4259a94cbd0904cbbc9348c, type: 2}
@@ -381,7 +355,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 452407304}
-  - {fileID: 618529199}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -445,7 +418,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1846555452
 Prefab:

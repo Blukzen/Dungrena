@@ -28,11 +28,13 @@ public class PlayerEditor : Editor {
         EditorGUILayout.LabelField("Stats", EditorStyles.boldLabel);
 
         player.maxHealth = EditorGUILayout.FloatField("Max Health", player.maxHealth);
-        player.health = player.maxHealth;
+        if (!EditorApplication.isPlaying)
+            player.health = player.maxHealth;
         EditorGUILayout.LabelField("Health", player.health.ToString());
 
         player.maxMana = EditorGUILayout.FloatField("Max Mana", player.maxMana);
-        player.mana = player.maxMana;
+        if (!EditorApplication.isPlaying)
+            player.mana = player.maxMana;
         EditorGUILayout.LabelField("Mana", player.mana.ToString());
 
         EditorGUILayout.EndVertical();

@@ -47,6 +47,9 @@ public class Room : MonoBehaviour
     private void InitNormalRoom() 
     {
         GameManager.enemySpawner.Spawn(this);
+
+        var wall = gameObject.transform.Find("Walls");
+        wall.gameObject.layer = LayerMask.NameToLayer("Obstacles");
     }
 
     private void InitSpawnRoom() 
@@ -58,6 +61,9 @@ public class Room : MonoBehaviour
         var floor = gameObject.transform.Find("Floor");
         floor.gameObject.layer = LayerMask.NameToLayer("NoEnemyZone");
         floor.gameObject.GetComponent<TilemapCollider2D>().isTrigger = false;
+
+        var wall = gameObject.transform.Find("Walls");
+        wall.gameObject.layer = LayerMask.NameToLayer("Obstacles");
 
     }
 
@@ -71,6 +77,9 @@ public class Room : MonoBehaviour
         floor.gameObject.layer = LayerMask.NameToLayer("NoEnemyZone");
         floor.gameObject.GetComponent<TilemapCollider2D>().isTrigger = false;
 
+        var wall = gameObject.transform.Find("Walls");
+        wall.gameObject.layer = LayerMask.NameToLayer("Obstacles");
+
     }
 
     private void InitBossRoom() 
@@ -78,6 +87,8 @@ public class Room : MonoBehaviour
         name = "Boss Room";
         Debug.Log("[" + name + "]" + " Initializing Boss Room");
 
+        var wall = gameObject.transform.Find("Walls");
+        wall.gameObject.layer = LayerMask.NameToLayer("Obstacles");
     }
 
     public Vector2 RandomPointInRoom() {

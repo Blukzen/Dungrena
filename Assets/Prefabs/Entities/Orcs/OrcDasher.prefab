@@ -148,7 +148,8 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 0.2
   friction: 1
-  maxHealth: 15
+  maxHealth: 20
+  health: 20
   canMove: 1
   applyFriction: 1
   attacking: 0

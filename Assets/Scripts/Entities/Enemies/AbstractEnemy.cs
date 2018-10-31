@@ -18,7 +18,7 @@ public abstract class AbstractEnemy : AbstractEntity
 
     }
 
-    public override void UpdatePhysics()
+    /**public override void UpdatePhysics()
     {
         // TODO: friction and acceleration multipliers
         var _friction = friction;
@@ -72,7 +72,7 @@ public abstract class AbstractEnemy : AbstractEntity
             newVel.y = Approach(newVel.y, 0, _friction);
 
         rb2d.velocity = newVel;
-    }
+    }*/
 
     public void Attack()
     {
@@ -83,5 +83,12 @@ public abstract class AbstractEnemy : AbstractEntity
         }
 
         attack.cast();
+    }
+
+    // TODO: Death effect
+    public override void Killed()
+    {
+        base.Killed();
+        Destroy(gameObject);
     }
 }

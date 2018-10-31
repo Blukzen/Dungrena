@@ -37,8 +37,8 @@ GameObject:
   - component: {fileID: 4599828083037958}
   - component: {fileID: 212322710210115554}
   - component: {fileID: 95876779914079372}
-  - component: {fileID: 58792044447087102}
   - component: {fileID: 114746445673159950}
+  - component: {fileID: 60296434790257708}
   m_Layer: 11
   m_Name: The Cleaver
   m_TagString: Untagged
@@ -73,8 +73,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58792044447087102
-CircleCollider2D:
+--- !u!60 &60296434790257708
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -85,9 +85,25 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.01}
-  serializedVersion: 2
-  m_Radius: 0.73249984
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.50596076, y: 0.10182469}
+    oldSize: {x: 0.75, y: 1.875}
+    newSize: {x: 0.75, y: 1.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.058029413, y: 1.6840787}
+      - {x: -0.2544706, y: 1.6840787}
+      - {x: -0.2544706, y: -0.0034213066}
+      - {x: -0.12947059, y: -0.1284213}
+      - {x: 0.12052941, y: -0.1284213}
+      - {x: 0.24552941, y: -0.06592131}
+      - {x: 0.24552941, y: 1.4965787}
 --- !u!95 &95876779914079372
 Animator:
   serializedVersion: 3
@@ -218,10 +234,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad9ab7a6b9abfa4b82b0e9edadc2de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
+  ItemName: 
+  ItemDescription: 
+  ItemSlug: 
+  ItemType: 0
+  attackDamage: 10
   attackSpeed: 0.5
   secondaryAttackManaCost: 0
-  Owner: {fileID: 0}
   secondaryAttackDamage: 0
   collisionMask:
     serializedVersion: 2

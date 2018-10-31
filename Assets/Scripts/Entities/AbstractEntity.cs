@@ -12,7 +12,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public float maxHealth = 10;
     public float health;
 
-    private float pickUpRange = 1.5f;
+    private float pickUpRange = 2f;
     private Vector3 pickUpOffset = new Vector2(0, 0.5f);
 
     public bool canMove = true;
@@ -23,7 +23,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     protected Collider2D collider2d;
     protected GameEvent onCollision;
 
-    public LayerMask layerMask; // TODO: Remove layermask from public variables
     public GameObject DamageEffect;
 
     private void Awake()
@@ -98,6 +97,10 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public void Damage(float amount)
     {
         health -= amount;
+
+        if (health <= 0)
+            Killed();
+
     }
 
     public void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
@@ -115,6 +118,11 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     {
         if (DamageEffect != null) { }
             Instantiate(DamageEffect, transform.position, Quaternion.identity);
+    }
+
+    public virtual void Killed()
+    {
+
     }
 
     // Set movement input
@@ -158,17 +166,19 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     }
 
     // Pick up 
-    public void pickupItem()
+    public void PickupItem()
     {
-        Debug.Log("Picking up Item");
-        IPickupable itemToPickup = null;
-
         // Search for nearby items
-        Collider2D[] items = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
+        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, 10, 1 << LayerMask.NameToLayer("Items"));
 
         // No items
         if (items.Length == 0)
             return;
+
+        Debug.Log("Pickup Item");
+
+        AbstractItem closestItem = null;
+        float closestDistance = -1;
 
         // Find eligible item
         foreach (var item in items)
@@ -178,15 +188,24 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
             if (distance > pickUpRange)
                 continue;
 
-            itemToPickup = item.GetComponent<IPickupable>();
+            if (closestDistance == -1 || closestDistance < distance)
+            {
+                closestDistance = distance;
+                closestItem = item.GetComponent<AbstractItem>();
+            }
         }
 
-        // Pickup closes
-        itemToPickup.pickup(this);
+        if (closestItem == null)
+            return;
+
+        if (closestItem.ItemType == ItemType.Weapon)
+            EquipItem((AbstractWeapon)closestItem);
     }
+
+    public abstract void EquipItem(AbstractWeapon weapon);
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position + pickUpOffset, pickUpRange);
+        Gizmos.DrawWireSphere(transform.position, pickUpRange);
     }
 }

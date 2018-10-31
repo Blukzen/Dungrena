@@ -8,21 +8,8 @@ public class Player : AbstractEntity
     public float mana;
 
     public AbstractWeapon currentWeapon;
-    [SerializeField]
-    private AbstractWeapon defaultWeapon;
-    private AbstractAbility ability;
 
     public float damageShakeAmount = 0.15f;
-
-    private void Start() {
-        mana = maxMana;
-        ability = GetComponent<AbstractAbility>();
-
-        if (currentWeapon == null)
-        {
-            //Instantiate(defaultWeapon, transform.position + new Vector3(Vector2.left.x * 5, 0, 0), Quaternion.identity);
-        }
-    }
 
     private void Update() 
     {
@@ -35,7 +22,7 @@ public class Player : AbstractEntity
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            pickupItem();
+            PickupItem();
         }
     }
 	
@@ -54,7 +41,6 @@ public class Player : AbstractEntity
     public override void DamageEffectPlay()
     {
         base.DamageEffectPlay();
-
         var CameraShake = Camera.main.GetComponent<CameraShake>();
         if (CameraShake != null)
             StartCoroutine(CameraShake.Shake(damageShakeAmount, 0.1f));
@@ -69,12 +55,15 @@ public class Player : AbstractEntity
         return true;
     }
 
-    public void EquipWeapon(AbstractWeapon weapon)
+    public override void EquipItem(AbstractWeapon weapon)
     {
         if (currentWeapon != null)
-            currentWeapon.Drop(weapon.transform.position);
+            currentWeapon.Drop();
 
-        weapon.transform.parent = transform.Find("Weapon");
         currentWeapon = weapon;
+        currentWeapon.Pickup(this);
+        currentWeapon.transform.parent = transform.Find("Weapon");
+        currentWeapon.transform.localScale = new Vector3(1, 1, 1);
+
     }
 }

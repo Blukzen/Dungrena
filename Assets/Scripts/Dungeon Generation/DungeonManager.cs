@@ -7,16 +7,22 @@ public class DungeonManager : MonoBehaviour {
 
     public static string TAG = "DungeonManager";
 
-    public RoomList roomList;
-
+    [Header("Dungeon Settings")]
     public int roomHeight = 10;
     public int roomWidth = 18;
 
     public int maxDifficulty = 1;
     public int minDifficulty = 1;
 
+    public RoomList roomList;
+
+    public AbstractWeapon starterWeapon;
+
+    [Space]
     public GameEvent dungeonGeneratedEvent;
+
     public AstarPath astarPrefab;
+    [HideInInspector]
     public AstarPath astarPath;
 
     private int numRooms = 15;
@@ -47,6 +53,9 @@ public class DungeonManager : MonoBehaviour {
 
         Debug.Log("[" + TAG + "]" + "Building Dunegon...");
         BuildDungeon();
+
+        if (starterWeapon != null)
+            Instantiate(starterWeapon, SpawnRoom.RandomPointInRoom(), Quaternion.identity);
 
         Debug.Log("[" + TAG + "]" + "Scanning dungeon for pathfinding...");
         if (astarPath == null)
