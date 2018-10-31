@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4517845788040868}
   - component: {fileID: 212933200796922806}
-  - component: {fileID: 114121532482956252}
   - component: {fileID: 50237827498415820}
-  - component: {fileID: 61693739289728284}
   - component: {fileID: 95254751253374828}
+  - component: {fileID: 61693739289728284}
+  - component: {fileID: 114121532482956252}
   - component: {fileID: 114771712804090922}
   - component: {fileID: 114811158005557748}
   - component: {fileID: 114233972482496202}
@@ -153,7 +153,8 @@ MonoBehaviour:
   maxSpeed: 6
   acceleration: 1
   friction: 1
-  maxHealth: 10
+  maxHealth: 18.09
+  health: 0
   canMove: 1
   applyFriction: 1
   attacking: 0

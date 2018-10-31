@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Player : AbstractEntity
 {
-    public int maxMana;
-    private int mana;
+    public float maxMana;
+    public float mana;
 
-    [Header("Extra")]
-    [SerializeField]
-    private AbstractWeapon currentWeapon;
+    public AbstractWeapon currentWeapon;
     [SerializeField]
     private AbstractWeapon defaultWeapon;
     private AbstractAbility ability;
-    private float damageShakeAmount = 0.15f;
+
+    public float damageShakeAmount = 0.15f;
 
     private void Start() {
         mana = maxMana;
@@ -21,8 +20,7 @@ public class Player : AbstractEntity
 
         if (currentWeapon == null)
         {
-            var weapon = Instantiate(defaultWeapon, transform.position, Quaternion.identity);
-           weapon.pickup(this);
+            //Instantiate(defaultWeapon, transform.position + new Vector3(Vector2.left.x * 5, 0, 0), Quaternion.identity);
         }
     }
 

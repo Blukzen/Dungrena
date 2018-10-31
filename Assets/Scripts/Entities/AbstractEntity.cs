@@ -3,27 +3,20 @@
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class AbstractEntity : MonoBehaviour, IDamageable
 {
-
-    [Header("Physics Values")]
     public int maxSpeed = 7;
     public float acceleration = 1;
     public float friction = 1.9f;
 
     protected Vector2 moveDirection;
 
-    [Header("Player Stats")]
-    [SerializeField]
-    private float maxHealth;
-    private float health;
+    public float maxHealth = 10;
+    public float health;
 
     private float pickUpRange = 1.5f;
     private Vector3 pickUpOffset = new Vector2(0, 0.5f);
 
-    [HideInInspector]
     public bool canMove = true;
-    [HideInInspector]
     public bool applyFriction = true;
-    [HideInInspector]
     public bool attacking = false;
 
     protected Rigidbody2D rb2d;
@@ -35,7 +28,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        health = maxHealth;
         rb2d = GetComponent<Rigidbody2D>();
     }
 

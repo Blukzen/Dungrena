@@ -66,6 +66,9 @@ public abstract class AbstractWeapon : MonoBehaviour, IPickupable
 
     private void OnMouseExit()
     {
+        if (!onGround)
+            return; 
+
         GetComponent<SpriteRenderer>().material = defaultMaterial;
     }
 }
