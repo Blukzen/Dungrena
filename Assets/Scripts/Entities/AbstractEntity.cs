@@ -20,14 +20,19 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public bool attacking = false;
 
     protected Rigidbody2D rb2d;
-    protected Collider2D collider2d;
+    protected Collider2D col;
+    protected SpriteRenderer sprite;
     protected GameEvent onCollision;
+
+    private int spriteSortingOrderBase = 5000;
 
     public GameObject DamageEffect;
 
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
     }
 
     public virtual void UpdatePhysics()
@@ -49,7 +54,17 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
                 newVel.y = Approach(newVel.y, 0, _friction / 2);
         }
 
-        rb2d.velocity = newVel;
+        rb2d.velocity = newVel; 
+    }
+
+    private void LateUpdate()
+    {
+        UpdateSprite();
+    }
+
+    protected virtual void UpdateSprite()
+    {
+        sprite.sortingOrder = (int)(spriteSortingOrderBase - (col.bounds.center.y * 10));
     }
 
     public virtual Vector2 UpdateMovement(Vector2 newVel)
@@ -202,8 +217,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     public abstract void EquipItem(AbstractWeapon weapon);
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, pickUpRange);
-    }
+    public virtual void OnAttackBegin() { }
+    public virtual void OnAttackEnd() { }
 }

@@ -59,6 +59,8 @@ public abstract class MeleeWeapon : AbstractWeapon
         itemCollider.enabled = true;
         if (swordEffect)
             swordEffect.enabled = true;
+
+        Owner.OnAttackBegin();
     }
 
     // Disables hitCollider to end attack. Used in animation events.
@@ -67,5 +69,9 @@ public abstract class MeleeWeapon : AbstractWeapon
         itemCollider.enabled = false;
         if (swordEffect)
             swordEffect.enabled = false;
+
+        lastAttackTime = Time.time;
+
+        Owner.OnAttackEnd();
     }
 }

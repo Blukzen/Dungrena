@@ -74,7 +74,14 @@ public class Player : AbstractEntity
         base.DamageEffectPlay();
         var CameraShake = Camera.main.GetComponent<CameraShake>();
         if (CameraShake != null)
-            StartCoroutine(CameraShake.Shake(damageShakeAmount, 0.1f));
+            StartCoroutine(CameraShake.Shake(damageShakeAmount, 0.2f));
+    }
+
+    protected override void UpdateSprite()
+    {
+        base.UpdateSprite();
+        if (currentWeapon != null)
+            currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder -1;
     }
 
     public bool UseMana(int amount) 

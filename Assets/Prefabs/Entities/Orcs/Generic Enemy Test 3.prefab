@@ -93,12 +93,11 @@ MonoBehaviour:
   acceleration: 1
   friction: 1.9
   maxHealth: 10
+  health: 0
   canMove: 1
   applyFriction: 1
   attacking: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  DamageEffect: {fileID: 0}
   target: {fileID: 0}
 --- !u!212 &212276279343060298
 SpriteRenderer:
@@ -115,7 +114,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 23164a52e1c82994f92eff6b462b55b7, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -61,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149.3, y: 89.33, z: 0}
+  m_LocalPosition: {x: 7.8631315, y: -1.7445376, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4903381131860694}
@@ -148,17 +148,15 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 0.2
   friction: 1
-  maxHealth: 20
-  health: 20
+  maxHealth: 10
+  health: 10
   canMove: 1
   applyFriction: 1
   attacking: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
   DamageEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44,
     type: 2}
   target: {fileID: 0}
+  currentWeapon: {fileID: 0}
 --- !u!114 &114070595716914548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,8 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 18944
-  viewDistance: 12
+    m_Bits: 25088
+  viewDistance: 11
 --- !u!114 &114073370192230380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6c562c562dbbb4eb579343e8e57b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 5
+  coolDown: 3
   DashDamage: 2
   DashKnockBack: 5
   DashSpeed: 20
@@ -246,10 +244,6 @@ MonoBehaviour:
   canSeePlayer: 0
   currentState: {fileID: 0}
   lastState: {fileID: 0}
-  idleState: {fileID: 0}
-  patrolState: {fileID: 0}
-  chaseState: {fileID: 0}
-  dashAttackState: {fileID: 0}
 --- !u!114 &114805103368521058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,4 +336,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1

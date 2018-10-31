@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    public static string TAG = "[GameManager] ";
+
     public static Player player;
     public Player playerPrefab;
 
@@ -28,7 +30,16 @@ public class GameManager : Singleton<GameManager>
     {
         if (scene.buildIndex > 0)
         {
-            dungeonManager = GameObject.Find(DungeonManager.TAG).GetComponent<DungeonManager>();
+            var dungeonManagerOBJ = GameObject.Find(DungeonManager.TAG);
+
+            if (dungeonManagerOBJ == null)
+            {
+                Debug.Log(TAG + "No dungeonManager. Dungeon will no be generated");
+                SetupTestLevel();
+                return;
+            }
+
+            dungeonManager = dungeonManagerOBJ.GetComponent<DungeonManager>();
             enemySpawner = GetComponent<EnemySpawner>();
 
             dungeonManager.Initialize();
@@ -59,5 +70,14 @@ public class GameManager : Singleton<GameManager>
     {
         enemySpawner.KillAll();
         dungeonManager.Regenerate();
+    }
+
+    private void SetupTestLevel()
+    {
+        // Check if there is already a player in the scene
+        var playerOBJ = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerOBJ != null)
+            player = playerOBJ.GetComponent<Player>();
     }
 }

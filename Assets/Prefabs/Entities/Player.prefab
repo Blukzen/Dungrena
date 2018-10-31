@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687475868900996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0035281, y: 1.0495685, z: 0}
+  m_LocalPosition: {x: -14.41839, y: 2.4478917, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4874228891043034}
@@ -108,7 +108,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08230829, y: 0.5980821}
+  m_Offset: {x: -0.08230829, y: 0.17235398}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -119,7 +119,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7728834, y: 1.1961643}
+  m_Size: {x: 0.7728834, y: 0.34470797}
   m_EdgeRadius: 0
 --- !u!95 &95254751253374828
 Animator:
@@ -153,20 +153,17 @@ MonoBehaviour:
   maxSpeed: 6
   acceleration: 1
   friction: 1
-  maxHealth: 18.09
-  health: 0
+  maxHealth: 30
+  health: 30
   canMove: 1
   applyFriction: 1
   attacking: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2048
   DamageEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44,
     type: 2}
   maxMana: 10
+  mana: 10
   currentWeapon: {fileID: 0}
-  defaultWeapon: {fileID: 114746445673159950, guid: 37262e04328214649b5f8cd80b1ccb52,
-    type: 2}
+  damageShakeAmount: 0.15
 --- !u!114 &114233972482496202
 MonoBehaviour:
   m_ObjectHideFlags: 1

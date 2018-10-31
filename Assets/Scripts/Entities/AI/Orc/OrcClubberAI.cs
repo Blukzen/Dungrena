@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class OrcDasherAI : AbstractEnemyAI
+public class OrcClubberAI : AbstractEnemyAI
 {
+
     private IdleState idleState;
     private PatrolState patrolState;
     private ChaseState chaseState;
-    private DashAttackState dashAttackState;
+    private WeaponAttackState attackState;
 
     private Animator animator;
 
@@ -16,14 +16,16 @@ public class OrcDasherAI : AbstractEnemyAI
         idleState = GetComponent<IdleState>();
         patrolState = GetComponent<PatrolState>();
         chaseState = GetComponent<ChaseState>();
-        dashAttackState = GetComponent<DashAttackState>();
+        attackState = GetComponent<WeaponAttackState>();
 
         animator = GetComponent<Animator>();
 
         currentState = idleState;
+        entity.EquipItem(transform.Find("Weapon").GetComponentInChildren<AbstractWeapon>());
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         // Dont update state if the current state is not yet finished
         if (!currentState.Executing)
             UpdateState();
@@ -35,9 +37,6 @@ public class OrcDasherAI : AbstractEnemyAI
 
         if (currentState == patrolState || currentState == chaseState)
             animator.SetTrigger("Walking");
-
-        if (currentState == dashAttackState)
-            animator.SetTrigger("Dashing");
     }
 
     private void UpdateState()
@@ -45,20 +44,16 @@ public class OrcDasherAI : AbstractEnemyAI
         AbstractEnemyState newState = null;
 
         if (idleState.conditionsMet(this) && currentState.Name != idleState.Name)
-        {
             newState = idleState;
-        }
 
         if (patrolState.conditionsMet(this) && currentState.Name != patrolState.Name)
-        {
             newState = patrolState;
-        }
 
         if (chaseState.conditionsMet(this) && currentState.Name != chaseState.Name)
             newState = chaseState;
 
-        if (dashAttackState.conditionsMet(this) && currentState.Name != dashAttackState.Name)
-            newState = dashAttackState;
+        if (attackState.conditionsMet(this) && currentState.Name != attackState.Name)
+            newState = attackState;
 
         if (newState != null && newState != currentState)
         {
@@ -70,6 +65,6 @@ public class OrcDasherAI : AbstractEnemyAI
 
     public override bool CanAttackTarget()
     {
-        return dashAttackState.conditionsMet(this);
+        return entity.currentWeapon.CanAttack() && canSeePlayer && attackState.TargetInRange();
     }
 }

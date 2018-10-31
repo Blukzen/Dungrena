@@ -49,7 +49,7 @@ public class DashAttackState : AbstractEnemyAbilityState
     public override bool conditionsMet(AbstractEnemyAI enemyAI)
     {
         target = GameManager.player.transform.position;
-        return canCast() && TargetInRange();
+        return canCast() && TargetInRange() && enemyAI.canSeePlayer;
     }
 
     public override void execute(AbstractEnemyAI enemyAI)

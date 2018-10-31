@@ -6,6 +6,13 @@ public class GenericEnemy : AbstractEnemy
 {
     public override void EquipItem(AbstractWeapon weapon)
     {
-        throw new System.NotImplementedException();
+        if (currentWeapon != null)
+            currentWeapon.Drop();
+
+        currentWeapon = weapon;
+        currentWeapon.Pickup(this);
+        currentWeapon.transform.parent = transform.Find("Weapon");
+        currentWeapon.transform.localScale = new Vector3(1, 1, 1);
+
     }
 }

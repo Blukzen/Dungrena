@@ -9,7 +9,7 @@ public abstract class AbstractWeapon : AbstractItem
     public float secondaryAttackDamage;
     public int secondaryAttackManaCost;
 
-    private float lastAttackTime;
+    protected float lastAttackTime = 0;
 
     public abstract void Attack();
     public abstract void SecondaryAttack();
@@ -21,10 +21,7 @@ public abstract class AbstractWeapon : AbstractItem
 
     public bool CanAttack() 
     {
-        var canAttack = lastAttackTime + attackSpeed <= Time.time;
-
-        if (canAttack) lastAttackTime = Time.time;
-        return canAttack;
+        return Time.time - lastAttackTime >= attackSpeed;
     }
 
     public override void MouseOver()
