@@ -11,6 +11,8 @@ public class Player : AbstractEntity
 
     public float damageShakeAmount = 0.15f;
 
+    private AbstractItem selectedItem;
+
     private void Update() 
     {
         if (Input.GetMouseButtonDown(0)) {
@@ -24,10 +26,33 @@ public class Player : AbstractEntity
         {
             PickupItem();
         }
+
+        MouseOverItem();
+
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () 
+
+    // Raycast version of OnMouseOver
+    private void MouseOverItem()
+    {
+        Collider2D collider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), 1 << LayerMask.NameToLayer("Items"));
+
+        if (collider == null)
+        {
+            if (selectedItem != null)
+            {
+                selectedItem.MouseExit();
+                selectedItem = null;
+            }
+
+            return;
+        }
+
+        selectedItem = collider.GetComponent<AbstractItem>();
+        selectedItem.MouseOver();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () 
     {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 

@@ -27,23 +27,15 @@ public abstract class AbstractWeapon : AbstractItem
         return canAttack;
     }
 
-    private void OnMouseEnter()
+    public override void MouseOver()
     {
-    }
-
-    private void OnMouseOver()
-    {
-        if (!OnGround)
-            return;
-
+        base.MouseOver();
         UIManager.ShowWeaponInfo(this);
     }
 
-    private void OnMouseExit()
+    public override void MouseExit()
     {
-        if (!OnGround)
-            return;
-
+        base.MouseExit();
         UIManager.HideWeaponInfo();
     }
 }

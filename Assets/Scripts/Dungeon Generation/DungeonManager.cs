@@ -55,7 +55,10 @@ public class DungeonManager : MonoBehaviour {
         BuildDungeon();
 
         if (starterWeapon != null)
+        {
             Instantiate(starterWeapon, SpawnRoom.RandomPointInRoom(), Quaternion.identity);
+            Instantiate(starterWeapon, ShopRoom.RandomPointInRoom(), Quaternion.identity);
+        }
 
         Debug.Log("[" + TAG + "]" + "Scanning dungeon for pathfinding...");
         if (astarPath == null)

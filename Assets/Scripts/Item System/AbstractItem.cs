@@ -62,6 +62,16 @@ public abstract class AbstractItem : MonoBehaviour
 
         transform.parent = null;
     }
+
+    public virtual void MouseOver()
+    {
+
+    }
+
+    public virtual void MouseExit()
+    {
+
+    }
 }
 
 public enum ItemType
