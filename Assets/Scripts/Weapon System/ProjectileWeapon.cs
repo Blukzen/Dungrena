@@ -4,59 +4,57 @@ using UnityEngine;
 
 public abstract class ProjectileWeapon : AbstractWeapon 
 {
-
-    [SerializeField]
-    private int projectileSpeed;
     [SerializeField]
     private AbstractProjectile projectile;
     [SerializeField]
+    private float projectileSpeed;
+    [SerializeField]
     private Transform firePosition;
+    public string mainAttackAnimation;
+    public string abilityAttackAnimation;
+    
 
-    /**public override void Attack() 
+    private Vector2 Target;
+
+    protected virtual void AttackBegin()
     {
-        if (!CanAttack())
-            return;
+        attacking = true;
+        Owner.OnAttackBegin(currentManaCost);
+    }
 
+    protected virtual void AttackEnd()
+    {
+        attacking = false;
         lastAttackTime = Time.time;
-
-        Shoot(0);
+        Owner.OnAttackEnd();
     }
 
-    // Shoots projectiles in 360 circle
-    public override void SecondaryAttack(Player player) 
+    protected void Shoot() 
     {
-        if (!player.UseMana(secondaryAttackManaCost))
-            return;
-
-        int angle = 0;
-
-        Shoot(0);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-        Shoot(angle += 36);
-    }
-
-    // Dir the direction of the bullet where 0 is straight ahead and 90 is degree's clockwise.
-    public void Shoot(int dir) 
-    {
-        var proj = Instantiate(projectile, firePosition.transform.position, DirectionToMouse(dir));
+        var proj = Instantiate(projectile, firePosition.transform.position, transform.parent.rotation);
         proj.Owner = transform.parent.parent.GetComponent<AbstractEntity>();
         proj.Speed = projectileSpeed;
-        proj.Damage = GetDamage();
-    }**/
+        proj.Damage = currentDamage;
+        proj.Knockback = knockBackForce;
 
-    protected Quaternion DirectionToMouse(int rot) 
+        if (enemyWeapon)
+            proj.EnemyProjectile = true;
+    }
+
+    protected void ShootStaffDir()
     {
-        Vector3 diff = Camera.main.ScreenToWorldPoint(Input.mousePosition) - firePosition.position;
+        var proj = Instantiate(projectile, firePosition.transform.position, transform.rotation);
+        proj.Owner = transform.parent.parent.GetComponent<AbstractEntity>();
+        proj.Speed = projectileSpeed;
+        proj.Damage = currentDamage;
+    }
+
+    protected Quaternion DirectionToPoint(Vector3 point) 
+    {
+        Vector3 diff = point - firePosition.position;
         diff.Normalize();
 
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0f, 0f, rot_z - 90 + rot);
+        return Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 }

@@ -13,6 +13,5 @@ public class GenericEnemy : AbstractEnemy
         currentWeapon.Pickup(this);
         currentWeapon.transform.parent = transform.Find("Weapon");
         currentWeapon.transform.localScale = new Vector3(1, 1, 1);
-
     }
 }

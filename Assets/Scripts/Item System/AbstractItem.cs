@@ -7,6 +7,7 @@ public abstract class AbstractItem : MonoBehaviour
     public string ItemName;
     public string ItemDescription;
     public string ItemSlug;
+    [HideInInspector]
     public ItemType ItemType;
 
     protected PolygonCollider2D itemCollider;
@@ -38,8 +39,6 @@ public abstract class AbstractItem : MonoBehaviour
         itemCollider.enabled = false;
         itemCollider.isTrigger = true;
         animator.enabled = true;
-
-        renderer.sortingOrder = 5;
 
         return this;
     }

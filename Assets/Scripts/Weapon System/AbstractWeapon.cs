@@ -4,12 +4,21 @@ using UnityEngine;
 
 public abstract class AbstractWeapon : AbstractItem
 {
-    public int attackDamage;
+    public float attackDamage;
     public float attackSpeed;
     public float secondaryAttackDamage;
     public int secondaryAttackManaCost;
+    public float knockBackForce; // Knockback force applied to hit enemy.
+    public WeaponType weaponType;
+
+    [HideInInspector]
+    public bool enemyWeapon;
+
+    protected float currentDamage; // This value is the damage of the current attack/damage applied on hit.
+    protected float currentManaCost;
 
     protected float lastAttackTime = 0;
+    public bool attacking = false;
 
     public abstract void Attack();
     public abstract void SecondaryAttack();
@@ -21,7 +30,12 @@ public abstract class AbstractWeapon : AbstractItem
 
     public bool CanAttack() 
     {
-        return Time.time - lastAttackTime >= attackSpeed;
+        return Time.time - lastAttackTime >= 1/attackSpeed && !attacking;
+    }
+
+    public bool CanSecondaryAttack()
+    {
+        return Owner.CanSecondaryAttack() && !attacking;
     }
 
     public override void MouseOver()
@@ -35,4 +49,9 @@ public abstract class AbstractWeapon : AbstractItem
         base.MouseExit();
         UIManager.HideWeaponInfo();
     }
+}
+
+public enum WeaponType
+{
+    MELEE, PROJECTILE
 }

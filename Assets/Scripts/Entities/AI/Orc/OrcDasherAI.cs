@@ -30,6 +30,8 @@ public class OrcDasherAI : AbstractEnemyAI
 
         currentState.execute(this);
 
+        entity.UpdatePhysics();
+
         if (currentState == idleState)
             animator.SetTrigger("Idle");
 

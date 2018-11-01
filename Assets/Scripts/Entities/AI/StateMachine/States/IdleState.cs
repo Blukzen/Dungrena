@@ -16,8 +16,7 @@ public class IdleState : AbstractEnemyState
     public override void execute(AbstractEnemyAI enemyAI)
     {
         timeIdle += Time.deltaTime;
-        enemyAI.SetMovement(new Vector2());
-        enemyAI.UpdatePhysics();
+        entity.StopMoving();
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)

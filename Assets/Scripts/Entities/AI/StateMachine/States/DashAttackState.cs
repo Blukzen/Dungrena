@@ -27,6 +27,7 @@ public class DashAttackState : AbstractEnemyAbilityState
         dashing = false;
         chargingDash = true;
         caster.ResetVelocity();
+        caster.StopMoving();
         gameObject.layer = LayerMask.NameToLayer("IgnoreEntities");
         Executing = true;
     }

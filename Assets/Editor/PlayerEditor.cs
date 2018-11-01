@@ -37,6 +37,8 @@ public class PlayerEditor : Editor {
             player.mana = player.maxMana;
         EditorGUILayout.LabelField("Mana", player.mana.ToString());
 
+        player.manaRegen = EditorGUILayout.FloatField("Mana Regen", player.manaRegen);
+
         EditorGUILayout.EndVertical();
     }
 

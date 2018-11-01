@@ -264,7 +264,7 @@ MonoBehaviour:
   ItemSlug: orc_club
   ItemType: 0
   attackDamage: 6
-  attackSpeed: 0.5
+  attackSpeed: 1
   secondaryAttackDamage: 10
   secondaryAttackManaCost: 2
   collisionMask:

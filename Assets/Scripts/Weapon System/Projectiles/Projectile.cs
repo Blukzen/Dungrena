@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileFireball : AbstractProjectile
+public class Projectile : AbstractProjectile
 {
     private void OnCollisionEnter2D(Collision2D collision) 
     {
@@ -17,14 +17,19 @@ public class ProjectileFireball : AbstractProjectile
                 continue;
             }
             // Ignore collision if it is its own owner.
-            else if (entity.Equals(Owner)) 
+            else if (entity.Equals(entityOwner)) 
             {
                 Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
                 continue;
             } 
 
+            if (enemyProjectile && entity is AbstractEnemy)
+            {
+                Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
+                continue;
+            }
             // Damage entity and destroy projectile.
-            entity.Damage(Damage);
+            entity.ApplyAttack(Damage, knockback, entityOwner);
             Destroy(gameObject);
         }
     }
@@ -50,7 +55,7 @@ public class ProjectileFireball : AbstractProjectile
         }
 
         // Damage entity and destroy projectile.
-        entity.Damage(Damage);
+        entity.ApplyAttack(Damage, knockback, entityOwner);
         Destroy(gameObject);
     }
 }

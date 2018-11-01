@@ -6,6 +6,11 @@ public abstract class AbstractEnemy : AbstractEntity
     private AbstractAbility attack;
     public Player target;
 
+    public float AbilityCooldown;
+    private float lastAbilityAttack;
+
+    [HideInInspector]
+    public GameObject weaponHolder;
     [HideInInspector]
     public AbstractWeapon currentWeapon;
 
@@ -13,6 +18,14 @@ public abstract class AbstractEnemy : AbstractEntity
     {
         attack = GetComponent<AbstractAbility>();
         target = GameManager.player;
+
+        if (transform.Find("Weapon"))
+            weaponHolder = transform.Find("Weapon").gameObject;
+    }
+
+    public override bool CanSecondaryAttack()
+    {
+        return Time.time - lastAbilityAttack >= AbilityCooldown && currentWeapon.CanAttack();
     }
 
     public void Attack()
@@ -24,6 +37,18 @@ public abstract class AbstractEnemy : AbstractEntity
         }
 
         currentWeapon.Attack();
+    }
+
+    public void SecondaryAttack()
+    {
+        if (currentWeapon == null)
+        {
+            Debug.Log("[" + name + "]" + "Has no weapon to attack with!");
+            return;
+        }
+
+        currentWeapon.SecondaryAttack();
+        lastAbilityAttack = Time.time;
     }
 
     protected override void UpdateSprite()

@@ -5,22 +5,35 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public abstract class AbstractProjectile : MonoBehaviour 
 {
-    private AbstractEntity entityOwner;
+    protected AbstractEntity entityOwner;
     public AbstractEntity Owner 
     {
         get { return entityOwner; }
         set { entityOwner = value; }
     }
 
-    private int projectileDamage;
-    public int Damage {
+    protected float projectileDamage;
+    public float Damage {
         get { return projectileDamage; }
         set { projectileDamage = value; }
     }
 
-    private int projectileSpeed;
-    public int Speed {
+    protected float knockback;
+    public float Knockback
+    {
+        get { return knockback; }
+        set { knockback = value; }
+    }
+
+    protected float projectileSpeed;
+    public float Speed {
         set { projectileSpeed = value; }
+    }
+
+    protected bool enemyProjectile;
+    public bool EnemyProjectile
+    {
+        set { enemyProjectile = value; }
     }
 
     private void FixedUpdate() {

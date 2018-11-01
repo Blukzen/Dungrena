@@ -146,6 +146,12 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         moveDirection = direction;
     }
 
+    // Reset movement input
+    public void StopMoving()
+    {
+        moveDirection = Vector2.zero;
+    }
+
     // For adding extra velocity without moveSpeed bounds to rb2d
     public void AddVelocity(Vector2 direction, float speed)
     {
@@ -217,6 +223,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     public abstract void EquipItem(AbstractWeapon weapon);
 
-    public virtual void OnAttackBegin() { }
+    public virtual void OnAttackBegin(float manaCost) { }
     public virtual void OnAttackEnd() { }
+
+    public abstract bool CanSecondaryAttack();
 }

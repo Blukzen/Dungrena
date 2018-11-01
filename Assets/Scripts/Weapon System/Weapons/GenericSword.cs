@@ -6,11 +6,21 @@ public class GenericSword : MeleeWeapon {
 
     public override void Attack() {
         currentDamage = attackDamage;
-        MeleeAttack(mainAttackAnimation);
+        currentManaCost = 0;
+
+        if (!CanAttack())
+            return;
+
+        animator.Play(mainAttackAnimation);
     }
 
     public override void SecondaryAttack() {
         currentDamage = secondaryAttackDamage;
-        MeleeAttack(secondaryAttackAnimation);
+        currentManaCost = secondaryAttackManaCost;
+
+        if (!CanSecondaryAttack())
+            return;
+
+        animator.Play(secondaryAttackAnimation);
     }
 }

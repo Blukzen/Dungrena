@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4874228891043034}
+  - component: {fileID: 114010469595008022}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
@@ -56,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687475868900996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.41839, y: 2.4478917, z: 0}
+  m_LocalPosition: {x: -3.21, y: -3.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4874228891043034}
@@ -139,6 +140,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114010469595008022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1737803995613298}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7833e0dce1916e0498eaf6cbb66c7c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114121532482956252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,8 +172,9 @@ MonoBehaviour:
   attacking: 0
   DamageEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44,
     type: 2}
-  maxMana: 10
-  mana: 10
+  maxMana: 20
+  mana: 20
+  manaRegen: 1
   currentWeapon: {fileID: 0}
   damageShakeAmount: 0.15
 --- !u!114 &114233972482496202

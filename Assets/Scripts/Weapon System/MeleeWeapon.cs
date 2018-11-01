@@ -6,7 +6,6 @@ using UnityEngine;
 public abstract class MeleeWeapon : AbstractWeapon 
 {
     public LayerMask collisionMask; // Collision layer to look for enemies to attack.
-    public float knockBackForce; // Knockback force applied to hit enemy.
     public GameObject hitEffect; // Prefab of particle effect for hitting enemy.
     public TrailRenderer swordEffect;
 
@@ -14,8 +13,6 @@ public abstract class MeleeWeapon : AbstractWeapon
     // Name of animation states for attacks in animator controller.
     public string mainAttackAnimation = "Default";
     public string secondaryAttackAnimation = "Default";
-
-    protected float currentDamage; // This value is the damage of the current attack/damage applied on hit.
 
     protected override void Start()
     {
@@ -46,27 +43,24 @@ public abstract class MeleeWeapon : AbstractWeapon
         }
     }
 
-    // Called to do a generic attack. string animation is the name of the animation to play on attack.
-    protected void MeleeAttack(string animation) 
-    {
-        if (!CanAttack()) return;
-        animator.Play(animation);
-    }
-
     // Enables hitCollider to start attack. Used in animation events.
     protected void AttackBegin() 
     {
         itemCollider.enabled = true;
+        attacking = true;
+
         if (swordEffect)
             swordEffect.enabled = true;
 
-        Owner.OnAttackBegin();
+        Owner.OnAttackBegin(currentManaCost);
     }
 
     // Disables hitCollider to end attack. Used in animation events.
     protected void AttackEnd() 
     {
         itemCollider.enabled = false;
+        attacking = false;
+
         if (swordEffect)
             swordEffect.enabled = false;
 

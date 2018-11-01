@@ -6,6 +6,8 @@ public class Player : AbstractEntity
 {
     public float maxMana;
     public float mana;
+    public float manaRegen;
+    private float lastManaRegen;
 
     public AbstractWeapon currentWeapon;
 
@@ -28,6 +30,7 @@ public class Player : AbstractEntity
         }
 
         MouseOverItem();
+        ManaRegen();
 
     }
 
@@ -84,10 +87,10 @@ public class Player : AbstractEntity
             currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder -1;
     }
 
-    public bool UseMana(int amount) 
+    public bool UseMana(float amount) 
     {
         if (mana < amount)
-            return false;
+            Debug.LogWarning("[Player] " + "Using more mana than we have!");
 
         mana -= amount;
 
@@ -95,16 +98,47 @@ public class Player : AbstractEntity
 
         return true;
     }
+    
+    protected void ManaRegen()
+    {
+        if (mana == maxMana)
+            return;
+
+        if (Time.time - lastManaRegen < 1 / manaRegen)
+            return;
+
+        mana += 1;
+        lastManaRegen = Time.time;
+        UIManager.UpdateMana(mana, maxMana);
+    }
 
     public override void EquipItem(AbstractWeapon weapon)
     {
         if (currentWeapon != null)
             currentWeapon.Drop();
 
+        var weaponHolder = transform.Find("Weapon");
+        weaponHolder.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         currentWeapon = weapon;
         currentWeapon.Pickup(this);
-        currentWeapon.transform.parent = transform.Find("Weapon");
+        currentWeapon.transform.parent = weaponHolder;
         currentWeapon.transform.localScale = new Vector3(1, 1, 1);
 
+        if (currentWeapon.weaponType == WeaponType.PROJECTILE)
+            gameObject.GetComponentInChildren<UtilityLookAtMouse>().enabled = true;
+        else
+            gameObject.GetComponentInChildren<UtilityLookAtMouse>().enabled = false;
+    }
+
+    public override void OnAttackBegin(float manaCost)
+    {
+        base.OnAttackBegin(manaCost);
+        UseMana(manaCost);
+    }
+
+    public override bool CanSecondaryAttack()
+    {
+        return mana >= currentWeapon.secondaryAttackManaCost;
     }
 }

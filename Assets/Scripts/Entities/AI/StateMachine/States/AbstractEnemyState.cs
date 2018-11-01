@@ -6,12 +6,12 @@ public abstract class AbstractEnemyState : MonoBehaviour, IEnemyState
     public virtual bool Executing { get; set; }
     public abstract string Name { get; }
     protected AbstractEnemyAI enemyAI;
-    protected AbstractEntity entity;
+    protected AbstractEnemy entity;
 
     private void Awake()
     {
         enemyAI = GetComponent<AbstractEnemyAI>();
-        entity = GetComponent<AbstractEntity>();
+        entity = GetComponent<AbstractEnemy>();
     }
 
     public abstract bool conditionsMet(AbstractEnemyAI enemyAI);

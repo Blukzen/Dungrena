@@ -22,17 +22,12 @@ public class ChaseState : AbstractEnemyState
         {
             enemyAI.targetPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
             enemyAI.AstarMoveToTarget();
-            enemyAI.UpdatePhysics();
         }
-        // If can no longer see player continue to last spot the player was seen.
-        /*else if (!enemyAI.reachedEndOfPath && !enemyAI.canSeePlayer && !enemyAI.CanAttackTarget())
-        {
-            enemyAI.AstarMoveToTarget();
-            enemyAI.UpdatePhysics();
-        }*/
+
         // If reached end of path and cannot see player stop executing ChaseState.
         else
         {
+            enemyAI.targetPosition = transform.position;
             Executing = false;
         }
     }

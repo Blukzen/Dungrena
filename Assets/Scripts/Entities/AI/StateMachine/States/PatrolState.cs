@@ -26,7 +26,6 @@ public class PatrolState : AbstractEnemyState
         }
 
         enemyAI.AstarMoveToTarget();
-        enemyAI.UpdatePhysics();
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)

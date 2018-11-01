@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911442533462970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.371, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4280663923404518}
@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 178.96748, y: 97.02692, z: 0}
+  m_LocalPosition: {x: -5.6951103, y: 4.3533173, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4210019132551872}
@@ -518,10 +518,12 @@ MonoBehaviour:
   attackSpeed: 0.6
   secondaryAttackDamage: 10
   secondaryAttackManaCost: 2
+  knockBackForce: 18
+  weaponType: 0
+  attacking: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 512
-  knockBackForce: 18
   hitEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44, type: 2}
   swordEffect: {fileID: 96726374379554292}
   mainAttackAnimation: Default
@@ -537,8 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19c8474211dcfc4b998d60887e7b538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 4
-  acceleration: 0.4
+  maxSpeed: 5
+  acceleration: 0.7
   friction: 1
   maxHealth: 20
   health: 20
@@ -548,6 +550,8 @@ MonoBehaviour:
   DamageEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44,
     type: 2}
   target: {fileID: 0}
+  AbilityCooldown: 2
+  weaponHolder: {fileID: 0}
   currentWeapon: {fileID: 0}
 --- !u!114 &114641739135534580
 MonoBehaviour:

@@ -27,5 +27,10 @@ public abstract class AbstractEnemyAI : AbstractAstarAI, ISearcher
         entity.Attack();
     }
 
+    public void SecondaryAttack()
+    {
+        entity.SecondaryAttack();
+    }
+
     public abstract bool CanAttackTarget();
 }

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 70565040897400620}
   - component: {fileID: 114555841191532290}
   m_Layer: 8
-  m_Name: Generic Enemy Test 3
+  m_Name: OrcSummoner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   attacking: 0
   DamageEffect: {fileID: 0}
   target: {fileID: 0}
+  currentWeapon: {fileID: 0}
 --- !u!212 &212276279343060298
 SpriteRenderer:
   m_ObjectHideFlags: 1
