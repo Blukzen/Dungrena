@@ -13,9 +13,13 @@ public abstract class AbstractEnemy : AbstractEntity
     public GameObject weaponHolder;
     [HideInInspector]
     public AbstractWeapon currentWeapon;
+    [HideInInspector]
+    public bool lookingAtPlayer = false;
 
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
+
         attack = GetComponent<AbstractAbility>();
         target = GameManager.player;
 
@@ -59,13 +63,19 @@ public abstract class AbstractEnemy : AbstractEntity
 
         var newScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-        if (rb2d.velocity.x < -0.5)
+        if (lookingAtPlayer)
         {
-            newScale.x = -1;
-        }
-        else if (rb2d.velocity.x > 0.5)
+            if (transform.position.x < GameManager.player.transform.position.x)
+                newScale.x = -1;
+            else if (transform.position.x > GameManager.player.transform.position.x)
+                newScale.x = 1;
+
+        } else
         {
-            newScale.x = 1;
+            if (rb2d.velocity.x < -0.5)
+                newScale.x = -1;
+            else if (rb2d.velocity.x > 0.5)
+                newScale.x = 1;
         }
 
         transform.localScale = newScale;

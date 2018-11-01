@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.446285, y: 8.215913, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4924990450588320}
@@ -273,7 +273,7 @@ Animator:
   m_GameObject: {fileID: 1868797904258820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 966a4414333467d4d9d24eb5c126d3ed, type: 2}
+  m_Controller: {fileID: 9100000, guid: 443b2ca03f7e47347b993bb330b4ec14, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -377,6 +377,7 @@ MonoBehaviour:
   AbilityCooldown: 5
   weaponHolder: {fileID: 0}
   currentWeapon: {fileID: 0}
+  lookingAtPlayer: 0
 --- !u!114 &114610543433763698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -411,6 +412,7 @@ MonoBehaviour:
   secondaryAttackManaCost: 8
   knockBackForce: 10
   weaponType: 1
+  enemyWeapon: 0
   attacking: 0
   projectile: {fileID: 114698292735160742, guid: 565ef33a30064ba4cb1dad3d8b666416,
     type: 2}

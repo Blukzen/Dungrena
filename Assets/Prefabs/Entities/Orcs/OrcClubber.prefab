@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868797904258820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.6951103, y: 4.3533173, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4210019132551872}
@@ -520,6 +520,7 @@ MonoBehaviour:
   secondaryAttackManaCost: 2
   knockBackForce: 18
   weaponType: 0
+  enemyWeapon: 0
   attacking: 0
   collisionMask:
     serializedVersion: 2
@@ -553,6 +554,7 @@ MonoBehaviour:
   AbilityCooldown: 2
   weaponHolder: {fileID: 0}
   currentWeapon: {fileID: 0}
+  lookingAtPlayer: 0
 --- !u!114 &114641739135534580
 MonoBehaviour:
   m_ObjectHideFlags: 1

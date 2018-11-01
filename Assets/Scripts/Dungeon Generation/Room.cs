@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,11 +17,28 @@ public class Room : MonoBehaviour
     }
 
     private BoxCollider2D spawnArea;
+    private bool updatedPathfinding = false;
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.gameObject.tag == "Player")
             Camera.main.GetComponent<CameraController>().MoveTo(transform.position);
+    }
+
+    private void LateUpdate()
+    {
+        if (!updatedPathfinding)
+        {
+            // Update astar graph
+            var bounds = transform.Find("Floor").GetComponent<Collider2D>().bounds;
+            bounds.Expand(Vector3.forward * 1000);
+
+            var guo = new GraphUpdateObject(bounds);
+            guo.updatePhysics = true;
+            AstarPath.active.UpdateGraphs(guo);
+
+            updatedPathfinding = true;
+        }
     }
 
     public void Init() 
@@ -93,8 +111,8 @@ public class Room : MonoBehaviour
 
     public Vector2 RandomPointInRoom() {
         return (Vector2) spawnArea.transform.position + new Vector2(
-           (Random.value - 0.5f) * spawnArea.bounds.size.x,
-           (Random.value - 0.5f) * spawnArea.bounds.size.y
+           (Random.value - 0.5f) * (spawnArea.bounds.size.x*0.9f),
+           (Random.value - 0.5f) * (spawnArea.bounds.size.y*0.9f)
         );
     }
 }

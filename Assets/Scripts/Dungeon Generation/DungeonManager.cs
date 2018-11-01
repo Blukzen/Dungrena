@@ -21,10 +21,6 @@ public class DungeonManager : MonoBehaviour {
     [Space]
     public GameEvent dungeonGeneratedEvent;
 
-    public AstarPath astarPrefab;
-    [HideInInspector]
-    public AstarPath astarPath;
-
     private int numRooms = 15;
     private int dungeonSize = 10;
 
@@ -59,11 +55,6 @@ public class DungeonManager : MonoBehaviour {
             Instantiate(starterWeapon, SpawnRoom.RandomPointInRoom(), Quaternion.identity);
             Instantiate(starterWeapon, ShopRoom.RandomPointInRoom(), Quaternion.identity);
         }
-
-        Debug.Log("[" + TAG + "]" + "Scanning dungeon for pathfinding...");
-        if (astarPath == null)
-            astarPath = Instantiate(astarPrefab);
-        astarPath.QueueGraphUpdates();
 
         Debug.Log("[" + TAG + "]" + "Dungeon Complete!");
 

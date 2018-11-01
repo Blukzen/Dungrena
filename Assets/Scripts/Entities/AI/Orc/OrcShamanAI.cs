@@ -31,15 +31,19 @@ public class OrcShamanAI : AbstractEnemyAI
             UpdateState();
 
         if (canSeePlayer)
+        {
             entity.weaponHolder.transform.LookAtPoint(GameManager.player.transform.position);
+        }
         else
+        {
             entity.weaponHolder.transform.rotation = new Quaternion();
+        }
 
         currentState.execute(this);
 
         entity.UpdatePhysics();
 
-        if (currentState == idleState)
+        if (currentState == idleState || currentState == attackState)
             animator.SetTrigger("Idle");
 
         if (currentState == patrolState || currentState == chaseState)

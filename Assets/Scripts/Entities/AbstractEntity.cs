@@ -28,7 +28,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     public GameObject DamageEffect;
 
-    private void Awake()
+    public virtual void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -120,13 +120,13 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     public virtual void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
     {
-        // Damage
-        Damage(damage);
-
         // Knockback
         var knockbackDirection = transform.position - attacker.transform.position;
         AddVelocity(knockbackDirection.normalized, knockback);
         DamageEffectPlay();
+
+        // Damage
+        Damage(damage);
     }
 
     public virtual void DamageEffectPlay()

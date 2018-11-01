@@ -12,6 +12,11 @@ public class GameManager : Singleton<GameManager>
 
     public static DungeonManager dungeonManager;
     public static EnemySpawner enemySpawner;
+
+    public AstarPath astarPrefab;
+    private AstarPath astarPath;
+
+    private int currentScene;
     private Camera mainCamera;
 
     public int score = 0;
@@ -28,7 +33,9 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        if (scene.buildIndex > 0)
+        currentScene = scene.buildIndex;
+
+        if (currentScene > 0)
         {
             var dungeonManagerOBJ = GameObject.Find(DungeonManager.TAG);
 
@@ -42,6 +49,10 @@ public class GameManager : Singleton<GameManager>
             dungeonManager = dungeonManagerOBJ.GetComponent<DungeonManager>();
             enemySpawner = GetComponent<EnemySpawner>();
 
+            if (astarPath != null)
+                Destroy(astarPath);
+
+            astarPath = Instantiate(astarPrefab);
             dungeonManager.Initialize();
         }
     }
