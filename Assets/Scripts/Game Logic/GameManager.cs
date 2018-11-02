@@ -10,13 +10,14 @@ public class GameManager : Singleton<GameManager>
     public static Player player;
     public Player playerPrefab;
 
-    public static DungeonManager dungeonManager;
-    public static EnemySpawner enemySpawner;
-
     public AstarPath astarPrefab;
-    private AstarPath astarPath;
+    public static AstarPath astarPath;
+
+    public static DungeonGenerator dungeonGenerator;
 
     private int currentScene;
+    private static int sceneToLoad;
+
     private Camera mainCamera;
 
     public int score = 0;
@@ -31,29 +32,33 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    public static void StartLoading()
+    {
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void LoadNextScene()
+    {
+        UIManager.loadingScreen.gameObject.SetActive(true);
+        sceneToLoad = SceneManager.GetActiveScene().buildIndex + 1;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         currentScene = scene.buildIndex;
 
+        if (instance != null)
+            return;
+
         if (currentScene > 0)
         {
-            var dungeonManagerOBJ = GameObject.Find(DungeonManager.TAG);
-
-            if (dungeonManagerOBJ == null)
-            {
-                Debug.Log(TAG + "No dungeonManager. Dungeon will no be generated");
-                SetupTestLevel();
-                return;
-            }
-
-            dungeonManager = dungeonManagerOBJ.GetComponent<DungeonManager>();
-            enemySpawner = GetComponent<EnemySpawner>();
-
             if (astarPath != null)
                 Destroy(astarPath);
 
             astarPath = Instantiate(astarPrefab);
-            dungeonManager.Initialize();
+
+            dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+            dungeonGenerator.Generate();
         }
     }
 
@@ -61,13 +66,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (player == null)
             player = Instantiate(playerPrefab);
-
-        var spawnRoom = dungeonManager.SpawnRoom;
-
-        player.transform.position = spawnRoom.transform.position;
-
-        Camera.main.GetComponent<CameraController>().MoveTo(new Vector2(spawnRoom.transform.position.x, spawnRoom.transform.position.y));
-        Camera.main.transform.position = player.transform.position;
 
         LevelChanger.LevelReady();
     }
@@ -79,8 +77,6 @@ public class GameManager : Singleton<GameManager>
 
     public void RegenerateDungeon() 
     {
-        enemySpawner.KillAll();
-        dungeonManager.Regenerate();
     }
 
     private void SetupTestLevel()

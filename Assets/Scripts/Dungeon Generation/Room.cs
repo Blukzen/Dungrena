@@ -64,8 +64,6 @@ public class Room : MonoBehaviour
 
     private void InitNormalRoom() 
     {
-        GameManager.enemySpawner.Spawn(this);
-
         var wall = gameObject.transform.Find("Walls");
         wall.gameObject.layer = LayerMask.NameToLayer("Obstacles");
     }

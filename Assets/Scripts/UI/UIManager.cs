@@ -9,16 +9,19 @@ public class UIManager : Singleton<UIManager>
     protected static ItemHoverInfo itemInfo;
     protected static StatsBar healthBar;
     protected static StatsBar manaBar;
+    public static LoadingScreen loadingScreen;
 
     public ItemHoverInfo _itemInfo;
     public StatsBar _healthBar;
     public StatsBar _manaBar;
+    public LoadingScreen _loadingScreen;
 
     private void Start()
     {
         itemInfo = _itemInfo;
         healthBar = _healthBar;
         manaBar = _manaBar;
+        loadingScreen = _loadingScreen;
 
         if (itemInfo != null && itemInfo.gameObject.activeSelf)
             itemInfo.gameObject.SetActive(false);

@@ -32,6 +32,9 @@ public class DungeonGenerator : MonoBehaviour
     private TilemapRenderer floorRenderer;
 
     private Coroutine generatingMaze;
+    private float loadingProgress = 0;
+    private float mazeGenProgress = 0;
+    private float roomGenProgress = 0;
 
     public void Start()
     {
@@ -67,20 +70,29 @@ public class DungeonGenerator : MonoBehaviour
         floorRenderer.sortingLayerName = "World";
 
         // Generate dungeon maze
-        Debug.Log(TAG + "Generating maze..");
+        Debug.Log(TAG + "Generating maze");
         foreach(float progress in GenerateMaze())
         {
-            Debug.Log(TAG + "Generating maze.. " + progress * 100 + "%");
+            mazeGenProgress = progress;
+            UpdateProgress();
         }
 
+        mazeGenProgress = 1;
         Debug.Log(TAG + "Maze generated");
 
         // Create rooms
-        Debug.Log(TAG + "Generating rooms..");
+        Debug.Log(TAG + "Generating rooms");
         foreach(float progress in GenerateRooms())
         {
-            Debug.Log(TAG + "Generating rooms.. " + progress * 100 + "%");
+            roomGenProgress = progress;
+            UpdateProgress();
         }
+    }
+
+    private void UpdateProgress()
+    {
+        loadingProgress = (mazeGenProgress + roomGenProgress) / 2;
+        UIManager.loadingScreen.Progress = loadingProgress;
     }
 
     IEnumerable<float> GenerateMaze()
@@ -161,7 +173,6 @@ public class DungeonGenerator : MonoBehaviour
             dungeonMaze.SetValue(RoomType.Normal, (int)pos.x, (int)pos.y);
             numberOfRooms++;
             canPlace = false;
-
             yield return numberOfRooms/dungeonSize;
             if (numberOfRooms == dungeonSize) yield return 1;
         }
