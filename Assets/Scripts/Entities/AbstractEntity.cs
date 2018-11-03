@@ -13,7 +13,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public float health;
 
     private float pickUpRange = 2f;
-    private Vector3 pickUpOffset = new Vector2(0, 0.5f);
 
     public bool canMove = true;
     public bool applyFriction = true;

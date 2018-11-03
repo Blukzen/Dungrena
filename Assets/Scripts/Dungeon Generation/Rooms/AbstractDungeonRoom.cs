@@ -116,10 +116,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
             left = maze[col + 1, row] != DungeonGenerator.RoomType.Empty;
 
         var floor = dungeon.FloorTilemap;
-        var walls = dungeon.WallTilemap;
-
         var floorTile = dungeon.floorTile;
-        var wallTile = dungeon.wallTile;
 
         if (up)
         {
@@ -150,16 +147,17 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
             var prefab = dungeon.spawnList.GetRandEnemy();
             if (prefab == null)
             {
-                Debug.Log("RECIEVE NULL PREFAB");
+                Debug.LogWarning("[Dungeon Room] recieved null enemy prefab from spawnList");
                 return;
             }
 
-            var enemy = Instantiate(prefab, GetRandomPointInRoom(), Quaternion.identity);
+            var enemy = Instantiate(prefab, GetRandomPointInRoom(5, 5), Quaternion.identity);
+            enemy.transform.parent = dungeon.Enemies.transform;
         }
     }
 
-    protected Vector2 GetRandomPointInRoom()
+    protected Vector2 GetRandomPointInRoom(int paddingX, int paddingY)
     {
-        return new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
+        return new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
     }
 }

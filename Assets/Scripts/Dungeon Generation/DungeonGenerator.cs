@@ -32,6 +32,8 @@ public class DungeonGenerator : MonoBehaviour
     public DungeonShopRoom ShopRoom { get { return shopRoom; } }
     private DungeonBossRoom bossRoom;
     public DungeonBossRoom BossRoom { get { return bossRoom;  } }
+    private GameObject enemies;
+    public GameObject Enemies { get { return enemies; } }
 
     private RoomType[,] dungeonMaze;
     public RoomType[,] GetMaze()
@@ -51,11 +53,6 @@ public class DungeonGenerator : MonoBehaviour
     private float mazeGenProgress = 0;
     private float roomGenProgress = 0;
 
-    public void Start()
-    {
-        //Generate();
-    }
-
     public void Regenerate()
     {
         foreach (var room in dungeonRooms)
@@ -66,6 +63,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Destroy(walls.gameObject);
         Destroy(floor.gameObject);
+        Destroy(enemies.gameObject);
 
         Generate();
     }
@@ -79,10 +77,13 @@ public class DungeonGenerator : MonoBehaviour
         floorRenderer = floor.GetComponent<TilemapRenderer>();
 
         // Setup tilemaps
+        wallRenderer.gameObject.layer = LayerMask.NameToLayer("Obstacles");
         wallRenderer.sortingLayerName = "Obstacles";
         wallRenderer.sortingOrder = 10;
-
         floorRenderer.sortingLayerName = "World";
+
+        enemies = new GameObject("Enemies");
+        enemies.transform.parent = transform;
 
         // Generate dungeon maze
         Debug.Log(TAG + "Generating maze");
