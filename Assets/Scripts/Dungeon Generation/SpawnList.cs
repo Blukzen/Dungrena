@@ -5,21 +5,47 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New SpawnList", menuName = "DungeonGen/SpawnList", order = 2)]
 public class SpawnList : ScriptableObject
 {
-    public AbstractEntity common;
-    public AbstractEntity uncommon;
-    public AbstractEntity rare;
-    public AbstractEntity special;
+    public WeightedSpawnChance[] enemies;
 
-    public AbstractEntity GetRandEnemy(float chance) {
-        if (chance <= 0.15) {
-            return special;
-        } else if (chance <= 0.35) {
-            return rare;
-        } else if (chance <= 0.6) {
-            return uncommon;
-        } else {
-            return common;
-        }
+    private int sum;
+
+    private void Awake()
+    {
+        
     }
+
+    public AbstractEntity GetRandEnemy()
+    {
+        //TODO: Optimize by having sum calculated on startup.
+        sum = 0;
+        foreach (var spawnChance in enemies)
+        {
+            sum += spawnChance.weight;
+        }
+
+        int min = 0, max = 0;
+        var num = Random.Range(0, sum);
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            max += enemies[i].weight;
+
+            if (num >= min && num <= max)
+            {
+                return enemies[i].entity;
+            }
+
+            min = max;
+        }
+
+        return null;
+    }
+}
+
+[System.Serializable]
+public class WeightedSpawnChance
+{
+    public AbstractEntity entity;
+    public int weight;
 }
 

@@ -12,50 +12,29 @@ public class Projectile : AbstractProjectile
 
             // Destroy projectile if not an entity.
             // TODO: Destroy event.
-            if (!entity) {
+            if (!entity)
+            {
                 Destroy(gameObject);
                 continue;
             }
             // Ignore collision if it is its own owner.
-            else if (entity.Equals(entityOwner)) 
-            {
-                Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
-                continue;
-            } 
-
-            if (enemyProjectile && entity is AbstractEnemy)
+            else if (entity.Equals(entityOwner))
             {
                 Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
                 continue;
             }
-            // Damage entity and destroy projectile.
-            entity.ApplyAttack(Damage, knockback, entityOwner);
-            Destroy(gameObject);
+
+            else if (enemyProjectile && entity is AbstractEnemy)
+            {
+                Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
+                continue;
+            }
+            else
+            {
+                // Damage entity and destroy projectile.
+                entity.ApplyAttack(Damage, knockback, entityOwner);
+                Destroy(gameObject);
+            }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) 
-    {
-        //var entity = collision.collider.gameObject.GetComponent<AbstractEntity>();
-
-        var entity = collision.GetComponent<AbstractEntity>();
-
-        // Destroy projectile if not an entity.
-        // TODO: Destroy event.
-        if (!entity) 
-        {
-            Destroy(gameObject);
-            return;
-        }
-        // Ignore collision if it is its own owner.
-        else if (entity.Equals(Owner)) 
-        {
-            Physics2D.IgnoreCollision(entity.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
-            return;
-        }
-
-        // Damage entity and destroy projectile.
-        entity.ApplyAttack(Damage, knockback, entityOwner);
-        Destroy(gameObject);
     }
 }

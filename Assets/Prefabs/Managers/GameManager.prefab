@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4380703899609462}
   - component: {fileID: 114051444630054470}
-  - component: {fileID: 114499278091898846}
   - component: {fileID: 114931219299232990}
   m_Layer: 0
   m_Name: GameManager
@@ -58,18 +57,6 @@ MonoBehaviour:
   astarPrefab: {fileID: 114622409332476072, guid: 029bd8c86938ab741b325550b85a35fb,
     type: 2}
   score: 0
---- !u!114 &114499278091898846
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1991888636706354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b3a6bd550b953946958d46769007fdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnList: {fileID: 11400000, guid: 86d1ff42a01c53d4c8b037604bb3d30a, type: 2}
 --- !u!114 &114931219299232990
 MonoBehaviour:
   m_ObjectHideFlags: 1

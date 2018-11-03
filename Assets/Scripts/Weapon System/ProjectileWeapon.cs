@@ -4,12 +4,9 @@ using UnityEngine;
 
 public abstract class ProjectileWeapon : AbstractWeapon 
 {
-    [SerializeField]
-    private AbstractProjectile projectile;
-    [SerializeField]
-    private float projectileSpeed;
-    [SerializeField]
-    private Transform firePosition;
+    public AbstractProjectile projectile;
+    public float projectileSpeed;
+    public Transform firePosition;
     public string mainAttackAnimation;
     public string abilityAttackAnimation;
     
@@ -47,6 +44,10 @@ public abstract class ProjectileWeapon : AbstractWeapon
         proj.Owner = transform.parent.parent.GetComponent<AbstractEntity>();
         proj.Speed = projectileSpeed;
         proj.Damage = currentDamage;
+        proj.Knockback = knockBackForce;
+
+        if (enemyWeapon)
+            proj.EnemyProjectile = true;
     }
 
     protected Quaternion DirectionToPoint(Vector3 point) 

@@ -16,7 +16,10 @@ public class DungeonGeneratorEditor : Editor
         dungeon.roomWidth = EditorGUILayout.IntField("Room Width", dungeon.roomWidth);
         dungeon.roomSpacing = EditorGUILayout.IntField("Room Spacing", dungeon.roomSpacing);
         dungeon.roomConnectionWidth = EditorGUILayout.IntField("Room Connection Width", dungeon.roomConnectionWidth);
+        dungeon.roomDifficulty = EditorGUILayout.IntField("Room Difficulty", dungeon.roomDifficulty);
         dungeon.dungeonSize = EditorGUILayout.IntField("Dungeon Size", dungeon.dungeonSize);
+
+        dungeon.spawnList = (SpawnList) EditorGUILayout.ObjectField("Spawn List", dungeon.spawnList, typeof(SpawnList), false);
 
         EditorGUILayout.Space();
 

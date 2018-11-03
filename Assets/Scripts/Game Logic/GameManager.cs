@@ -43,22 +43,26 @@ public class GameManager : Singleton<GameManager>
         sceneToLoad = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        currentScene = scene.buildIndex;
-
-        if (instance != null)
-            return;
-
-        if (currentScene > 0)
+        if (scene.name != "Main Menu")
         {
             if (astarPath != null)
                 Destroy(astarPath);
 
-            astarPath = Instantiate(astarPrefab);
+            astarPath = Instantiate(astarPrefab, transform);
 
-            dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+            var dungeonGeneratorGO = GameObject.FindGameObjectWithTag("DungeonGenerator");
+            if (dungeonGeneratorGO == null)
+            {
+                SetupTestLevel();
+                return;
+            }
+
+            dungeonGenerator = dungeonGeneratorGO.GetComponent<DungeonGenerator>();
             dungeonGenerator.Generate();
+            SpawnEnemies();
+            SpawnPlayer();
         }
     }
 
@@ -67,7 +71,12 @@ public class GameManager : Singleton<GameManager>
         if (player == null)
             player = Instantiate(playerPrefab);
 
-        LevelChanger.LevelReady();
+        player.transform.position = dungeonGenerator.SpawnRoom.transform.position;
+    }
+
+    private void SpawnEnemies()
+    {
+
     }
 
     public void DungeonGenerated() 

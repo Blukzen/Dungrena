@@ -21,6 +21,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         BuildFloor();
         BuildConnections();
         BuildWalls();
+        SpawnEnemies(dungeon.roomDifficulty);
     }
 
     /**
@@ -38,15 +39,15 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         var yPos = bounds.max.y + dungeon.roomSpacing / 2;
 
         // Scan area place walls where appropriate
-        for (float x = xPos; x < bounds.max.x + dungeon.roomSpacing/2; x++)
+        for (float x = xPos; x < bounds.max.x + dungeon.roomSpacing / 2; x++)
         {
-            for (float y = yPos; y > bounds.min.y - dungeon.roomSpacing/2; y--)
+            for (float y = yPos; y > bounds.min.y - dungeon.roomSpacing / 2; y--)
             {
                 // Top row
-                if (floor.GetTile(new Vector3Int((int) x, (int) y, 0)) != null && floor.GetTile(new Vector3Int((int) x, (int) y + 1, 0)) == null)
+                if (floor.GetTile(new Vector3Int((int)x, (int)y, 0)) != null && floor.GetTile(new Vector3Int((int)x, (int)y + 1, 0)) == null)
                 {
-                    walls.SetTile(new Vector3Int((int) x, (int) y, 0), tile);
-                    walls.SetTile(new Vector3Int((int) x, (int) y + 1, 0), tile);
+                    walls.SetTile(new Vector3Int((int)x, (int)y, 0), tile);
+                    walls.SetTile(new Vector3Int((int)x, (int)y + 1, 0), tile);
                 }
 
                 // Bottom row
@@ -95,7 +96,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         {
             for (float y = bounds.min.y; y < bounds.max.y; y++)
             {
-                floor.SetTile(new Vector3Int((int) x, (int) y, 0), tile);
+                floor.SetTile(new Vector3Int((int)x, (int)y, 0), tile);
             }
         }
     }
@@ -122,7 +123,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
 
         if (up)
         {
-            placeTileRect(new Vector2(transform.position.x - (dungeon.roomConnectionWidth / 2), transform.position.y + (dungeon.roomHeight / 2) + (dungeon.roomSpacing-1)), dungeon.roomConnectionWidth, dungeon.roomSpacing, floorTile, floor);
+            placeTileRect(new Vector2(transform.position.x - (dungeon.roomConnectionWidth / 2), transform.position.y + (dungeon.roomHeight / 2) + (dungeon.roomSpacing - 1)), dungeon.roomConnectionWidth, dungeon.roomSpacing, floorTile, floor);
         }
 
         if (left)
@@ -140,5 +141,25 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
                 tilemap.SetTile(new Vector3Int((int)x, (int)y, 0), tile);
             }
         }
+    }
+
+    protected void SpawnEnemies(int numEnemies)
+    {
+        for (int num = 0; num < numEnemies; num++)
+        {
+            var prefab = dungeon.spawnList.GetRandEnemy();
+            if (prefab == null)
+            {
+                Debug.Log("RECIEVE NULL PREFAB");
+                return;
+            }
+
+            var enemy = Instantiate(prefab, GetRandomPointInRoom(), Quaternion.identity);
+        }
+    }
+
+    protected Vector2 GetRandomPointInRoom()
+    {
+        return new Vector2(Random.Range(bounds.min.x, bounds.max.x), Random.Range(bounds.min.y, bounds.max.y));
     }
 }

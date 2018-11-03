@@ -14,7 +14,7 @@ public class PlayerSensor : MonoBehaviour
     private void Start() 
     {
         searcher = GetComponentInParent<ISearcher>();
-        player = GameManager.player.gameObject;
+        player = GameManager.player == null ? null : GameManager.player.gameObject;
     }
 
     private void Update() 

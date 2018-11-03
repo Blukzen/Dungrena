@@ -120,6 +120,9 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     public virtual void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
     {
+        if (attacker == null)
+            return;
+
         // Knockback
         var knockbackDirection = transform.position - attacker.transform.position;
         AddVelocity(knockbackDirection.normalized, knockback);

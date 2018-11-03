@@ -11,13 +11,28 @@ public class DungeonGenerator : MonoBehaviour
     public int roomWidth;
     public int roomSpacing;
     public int roomConnectionWidth;
+    public int roomDifficulty;
     public int dungeonSize;
+
+    public SpawnList spawnList;
 
     public RuleTile wallTile;
     public WeightedRandomTile floorTile;
 
     private Bounds dungeonBounds;
     private List<AbstractDungeonRoom> dungeonRooms = new List<AbstractDungeonRoom>();
+    public List<AbstractDungeonRoom> DungeonRooms
+    {
+        get { return dungeonRooms; }
+    }
+
+    private DungeonSpawnRoom spawnRoom;
+    public DungeonSpawnRoom SpawnRoom { get { return spawnRoom; } }
+    private DungeonShopRoom shopRoom;
+    public DungeonShopRoom ShopRoom { get { return shopRoom; } }
+    private DungeonBossRoom bossRoom;
+    public DungeonBossRoom BossRoom { get { return bossRoom;  } }
+
     private RoomType[,] dungeonMaze;
     public RoomType[,] GetMaze()
     {
@@ -38,7 +53,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public void Start()
     {
-        Generate();
+        //Generate();
     }
 
     public void Regenerate()
@@ -87,12 +102,25 @@ public class DungeonGenerator : MonoBehaviour
             roomGenProgress = progress;
             UpdateProgress();
         }
+        Debug.Log(TAG + "Rooms generated");
+
+        spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
+        shopRoom = GetComponentInChildren<DungeonShopRoom>();
+        bossRoom = GetComponentInChildren<DungeonBossRoom>();
+
+        walls.gameObject.AddComponent<TilemapCollider2D>();
+
+        foreach(var room in dungeonRooms)
+        {
+
+        }
     }
 
     private void UpdateProgress()
     {
         loadingProgress = (mazeGenProgress + roomGenProgress) / 2;
-        UIManager.loadingScreen.Progress = loadingProgress;
+        if (UIManager.loadingScreen != null)
+            UIManager.loadingScreen.Progress = loadingProgress;
     }
 
     IEnumerable<float> GenerateMaze()
