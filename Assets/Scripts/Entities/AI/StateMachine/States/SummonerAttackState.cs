@@ -11,12 +11,16 @@ public class SummonerAttackState : AbstractEnemyAbilityState
     public AbstractEnemyAI enemyPrefab;
     public SummoningEffectController summoningController;
 
+    [HideInInspector]
+    public Vector2 summoningPosition;
+
     public override void init()
     {
         base.init();
         Executing = true;
         spawnCount = 0;
         enemySpawned = true;
+        entity.lookingAt = true;
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)
@@ -32,14 +36,10 @@ public class SummonerAttackState : AbstractEnemyAbilityState
         {
             // TODO: Point staff to location
             var summon = Instantiate(summoningController, enemyAI.GetCurrentRoom().GetRandomPointInRoom(2, 2), Quaternion.identity);
+            entity.lookPos = summon.transform.position;
+
             summon.beginSummon(this, enemyPrefab);
             enemySpawned = false;
-        }
-
-        if (spawnCount == numEnemiesToSpawn)
-        {
-            Executing = false;
-            lastCastTime = Time.time;
         }
     }
 
@@ -47,5 +47,17 @@ public class SummonerAttackState : AbstractEnemyAbilityState
     {
         enemySpawned = true;
         spawnCount++;
+
+        if (spawnCount == numEnemiesToSpawn)
+        {
+            Executing = false;
+
+            entity.lookingAt = false;
+
+            if (entity.currentWeapon != null)
+                entity.currentWeapon.transform.parent.rotation = new Quaternion(0, 0, 0, 0);
+
+            lastCastTime = Time.time;
+        }
     }
 }

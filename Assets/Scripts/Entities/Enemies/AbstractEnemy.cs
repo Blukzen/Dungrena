@@ -14,7 +14,9 @@ public abstract class AbstractEnemy : AbstractEntity
     [HideInInspector]
     public AbstractWeapon currentWeapon;
     [HideInInspector]
-    public bool lookingAtPlayer = false;
+    public bool lookingAt = false;
+    [HideInInspector]
+    public Vector2 lookPos;
 
     public override void Awake()
     {
@@ -58,17 +60,18 @@ public abstract class AbstractEnemy : AbstractEntity
     protected override void UpdateSprite()
     {
         base.UpdateSprite();
+
         if (currentWeapon != null)
             currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder - 1;
 
         var newScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-        if (lookingAtPlayer)
+        if (lookingAt && lookPos != null)
         {
-            if (transform.position.x < GameManager.player.transform.position.x)
-                newScale.x = -1;
-            else if (transform.position.x > GameManager.player.transform.position.x)
+            if (transform.position.x < lookPos.x)
                 newScale.x = 1;
+            else if (transform.position.x > lookPos.x)
+                newScale.x = -1;
 
         } else
         {

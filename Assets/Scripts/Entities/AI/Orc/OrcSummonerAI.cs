@@ -18,8 +18,10 @@ public class OrcSummonerAI : AbstractEnemyAI
         summonerState = GetComponent<SummonerAttackState>();
 
         animator = GetComponent<Animator>();
-
+    
         currentState = idleState;
+        entity.EquipItem(transform.Find("Weapon").GetComponentInChildren<AbstractWeapon>());
+        entity.currentWeapon.enemyWeapon = true;
     }
 
     private void FixedUpdate()
@@ -37,6 +39,9 @@ public class OrcSummonerAI : AbstractEnemyAI
 
         if (currentState == patrolState || currentState == runnerState)
             animator.SetTrigger("Walking");
+
+        if (currentState == summonerState && entity.lookPos != null)
+            entity.weaponHolder.transform.LookAtPoint(entity.lookPos);
     }
 
     private void UpdateState()

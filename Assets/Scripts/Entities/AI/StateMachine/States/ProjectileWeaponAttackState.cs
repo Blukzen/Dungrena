@@ -11,7 +11,7 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
     {
         base.init();
         Executing = true;
-        entity.lookingAtPlayer = true;
+        entity.lookingAt = true;
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)
@@ -22,6 +22,7 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
     public override void execute(AbstractEnemyAI enemyAI)
     {
         entity.StopMoving();
+        entity.lookPos = GameManager.player.transform.position;
 
         if (entity.currentWeapon.attacking)
             return;
@@ -37,7 +38,7 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
 
         if (!enemyAI.CanAttackTarget())
         {
-            entity.lookingAtPlayer = false;
+            entity.lookingAt = false;
             Executing = false;
         }
     }

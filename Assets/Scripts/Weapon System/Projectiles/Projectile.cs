@@ -47,6 +47,9 @@ public class Projectile : AbstractProjectile
 
         foreach (var fx in particleRenderers)
         {
+            if (fx == null)
+                continue;
+
             fx.sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder - 1;
         }
     }
