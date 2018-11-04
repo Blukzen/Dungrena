@@ -544,8 +544,8 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 0.7
   friction: 1
-  maxHealth: 20
-  health: 20
+  maxHealth: 30
+  health: 30
   canMove: 1
   applyFriction: 1
   attacking: 0
@@ -555,7 +555,8 @@ MonoBehaviour:
   AbilityCooldown: 2
   weaponHolder: {fileID: 0}
   currentWeapon: {fileID: 0}
-  lookingAtPlayer: 0
+  lookingAt: 0
+  lookPos: {x: 0, y: 0}
 --- !u!114 &114641739135534580
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,11 +6,13 @@ public class SummonerAttackState : AbstractEnemyAbilityState
     public override string Name { get { return "Summoning Attack State"; } }
 
     public float numEnemiesToSpawn;
-    public int spawnCount;
-    public bool enemySpawned;
     public AbstractEnemyAI enemyPrefab;
     public SummoningEffectController summoningController;
 
+    [HideInInspector]
+    public int spawnCount;
+    [HideInInspector]
+    public bool enemySpawned;
     [HideInInspector]
     public Vector2 summoningPosition;
 

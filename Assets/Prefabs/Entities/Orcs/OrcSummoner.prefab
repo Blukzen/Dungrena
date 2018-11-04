@@ -364,14 +364,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8708f7136e3a4664ab3adca1d2812ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolDown: 10
+  coolDown: 9
   numEnemiesToSpawn: 3
-  spawnCount: 0
-  enemySpawned: 0
   enemyPrefab: {fileID: 114681041545352206, guid: f52c4efa10d1dd24596b3007df09404d,
     type: 2}
   summoningController: {fileID: 114377132667658750, guid: b0c2d936d0776d14d95db704ff36b69e,
     type: 2}
+  spawnCount: 0
+  enemySpawned: 0
+  summoningPosition: {x: 0, y: 0}
 --- !u!114 &114499673392853906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +413,8 @@ MonoBehaviour:
   maxSpeed: 8
   acceleration: 0.6
   friction: 1
-  maxHealth: 20
-  health: 20
+  maxHealth: 30
+  health: 30
   canMove: 1
   applyFriction: 1
   attacking: 0
