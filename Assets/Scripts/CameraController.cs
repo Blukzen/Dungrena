@@ -8,8 +8,12 @@ public class CameraController : MonoBehaviour
     public float damping;
     private Vector2 targetPosition;
 
-    private void Update() 
+    private void Update()
     {
+        if (GameManager.player == null)
+            return;
+
+        targetPosition = GameManager.player.GetCurrentRoom().transform.position;
         transform.position = Vector3.Lerp(this.transform.position, new Vector3(targetPosition.x, targetPosition.y, -10), damping);
     }
 

@@ -45,6 +45,8 @@ public class GameManager : Singleton<GameManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
+        Debug.Log(TAG + "Scene loaded " + scene.name);
+
         if (scene.name != "Main Menu")
         {
             if (astarPath != null)
@@ -55,6 +57,7 @@ public class GameManager : Singleton<GameManager>
             var dungeonGeneratorGO = GameObject.FindGameObjectWithTag("DungeonGenerator");
             if (dungeonGeneratorGO == null)
             {
+                Debug.Log(TAG + "Setting up test level");
                 SetupTestLevel();
                 return;
             }
@@ -63,6 +66,7 @@ public class GameManager : Singleton<GameManager>
             dungeonGenerator.Generate();
             SpawnEnemies();
             SpawnPlayer();
+            UIManager.ShowHUD();
         }
     }
 
@@ -71,6 +75,8 @@ public class GameManager : Singleton<GameManager>
         if (player == null)
             player = Instantiate(playerPrefab);
 
+        Camera.main.transform.position = dungeonGenerator.SpawnRoom.transform.position;
+        player.transform.parent = transform;
         player.transform.position = dungeonGenerator.SpawnRoom.transform.position;
     }
 

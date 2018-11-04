@@ -66,8 +66,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560234297768740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.8, y: 0.22, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.77966654, w: 0.6261949}
+  m_LocalPosition: {x: 150.9426, y: 104.377495, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4589459979819686}
@@ -154,7 +154,7 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1533759339117608}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -264,13 +264,16 @@ MonoBehaviour:
   ItemSlug: orc_club
   ItemType: 0
   attackDamage: 6
-  attackSpeed: 1
+  attackSpeed: 2
   secondaryAttackDamage: 10
   secondaryAttackManaCost: 2
+  knockBackForce: 35
+  weaponType: 0
+  enemyWeapon: 0
+  attacking: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
-  knockBackForce: 35
   hitEffect: {fileID: 1899233368176988, guid: 82de68cf202b1ac4d8869b784a799c44, type: 2}
   swordEffect: {fileID: 96563048836712614}
   mainAttackAnimation: Default

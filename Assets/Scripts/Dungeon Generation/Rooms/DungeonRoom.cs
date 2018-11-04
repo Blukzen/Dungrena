@@ -3,16 +3,9 @@ using System.Collections;
 
 public class DungeonRoom : AbstractDungeonRoom
 {
-
-    // Use this for initialization
-    void Start()
+    public override void Generate(int _col, int _row)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        base.Generate(_col, _row);
+        SpawnEnemies(dungeon.roomDifficulty);
     }
 }

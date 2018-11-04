@@ -174,7 +174,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 25088
-  viewDistance: 11
+  viewDistance: 16
 --- !u!114 &114073370192230380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,8 +202,8 @@ MonoBehaviour:
   coolDown: 2.5
   DashDamage: 2
   DashKnockBack: 5
-  DashSpeed: 20
-  DashDistance: 6
+  DashSpeed: 30
+  DashDistance: 8
   DashEffect: {fileID: 1563650997319774, guid: 31ce080dcffccae4e9723de7cfb04bd0, type: 2}
   chargingDash: 1
 --- !u!114 &114418581577789718
@@ -293,7 +293,8 @@ MonoBehaviour:
     useGraphRaycasting: 0
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask: -1
+  graphMask:
+    value: -1
 --- !u!212 &212276279343060298
 SpriteRenderer:
   m_ObjectHideFlags: 1

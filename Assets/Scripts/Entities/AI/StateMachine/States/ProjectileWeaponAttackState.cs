@@ -11,6 +11,7 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
     {
         base.init();
         Executing = true;
+        entity.lookingAtPlayer = true;
     }
 
     public override bool conditionsMet(AbstractEnemyAI enemyAI)
@@ -35,7 +36,10 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
         }
 
         if (!enemyAI.CanAttackTarget())
+        {
+            entity.lookingAtPlayer = false;
             Executing = false;
+        }
     }
 
     public bool TargetInRange()

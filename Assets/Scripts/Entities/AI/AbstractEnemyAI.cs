@@ -33,4 +33,22 @@ public abstract class AbstractEnemyAI : AbstractAstarAI, ISearcher
     }
 
     public abstract bool CanAttackTarget();
+
+    public AbstractDungeonRoom GetCurrentRoom()
+    {
+        AbstractDungeonRoom closestRoom = null;
+        foreach (var room in GameManager.dungeonGenerator.DungeonRooms)
+        {
+            if (closestRoom == null)
+            {
+                closestRoom = room;
+                continue;
+            }
+
+            if (Vector2.Distance(closestRoom.transform.position, transform.position) > Vector2.Distance(room.transform.position, transform.position))
+                closestRoom = room;
+        }
+
+        return closestRoom;
+    }
 }

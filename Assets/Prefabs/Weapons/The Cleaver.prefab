@@ -260,11 +260,13 @@ MonoBehaviour:
   ItemSlug: the_cleaver
   ItemType: 0
   attackDamage: 10
-  attackSpeed: 2
-  secondaryAttackDamage: 20
+  attackSpeed: 2.5
+  secondaryAttackDamage: 15
   secondaryAttackManaCost: 10
   knockBackForce: 25
   weaponType: 0
+  enemyWeapon: 0
+  attacking: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 256

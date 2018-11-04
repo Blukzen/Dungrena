@@ -26,6 +26,7 @@ public abstract class AbstractWeapon : AbstractItem
     protected virtual void Start()
     {
         ItemType = ItemType.Weapon;
+        transform.Rotate(0, 0, Random.Range(0, 360));
     }
 
     public bool CanAttack() 

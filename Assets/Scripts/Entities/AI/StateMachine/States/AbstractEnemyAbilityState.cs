@@ -8,8 +8,9 @@ public abstract class AbstractEnemyAbilityState : AbstractEnemyState
     protected AbstractEntity caster;
     protected float lastCastTime = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         caster = GetComponent<AbstractEntity>();
     }
 

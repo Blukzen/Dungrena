@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a8aba7cf5810f42a0fdbab3278e3e4, type: 3}
+  m_Name: OrcDungeonSpawnList
+  m_EditorClassIdentifier: 
+  enemies:
+  - entity: {fileID: 114062569597294482, guid: f52c4efa10d1dd24596b3007df09404d, type: 2}
+    weight: 40
+  - entity: {fileID: 114555841191532290, guid: 1b22055b208e3814887caa41f8c67283, type: 2}
+    weight: 30
+  - entity: {fileID: 114555841191532290, guid: 58da08356d7df654e9b5285c1c29f89e, type: 2}
+    weight: 15
+  - entity: {fileID: 114844961300589558, guid: 3ac98a7c68e9a9340b1687826de939b4, type: 2}
+    weight: 10

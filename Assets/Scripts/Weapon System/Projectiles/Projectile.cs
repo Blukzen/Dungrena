@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : AbstractProjectile
 {
+    private ParticleSystemRenderer[] particleRenderers;
+
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         foreach (var col in collision.contacts) 
@@ -35,6 +37,17 @@ public class Projectile : AbstractProjectile
                 entity.ApplyAttack(Damage, knockback, entityOwner);
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (particleRenderers == null)
+            particleRenderers = GetComponentsInChildren<ParticleSystemRenderer>();
+
+        foreach (var fx in particleRenderers)
+        {
+            fx.sortingOrder = GetComponentInParent<SpriteRenderer>().sortingOrder - 1;
         }
     }
 }

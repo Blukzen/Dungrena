@@ -27,6 +27,24 @@ public class UIManager : Singleton<UIManager>
             itemInfo.gameObject.SetActive(false);
     }
 
+    public static void ShowHUD()
+    {
+        if (healthBar == null)
+            return;
+
+        healthBar.gameObject.SetActive(true);
+        manaBar.gameObject.SetActive(true);
+    }
+
+    public static void HideHUD()
+    {
+        if (healthBar == null)
+            return;
+
+        healthBar.gameObject.SetActive(false);
+        manaBar.gameObject.SetActive(false);
+    }
+
     public static void ShowWeaponInfo(AbstractWeapon weapon)
     {
         if (itemInfo == null)

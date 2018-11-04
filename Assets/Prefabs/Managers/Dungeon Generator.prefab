@@ -54,9 +54,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomHeight: 12
   roomWidth: 20
-  roomSpacing: 4
+  roomSpacing: 6
   roomConnectionWidth: 4
-  roomDifficulty: 5
+  roomDifficulty: 6
   dungeonSize: 12
   spawnList: {fileID: 11400000, guid: 86d1ff42a01c53d4c8b037604bb3d30a, type: 2}
   wallTile: {fileID: 11400000, guid: ec9492e5d1226f344b9edea4683c87ee, type: 2}

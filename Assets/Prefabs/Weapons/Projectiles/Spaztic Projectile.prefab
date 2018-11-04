@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50661157434769748}
   - component: {fileID: 58535459508199574}
   - component: {fileID: 114698292735160742}
+  - component: {fileID: 114894081225367934}
   m_Layer: 10
   m_Name: Spaztic Projectile
   m_TagString: Untagged
@@ -151,6 +152,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f48a526b0877954e992f10fcc4ba39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114894081225367934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1297492909691150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b16cc2fbfcbfa43ac191d6202c58b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StaticObject: 0
 --- !u!198 &198081634141783044
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -9269,8 +9282,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 815372455
-  m_SortingLayer: 4
+  m_SortingLayerID: -2124109051
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -9326,8 +9339,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 815372455
-  m_SortingLayer: 4
+  m_SortingLayerID: -2124109051
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_RenderMode: 0
   m_SortMode: 0
@@ -9381,8 +9394,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 815372455
-  m_SortingLayer: 4
+  m_SortingLayerID: -2124109051
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: 2a6265814a402d7489027d9f603dc0cf, type: 3}
   m_Color: {r: 0.8068075, g: 0.982, b: 0.11986854, a: 1}

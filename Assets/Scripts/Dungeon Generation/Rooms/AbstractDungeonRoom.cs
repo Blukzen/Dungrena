@@ -21,7 +21,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         BuildFloor();
         BuildConnections();
         BuildWalls();
-        SpawnEnemies(dungeon.roomDifficulty);
+        UpdatePathfinding();
     }
 
     /**
@@ -129,6 +129,17 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
+    protected virtual void UpdatePathfinding()
+    {
+        AstarPath astar = AstarPath.active;
+
+        // Expand bounds to include room connections;
+        var fullBounds = new Bounds(bounds.center, bounds.size);
+        fullBounds.Expand(dungeon.roomSpacing);
+
+        astar.UpdateGraphs(fullBounds);
+    }
+
     protected void placeTileRect(Vector2 topLeft, int width, int height, Tile tile, Tilemap tilemap)
     {
         for (float x = topLeft.x; x < topLeft.x + width; x++)
@@ -156,8 +167,13 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
-    protected Vector2 GetRandomPointInRoom(int paddingX, int paddingY)
+    public Vector2 GetRandomPointInRoom(int paddingX, int paddingY)
     {
         return new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
+    }
+
+    public bool IsPointInRoom(Vector2 point)
+    {
+        return point.x > bounds.min.x && point.x < bounds.max.x && point.y > bounds.min.y && point.y < bounds.max.y;
     }
 }

@@ -141,4 +141,22 @@ public class Player : AbstractEntity
     {
         return mana >= currentWeapon.secondaryAttackManaCost;
     }
+
+    public AbstractDungeonRoom GetCurrentRoom()
+    {
+        AbstractDungeonRoom closestRoom = null;
+        foreach (var room in GameManager.dungeonGenerator.DungeonRooms)
+        {
+            if (closestRoom == null)
+            {
+                closestRoom = room;
+                continue;
+            }
+
+            if (Vector2.Distance(closestRoom.transform.position, transform.position) > Vector2.Distance(room.transform.position, transform.position))
+                closestRoom = room;
+        }
+
+        return closestRoom;
+    }
 }

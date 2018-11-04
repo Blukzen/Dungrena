@@ -8,7 +8,7 @@ public abstract class AbstractEnemyState : MonoBehaviour, IEnemyState
     protected AbstractEnemyAI enemyAI;
     protected AbstractEnemy entity;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         enemyAI = GetComponent<AbstractEnemyAI>();
         entity = GetComponent<AbstractEnemy>();
