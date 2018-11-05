@@ -15,6 +15,7 @@ public class DungeonGenerator : MonoBehaviour
     public int dungeonSize;
 
     public SpawnList spawnList;
+    public ObjectGenList objectList;
 
     public RuleTile wallTile;
     public WeightedRandomTile floorTile;
@@ -45,6 +46,8 @@ public class DungeonGenerator : MonoBehaviour
     public Tilemap WallTilemap { get { return walls; } }
     private Tilemap floor;
     public Tilemap FloorTilemap { get { return floor; } }
+    private Tilemap objects;
+    public Tilemap ObjectTilemap { get { return objects; } }
     private TilemapRenderer wallRenderer;
     private TilemapRenderer floorRenderer;
 
@@ -63,6 +66,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Destroy(walls.gameObject);
         Destroy(floor.gameObject);
+        Destroy(objects.gameObject);
         Destroy(enemies.gameObject);
 
         Generate();
@@ -75,6 +79,7 @@ public class DungeonGenerator : MonoBehaviour
         wallRenderer = walls.GetComponent<TilemapRenderer>();
         floor = CreateTilemap("Floor");
         floorRenderer = floor.GetComponent<TilemapRenderer>();
+        objects = CreateTilemap("Objects");
 
         // Setup tilemaps
         wallRenderer.gameObject.layer = LayerMask.NameToLayer("Obstacles");

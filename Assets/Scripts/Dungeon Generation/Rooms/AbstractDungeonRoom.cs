@@ -167,6 +167,14 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
+    protected void SpawnObjects()
+    {
+        foreach (var ObjectData in dungeon.objectList.objects)
+        {
+
+        }
+    }
+
     public Vector2 GetRandomPointInRoom(int paddingX, int paddingY)
     {
         return new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
@@ -175,5 +183,13 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
     public bool IsPointInRoom(Vector2 point)
     {
         return point.x > bounds.min.x && point.x < bounds.max.x && point.y > bounds.min.y && point.y < bounds.max.y;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        var newBounds = new Bounds(bounds.center, bounds.size);
+        newBounds.Expand(-2);
+
+        Gizmos.DrawWireCube(newBounds.center, newBounds.size);
     }
 }

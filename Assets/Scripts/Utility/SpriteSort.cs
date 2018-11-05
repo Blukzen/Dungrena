@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpriteSort : MonoBehaviour
 {
+    public bool SortChildren;
     public bool StaticObject;
     private SpriteRenderer sprite;
     private Collider2D col;
@@ -31,5 +32,13 @@ public class SpriteSort : MonoBehaviour
     private void UpdateSprite()
     {
         sprite.sortingOrder = (int)(spriteSortingOrderBase - (col.bounds.center.y * 10));
+
+        if (SortChildren)
+        {
+            foreach (var sprite in GetComponentsInChildren<SpriteRenderer>())
+            {
+                sprite.sortingOrder = (int)(spriteSortingOrderBase - (col.bounds.center.y * 10));
+            }
+        }
     }
 }

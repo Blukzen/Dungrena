@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c957502f2378a914f9a838bcdeeb264d, type: 3}
+  m_Name: ManaPoolTile
+  m_EditorClassIdentifier: 
+  TileSprite: {fileID: 21300044, guid: 1f7e1c4db4f12d94299034489acb24eb, type: 3}
+  TileAssociatedPrefab: {fileID: 1133502997267994, guid: 01c1bf62babf02c4aa9da397e2b80322,
+    type: 2}
+  PrefabLocalOffset: 0.5
+  prefabZOffset: 0

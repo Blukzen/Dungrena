@@ -36,7 +36,6 @@ public class SummonerAttackState : AbstractEnemyAbilityState
 
         if (enemySpawned && spawnCount <= numEnemiesToSpawn)
         {
-            // TODO: Point staff to location
             var summon = Instantiate(summoningController, enemyAI.GetCurrentRoom().GetRandomPointInRoom(2, 2), Quaternion.identity);
             entity.lookPos = summon.transform.position;
 
