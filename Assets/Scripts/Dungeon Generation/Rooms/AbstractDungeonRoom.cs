@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Tilemaps;
+using System.Collections.Generic;
 
 public abstract class AbstractDungeonRoom : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         BuildFloor();
         BuildConnections();
         BuildWalls();
+        BuildRoom();
         UpdatePathfinding();
     }
 
@@ -101,6 +103,25 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
+    protected virtual void BuildRoom()
+    {
+        var floor = dungeon.FloorTilemap;
+        IEnumerable<TileBase> mapData = dungeon.roomSet.GetRandomMap();
+        List<TileBase> tiles = new List<TileBase>(mapData);
+        var index = 0;
+
+        for (int x = (int) bounds.min.x; x < bounds.max.x; x++)
+        {
+            for (int y = (int) bounds.min.y; y < bounds.max.y; y++)
+            {
+                var currentTile = tiles[index];
+                index++;
+
+                floor.SetTile(new Vector3Int((int)x, (int)y, 0), currentTile);
+            }
+        }
+    }
+
     /** Each room builds the connections to any neighbouring rooms.
      *  only to the room below and room to the left to avoid connecting 
      *  the same rooms multiple times.
@@ -164,14 +185,6 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
 
             var enemy = Instantiate(prefab, GetRandomPointInRoom(5, 5), Quaternion.identity);
             enemy.transform.parent = dungeon.Enemies.transform;
-        }
-    }
-
-    protected void SpawnObjects()
-    {
-        foreach (var ObjectData in dungeon.objectList.objects)
-        {
-
         }
     }
 

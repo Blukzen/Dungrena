@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: OrcDungeonColorMap
+  m_EditorClassIdentifier: Assembly-CSharp::RoomSet/ColorMap
+  colorMap:
+  - color: {r: 0.627451, g: 0.35686275, b: 0.3254902, a: 1}
+    tile: {fileID: 11400000, guid: cb1c40182fe2dc245a2c578b0cbc61dc, type: 2}
+  - color: {r: 0.4784314, g: 0.26666668, b: 0.2901961, a: 1}
+    tile: {fileID: 11400000, guid: 42eb811afad35c44f881536fe671f95e, type: 2}
+  - color: {r: 0.2784314, g: 0.1764706, b: 0.23529413, a: 1}
+    tile: {fileID: 11400000, guid: b64568cfb52c71541b2dc30203689c06, type: 2}

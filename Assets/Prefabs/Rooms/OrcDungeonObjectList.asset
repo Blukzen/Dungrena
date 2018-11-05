@@ -13,8 +13,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - NumInDungeon: 0
-    tile: {fileID: 0}
+    tile: {fileID: 11400000, guid: b64568cfb52c71541b2dc30203689c06, type: 2}
     chance: 0
     MinPerRoom: 0
-    MaxPerRoom: 0
+    MaxPerRoom: 4
+    MaxPerDungeon: 0
+  - NumInDungeon: 0
+    tile: {fileID: 11400000, guid: 9f18363ec97c8ab42bab8f23d3f45b2d, type: 2}
+    chance: 0
+    MinPerRoom: 0
+    MaxPerRoom: 1
+    MaxPerDungeon: 0
+  - NumInDungeon: 0
+    tile: {fileID: 11400000, guid: 79ab928054895ad4ba5e66c03ee4e0da, type: 2}
+    chance: 0
+    MinPerRoom: 0
+    MaxPerRoom: 1
     MaxPerDungeon: 0

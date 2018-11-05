@@ -26,7 +26,6 @@ public class SummoningEffectController : MonoBehaviour
 
     public void summonEnemy()
     {
-        Debug.Log("SUMMONING DA BITCH");
         enemySummoned = Instantiate(enemyToSummon, GameManager.dungeonGenerator.Enemies.transform);
         enemySummoned.transform.position = this.transform.position;
         enemySummoned.enabled = false;

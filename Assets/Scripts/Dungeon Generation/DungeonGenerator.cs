@@ -15,7 +15,7 @@ public class DungeonGenerator : MonoBehaviour
     public int dungeonSize;
 
     public SpawnList spawnList;
-    public ObjectGenList objectList;
+    public RoomSet roomSet;
 
     public RuleTile wallTile;
     public WeightedRandomTile floorTile;
