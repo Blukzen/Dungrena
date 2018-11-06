@@ -18,3 +18,5 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 42eb811afad35c44f881536fe671f95e, type: 2}
   - color: {r: 0.2784314, g: 0.1764706, b: 0.23529413, a: 1}
     tile: {fileID: 11400000, guid: b64568cfb52c71541b2dc30203689c06, type: 2}
+  - color: {r: 0.18823531, g: 0.17254902, b: 0.18039216, a: 1}
+    tile: {fileID: 11400000, guid: d024fd1045a621d4387d4331f83e8b7e, type: 2}

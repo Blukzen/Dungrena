@@ -3,9 +3,16 @@
 public abstract class AbstractEnemyAI : AbstractAstarAI, ISearcher 
 {
     public bool canSeePlayer;
+    public bool attackBlocked;
 
     public AbstractEnemyState currentState;
     public AbstractEnemyState lastState;
+
+
+    public void canAttackTarget(bool canAttack)
+    {
+        attackBlocked = !canAttack;
+    }
 
     public void canSeeTarget(bool canSee) 
     {

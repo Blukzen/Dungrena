@@ -50,11 +50,14 @@ public class DungeonGenerator : MonoBehaviour
     public Tilemap ObjectTilemap { get { return objects; } }
     private TilemapRenderer wallRenderer;
     private TilemapRenderer floorRenderer;
+    private TilemapRenderer objectsRenderer;
 
     private Coroutine generatingMaze;
     private float loadingProgress = 0;
     private float mazeGenProgress = 0;
     private float roomGenProgress = 0;
+
+    private bool updatedPathfinding = false;
 
     public void Regenerate()
     {
@@ -77,15 +80,29 @@ public class DungeonGenerator : MonoBehaviour
         // Create tilemaps
         walls = CreateTilemap("Walls");
         wallRenderer = walls.GetComponent<TilemapRenderer>();
+        walls.gameObject.AddComponent<TilemapCollider2D>();
+
         floor = CreateTilemap("Floor");
         floorRenderer = floor.GetComponent<TilemapRenderer>();
+
         objects = CreateTilemap("Objects");
+        objects.gameObject.AddComponent<TilemapCollider2D>();
+        objects.gameObject.AddComponent<TilemapHoles>();
+        objects.GetComponent<TilemapCollider2D>().isTrigger = true;
+        objectsRenderer = objects.GetComponent<TilemapRenderer>();
 
         // Setup tilemaps
         wallRenderer.gameObject.layer = LayerMask.NameToLayer("Obstacles");
         wallRenderer.sortingLayerName = "Obstacles";
         wallRenderer.sortingOrder = 10;
-        floorRenderer.sortingLayerName = "World";
+
+        floorRenderer.gameObject.layer = LayerMask.NameToLayer("World");
+        floorRenderer.sortingLayerName = "Ground";
+        floorRenderer.sortingOrder = -1;
+
+        objectsRenderer.gameObject.layer = LayerMask.NameToLayer("SeeThroughObstacles");
+        objectsRenderer.sortingLayerName = "Obstacles";
+        objectsRenderer.sortingOrder = 9;
 
         enemies = new GameObject("Enemies");
         enemies.transform.parent = transform;
@@ -110,16 +127,11 @@ public class DungeonGenerator : MonoBehaviour
         }
         Debug.Log(TAG + "Rooms generated");
 
+        StartCoroutine(UpdatePathfinding().GetEnumerator());
+
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
         shopRoom = GetComponentInChildren<DungeonShopRoom>();
         bossRoom = GetComponentInChildren<DungeonBossRoom>();
-
-        walls.gameObject.AddComponent<TilemapCollider2D>();
-
-        foreach(var room in dungeonRooms)
-        {
-
-        }
     }
 
     private void UpdateProgress()
@@ -136,8 +148,6 @@ public class DungeonGenerator : MonoBehaviour
         Vector2 pos = new Vector2(dungeonSize / 2, dungeonSize / 2);
         dungeonMaze = new RoomType[dungeonSize, dungeonSize];
 
-        System.Random rand = new System.Random((int)(Time.time * 1000));
-
         while (numberOfRooms < dungeonSize)
         {
             // Spawn room
@@ -150,7 +160,7 @@ public class DungeonGenerator : MonoBehaviour
             while (!canPlace)
             {
                 // Move pos
-                int dir = rand.Next(1, 4);
+                int dir = GameManager.rng.Next(1, 5);
 
                 switch (dir)
                 {
@@ -234,6 +244,18 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    IEnumerable UpdatePathfinding()
+    {
+        yield return new WaitForEndOfFrame();
+
+        foreach (var room in dungeonRooms)
+        {
+            room.UpdatePathfinding();
+        }
+
+        yield return null;
+    }
+
     private Tilemap CreateTilemap(string name)
     {
         GameObject tilemapGO = new GameObject(name, typeof(Tilemap), typeof(TilemapRenderer));
@@ -266,6 +288,11 @@ public class DungeonGenerator : MonoBehaviour
         roomGO.transform.parent = transform;
 
         return roomGO.GetComponent<AbstractDungeonRoom>();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(new Vector2(dungeonSize / 2 * roomWidth, dungeonSize / 2 * roomHeight), new Vector2(dungeonSize * roomWidth, dungeonSize * roomHeight));
     }
 
     public enum RoomType

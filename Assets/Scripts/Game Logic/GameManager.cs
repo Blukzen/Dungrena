@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public static AstarPath astarPath;
 
     public static DungeonGenerator dungeonGenerator;
+    public static System.Random rng;
 
     private int currentScene;
     private static int sceneToLoad;
@@ -25,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        rng = new System.Random(System.DateTime.Now.Millisecond);
     }
 
     private void OnDisable()
@@ -77,7 +79,7 @@ public class GameManager : Singleton<GameManager>
 
         Camera.main.transform.position = dungeonGenerator.SpawnRoom.transform.position;
         player.transform.parent = transform;
-        player.transform.position = dungeonGenerator.SpawnRoom.transform.position;
+        player.transform.position = dungeonGenerator.SpawnRoom.GetRandomPointInRoom(3, 3);
     }
 
     private void SpawnEnemies()

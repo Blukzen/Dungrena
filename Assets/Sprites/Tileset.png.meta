@@ -86,6 +86,7 @@ TextureImporter:
     21300162: Tileset_81
     21300164: Tileset_82
     21300166: Tileset_83
+    21300168: Empty
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -2001,6 +2002,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 40045673f9308204fb8f84567749b190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Empty
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebb187093dd385643b4ec2a06bfa8124
       vertices: []
       indices: 
       edges: []

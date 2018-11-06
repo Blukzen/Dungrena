@@ -67,6 +67,6 @@ public class OrcClubberAI : AbstractEnemyAI
 
     public override bool CanAttackTarget()
     {
-        return entity.currentWeapon.CanAttack() && canSeePlayer && attackState.TargetInRange();
+        return entity.currentWeapon.CanAttack() && canSeePlayer && attackState.TargetInRange() && !attackBlocked;
     }
 }

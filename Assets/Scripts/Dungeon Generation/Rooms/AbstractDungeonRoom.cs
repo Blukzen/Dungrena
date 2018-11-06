@@ -22,8 +22,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         BuildFloor();
         BuildConnections();
         BuildWalls();
-        BuildRoom();
-        UpdatePathfinding();
+        SetupRoom();
     }
 
     /**
@@ -103,7 +102,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
-    protected virtual void BuildRoom()
+    protected virtual void SetupRoom()
     {
         var floor = dungeon.FloorTilemap;
         var objects = dungeon.ObjectTilemap;
@@ -111,6 +110,8 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         dungeon.roomSet.RandomizeCurrentMap();
         PlaceTiles(dungeon.roomSet.GetFloorMap(), floor);
         PlaceTiles(dungeon.roomSet.GetObjectMap(), objects);
+
+        // Scan for holes in floor
     }
 
     protected void PlaceTiles(TileBase[] tiles, Tilemap tileMap)
@@ -157,14 +158,13 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
-    protected virtual void UpdatePathfinding()
+    public virtual void UpdatePathfinding()
     {
         AstarPath astar = AstarPath.active;
 
         // Expand bounds to include room connections;
         var fullBounds = new Bounds(bounds.center, bounds.size);
         fullBounds.Expand(dungeon.roomSpacing);
-
         astar.UpdateGraphs(fullBounds);
     }
 
@@ -197,7 +197,18 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
 
     public Vector2 GetRandomPointInRoom(int paddingX, int paddingY)
     {
-        return new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
+        Vector2 pos = new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
+
+        while (true)
+        {
+            // Check if theres a tile there
+            if (dungeon.ObjectTilemap.GetTile(new Vector3Int((int) pos.x, (int) pos.y, 0)) == null)
+            {
+                return pos;
+            }
+
+            pos = new Vector2(Random.Range(bounds.min.x + paddingX, bounds.max.x - paddingX), Random.Range(bounds.min.y + paddingY, bounds.max.y - paddingY));
+        }
     }
 
     public bool IsPointInRoom(Vector2 point)

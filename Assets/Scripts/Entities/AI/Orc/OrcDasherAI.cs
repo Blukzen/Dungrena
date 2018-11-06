@@ -72,6 +72,6 @@ public class OrcDasherAI : AbstractEnemyAI
 
     public override bool CanAttackTarget()
     {
-        return dashAttackState.conditionsMet(this);
+        return dashAttackState.conditionsMet(this) && !attackBlocked;
     }
 }

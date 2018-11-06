@@ -338,6 +338,7 @@ MonoBehaviour:
   nextWaypointDistance: 1
   reachedEndOfPath: 0
   canSeePlayer: 0
+  attackBlocked: 0
   currentState: {fileID: 0}
   lastState: {fileID: 0}
 --- !u!114 &114353412894005126
@@ -395,9 +396,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4780d61aaabb8884abdf24e778cfbc6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  sightBlock:
     serializedVersion: 2
-    m_Bits: 25088
+    m_Bits: 29184
+  attackBlock:
+    serializedVersion: 2
+    m_Bits: 29184
   viewDistance: 16
 --- !u!114 &114844961300589558
 MonoBehaviour:

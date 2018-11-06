@@ -293,9 +293,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4780d61aaabb8884abdf24e778cfbc6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  sightBlock:
     serializedVersion: 2
-    m_Bits: 25088
+    m_Bits: 29184
+  attackBlock:
+    serializedVersion: 2
+    m_Bits: 29184
   viewDistance: 16
 --- !u!114 &114198677971201022
 MonoBehaviour:
@@ -351,6 +354,7 @@ MonoBehaviour:
   nextWaypointDistance: 1
   reachedEndOfPath: 0
   canSeePlayer: 0
+  attackBlocked: 0
   currentState: {fileID: 0}
   lastState: {fileID: 0}
 --- !u!114 &114555841191532290
@@ -378,7 +382,8 @@ MonoBehaviour:
   AbilityCooldown: 5
   weaponHolder: {fileID: 0}
   currentWeapon: {fileID: 0}
-  lookingAtPlayer: 0
+  lookingAt: 0
+  lookPos: {x: 0, y: 0}
 --- !u!114 &114610543433763698
 MonoBehaviour:
   m_ObjectHideFlags: 1

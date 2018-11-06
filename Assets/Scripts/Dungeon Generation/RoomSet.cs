@@ -11,7 +11,7 @@ public class RoomSet : ScriptableObject {
 
     public string RandomizeCurrentMap()
     {
-        currentMap = maps[Random.Range(0, maps.Length - 1)];
+        currentMap = maps[Random.Range(0, maps.Length)] ;
         return currentMap.name;
     }
 

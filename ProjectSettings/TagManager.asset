@@ -22,7 +22,7 @@ TagManager:
   - Obstacles
   - NoEnemyZone
   - IgnoreEntities
-  - 
+  - SeeThroughObstacles
   - 
   - 
   - 
@@ -53,6 +53,9 @@ TagManager:
     locked: 0
   - name: Projectiles
     uniqueID: 815372455
+    locked: 0
+  - name: BottomWalls
+    uniqueID: 2897127937
     locked: 0
   - name: UI
     uniqueID: 1644403387

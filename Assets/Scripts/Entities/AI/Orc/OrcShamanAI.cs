@@ -76,6 +76,6 @@ public class OrcShamanAI : AbstractEnemyAI
 
     public override bool CanAttackTarget()
     {
-        return canSeePlayer && attackState.TargetInRange();
+        return canSeePlayer && attackState.TargetInRange() && !attackBlocked;
     }
 }

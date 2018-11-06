@@ -75,6 +75,6 @@ public class OrcSummonerAI : AbstractEnemyAI
 
     public override bool CanAttackTarget()
     {
-        return summonerState.canCast() && canSeePlayer;
+        return summonerState.canCast() && canSeePlayer && !attackBlocked;
     }
 }

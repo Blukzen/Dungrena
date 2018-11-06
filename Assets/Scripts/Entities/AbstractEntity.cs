@@ -20,6 +20,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     protected Rigidbody2D rb2d;
     protected Collider2D col;
+    protected Animator animator;
     protected SpriteRenderer sprite;
     protected GameEvent onCollision;
 
@@ -31,6 +32,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     {
         rb2d = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
     }
 
@@ -115,6 +117,23 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         if (health <= 0)
             Killed();
 
+    }
+
+    public virtual void Fall()
+    {
+        if (GetComponent<AbstractEnemyAI>() != null)
+            GetComponent<AbstractEnemyAI>().enabled = false;
+
+        canMove = false;
+
+        sprite.sortingLayerName = "Default";
+        sprite.sortingOrder = -10;
+        animator.Play("Fall");
+    }
+
+    public virtual void FinishedFall()
+    {
+        Destroy(gameObject);
     }
 
     public virtual void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
