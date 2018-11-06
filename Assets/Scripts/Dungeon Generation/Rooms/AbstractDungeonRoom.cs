@@ -111,7 +111,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         PlaceTiles(dungeon.roomSet.GetFloorMap(), floor);
         PlaceTiles(dungeon.roomSet.GetObjectMap(), objects);
 
-        // Scan for holes in floor
+        // Block off room exits
     }
 
     protected void PlaceTiles(TileBase[] tiles, Tilemap tileMap)
@@ -147,14 +147,19 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         var floor = dungeon.FloorTilemap;
         var floorTile = dungeon.floorTile;
 
+        var barriers = dungeon.BarrierTilemap;
+        var barrierTile = dungeon.barrierTile;
+
         if (up)
         {
             placeTileRect(new Vector2(transform.position.x - (dungeon.roomConnectionWidth / 2), transform.position.y + (dungeon.roomHeight / 2) + (dungeon.roomSpacing - 1)), dungeon.roomConnectionWidth, dungeon.roomSpacing, floorTile, floor);
+            placeTileRect(new Vector2(transform.position.x - (dungeon.roomConnectionWidth / 2), transform.position.y + (dungeon.roomHeight / 2) + (dungeon.roomSpacing - 3)), dungeon.roomConnectionWidth, dungeon.roomSpacing - 3, barrierTile, barriers);
         }
 
         if (left)
         {
             placeTileRect(new Vector2(transform.position.x + (dungeon.roomWidth / 2), transform.position.y + (dungeon.roomConnectionWidth / 2) - 1), dungeon.roomSpacing, dungeon.roomConnectionWidth, floorTile, floor);
+            placeTileRect(new Vector2(transform.position.x + (dungeon.roomWidth / 2) + 2, transform.position.y + (dungeon.roomConnectionWidth / 2) - 1), dungeon.roomSpacing - 3, dungeon.roomConnectionWidth, barrierTile, barriers);
         }
     }
 

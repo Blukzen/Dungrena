@@ -19,6 +19,7 @@ public class DungeonGenerator : MonoBehaviour
 
     public RuleTile wallTile;
     public WeightedRandomTile floorTile;
+    public Tile barrierTile;
 
     private Bounds dungeonBounds;
     private List<AbstractDungeonRoom> dungeonRooms = new List<AbstractDungeonRoom>();
@@ -48,6 +49,8 @@ public class DungeonGenerator : MonoBehaviour
     public Tilemap FloorTilemap { get { return floor; } }
     private Tilemap objects;
     public Tilemap ObjectTilemap { get { return objects; } }
+    private Tilemap barriers;
+    public Tilemap BarrierTilemap { get { return barriers; } }
     private TilemapRenderer wallRenderer;
     private TilemapRenderer floorRenderer;
     private TilemapRenderer objectsRenderer;
@@ -70,6 +73,7 @@ public class DungeonGenerator : MonoBehaviour
         Destroy(walls.gameObject);
         Destroy(floor.gameObject);
         Destroy(objects.gameObject);
+        Destroy(barriers.gameObject);
         Destroy(enemies.gameObject);
 
         Generate();
@@ -91,6 +95,9 @@ public class DungeonGenerator : MonoBehaviour
         objects.GetComponent<TilemapCollider2D>().isTrigger = true;
         objectsRenderer = objects.GetComponent<TilemapRenderer>();
 
+        barriers = CreateTilemap("Barriers");
+        barriers.gameObject.AddComponent<TilemapCollider2D>();
+
         // Setup tilemaps
         wallRenderer.gameObject.layer = LayerMask.NameToLayer("Obstacles");
         wallRenderer.sortingLayerName = "Obstacles";
@@ -103,6 +110,8 @@ public class DungeonGenerator : MonoBehaviour
         objectsRenderer.gameObject.layer = LayerMask.NameToLayer("SeeThroughObstacles");
         objectsRenderer.sortingLayerName = "Obstacles";
         objectsRenderer.sortingOrder = 9;
+
+        barriers.gameObject.layer = LayerMask.NameToLayer("NoEnemyZone");
 
         enemies = new GameObject("Enemies");
         enemies.transform.parent = transform;

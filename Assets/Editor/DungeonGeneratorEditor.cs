@@ -28,6 +28,7 @@ public class DungeonGeneratorEditor : Editor
 
         dungeon.wallTile = (RuleTile)EditorGUILayout.ObjectField("Wall Tile", dungeon.wallTile, typeof(RuleTile), false);
         dungeon.floorTile = (WeightedRandomTile)EditorGUILayout.ObjectField("Floor Tile", dungeon.floorTile, typeof(WeightedRandomTile), false);
+        dungeon.barrierTile = (Tile)EditorGUILayout.ObjectField("Barrier Tile", dungeon.barrierTile, typeof(Tile), false);
 
         EditorGUILayout.Space();
 
