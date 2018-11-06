@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,65 +8,74 @@ public class RoomSet : ScriptableObject {
     public Texture2D[] maps;
     public ColorMap colorMap;
     private Texture2D currentMap;
-    private int xIndex;
-    private int yIndex;
 
-    public void RandomizeCurrentMap()
+    public string RandomizeCurrentMap()
     {
         currentMap = maps[Random.Range(0, maps.Length - 1)];
-        xIndex = 0;
-        yIndex = 0;
+        return currentMap.name;
     }
 
-    public TileBase GetTile(int x, int y)
+    public List<TileBase[]> GetRandomMap()
     {
-        Color pixelColor = currentMap.GetPixel(x, y);
-        return colorMap.ColorToTile(pixelColor);
+        List<TileBase[]> map = new List<TileBase[]>();
+        RandomizeCurrentMap();
+
+        // Floor layer
+        var floor = GetFloorMap();
+        map.Insert(0, floor);
+
+        // Object layer
+        var objects = GetObjectMap();
+        map.Insert(1, objects);
+
+        return map;
     }
 
-    public IEnumerable<TileBase> GetRandomMap()
+    public TileBase[] GetObjectMap()
     {
-        var map = maps[Random.Range(0, maps.Length - 1)];
-
-        Debug.Log(map.width + " " + map.height);
+        int index = 0;
+        var map = currentMap;
+        TileBase[] tiles = new TileBase[map.width * map.height/2];
 
         for (int x = 0; x < map.width; x++)
         {
-            for (int y = 0; y < map.height; y++)
+            for (int y = 0; y < map.height/2; y++)
             {
                 Color pixelColor = map.GetPixel(x, y);
 
                 if (pixelColor.a == 0)
-                    yield return null;
+                    tiles[index] = null;
                 else
-                    yield return colorMap.ColorToTile(pixelColor);
+                    tiles[index] = colorMap.ColorToTile(pixelColor);
+
+                index++;
             }
         }
+
+        return tiles;
     }
 
-    [CreateAssetMenu(fileName = "New ColorMap", menuName = "DungeonGen/ColorMap", order = 3)]
-    public class ColorMap : ScriptableObject
+    public TileBase[] GetFloorMap()
     {
-        public ColorToTile[] colorMap;
+        int index = 0;
+        var map = currentMap;
+        TileBase[] tiles = new TileBase[map.width * map.height/2];
 
-        public TileBase ColorToTile(Color color)
+        for (int x = 0; x < map.width; x++)
         {
-            foreach (ColorToTile colorTile in colorMap)
+            for (int y = map.height/2; y < map.height; y++)
             {
-                if (colorTile.color.ToString() == color.ToString())
-                {
-                    return colorTile.tile;
-                }
+                Color pixelColor = map.GetPixel(x, y);
+
+                if (pixelColor.a == 0)
+                    tiles[index] = null;
+                else
+                    tiles[index] = colorMap.ColorToTile(pixelColor);
+
+                index++;
             }
-
-            return null;
         }
-    }
 
-    [System.Serializable]
-    public class ColorToTile
-    {
-        public Color color;
-        public TileBase tile;
+        return tiles;
     }
 }

@@ -40,7 +40,7 @@ public class OrcSummonerAI : AbstractEnemyAI
         if (currentState == patrolState || currentState == runnerState)
             animator.SetTrigger("Walking");
 
-        if (currentState == summonerState && entity.lookPos != null)
+        if (currentState == summonerState)
             entity.weaponHolder.transform.LookAtPoint(entity.lookPos);
     }
 

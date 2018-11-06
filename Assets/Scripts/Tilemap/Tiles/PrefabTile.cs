@@ -15,7 +15,6 @@ public class PrefabTile : UnityEngine.Tilemaps.TileBase
     public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
     {
         //This prevents rogue prefab objects from appearing when the Tile palette is present
-#if UNITY_EDITOR
         if (go != null)
         {
             if (go.scene.name == null)
@@ -24,7 +23,6 @@ public class PrefabTile : UnityEngine.Tilemaps.TileBase
                 DestroyImmediate(go.gameObject);
             }
         }
-#endif
 
         if (go != null)
         {

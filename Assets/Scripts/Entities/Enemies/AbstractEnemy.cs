@@ -3,7 +3,6 @@ using System.Collections;
 
 public abstract class AbstractEnemy : AbstractEntity
 {
-    private AbstractAbility attack;
     public Player target;
 
     public float AbilityCooldown;
@@ -21,8 +20,6 @@ public abstract class AbstractEnemy : AbstractEntity
     public override void Awake()
     {
         base.Awake();
-
-        attack = GetComponent<AbstractAbility>();
         target = GameManager.player;
 
         if (transform.Find("Weapon"))
@@ -66,7 +63,7 @@ public abstract class AbstractEnemy : AbstractEntity
 
         var newScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
-        if (lookingAt && lookPos != null)
+        if (lookingAt)
         {
             if (transform.position.x < lookPos.x)
                 newScale.x = 1;

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: OrcDungeonRoomSet
   m_EditorClassIdentifier: 
   maps:
-  - {fileID: 2800000, guid: 7534894d997b71e45a819afc68a6e680, type: 3}
+  - {fileID: 2800000, guid: b289badd72fcd90439aef0b0d05d251a, type: 3}
   colorMap: {fileID: 11400000, guid: c963edd32a4eec743a814be31db9278a, type: 2}

@@ -106,18 +106,25 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
     protected virtual void BuildRoom()
     {
         var floor = dungeon.FloorTilemap;
-        IEnumerable<TileBase> mapData = dungeon.roomSet.GetRandomMap();
-        List<TileBase> tiles = new List<TileBase>(mapData);
-        var index = 0;
+        var objects = dungeon.ObjectTilemap;
 
-        for (int x = (int) bounds.min.x; x < bounds.max.x; x++)
+        dungeon.roomSet.RandomizeCurrentMap();
+        PlaceTiles(dungeon.roomSet.GetFloorMap(), floor);
+        PlaceTiles(dungeon.roomSet.GetObjectMap(), objects);
+    }
+
+    protected void PlaceTiles(TileBase[] tiles, Tilemap tileMap)
+    {
+        int index = 0;
+
+        for (int xPos = (int)bounds.min.x; xPos < bounds.max.x; xPos++)
         {
-            for (int y = (int) bounds.min.y; y < bounds.max.y; y++)
+            for (int yPos = (int)bounds.min.y; yPos < bounds.max.y; yPos++)
             {
                 var currentTile = tiles[index];
                 index++;
 
-                floor.SetTile(new Vector3Int((int)x, (int)y, 0), currentTile);
+                tileMap.SetTile(new Vector3Int((int)xPos, (int)yPos, 0), currentTile);
             }
         }
     }
