@@ -129,6 +129,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         sprite.sortingLayerName = "Default";
         sprite.sortingOrder = -10;
         animator.Play("Fall");
+
+        // TODO: Shrink scale here because animator scale overrides look to mouse in game.
     }
 
     public virtual void FinishedFall()
