@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -67,8 +68,8 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var room in dungeonRooms)
             Destroy(room.gameObject);
         dungeonRooms = new List<AbstractDungeonRoom>();
-
         dungeonMaze = null;
+        dungeonBounds = new Bounds();
 
         Destroy(walls.gameObject);
         Destroy(floor.gameObject);
@@ -136,6 +137,14 @@ public class DungeonGenerator : MonoBehaviour
         }
         Debug.Log(TAG + "Rooms generated");
 
+        // Set dungeon bounds
+        var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
+        dungeonGraph.center = dungeonBounds.center;
+        dungeonGraph.UpdateTransform();
+        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 2, (int) dungeonBounds.size.y * 2, dungeonGraph.nodeSize);
+        dungeonGraph.Scan();
+
+        // Update pathfinding
         StartCoroutine(UpdatePathfinding().GetEnumerator());
 
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
@@ -245,17 +254,28 @@ public class DungeonGenerator : MonoBehaviour
                     room.dungeon = this;
                     room.Generate(col, row);
 
+                    // Add room to rooms list and expand bounds
                     dungeonRooms.Add(room);
+
+                    if (dungeonBounds.size.x < 1)
+                        dungeonBounds = new Bounds(room.Bounds.center, room.Bounds.size);
+                    else
+                        dungeonBounds.Encapsulate(room.Bounds);
+
                     roomsGenerated++;
                     yield return roomsGenerated/dungeonSize;
                 }
             }
         }
+
+        // Expand bounds after rooms are all generated to provide padding
+        dungeonBounds.Expand(5);
     }
 
     IEnumerable UpdatePathfinding()
     {
-        yield return new WaitForEndOfFrame();
+        // Wait for a few frames so (tilemap colliders are updated) before updating pathfinding
+        yield return new WaitForSeconds(0.1f);
 
         foreach (var room in dungeonRooms)
         {
@@ -301,7 +321,8 @@ public class DungeonGenerator : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireCube(new Vector2(dungeonSize / 2 * roomWidth, dungeonSize / 2 * roomHeight), new Vector2(dungeonSize * roomWidth, dungeonSize * roomHeight));
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(dungeonBounds.center, dungeonBounds.size);
     }
 
     public enum RoomType

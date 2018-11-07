@@ -9,7 +9,13 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
 
     private int col, row; // Index in the dungeon maze.
     private Bounds bounds;
-
+    public Bounds Bounds
+    {
+        get
+        {
+            return bounds;
+        }
+    }
 
     public virtual void Generate(int _col, int _row)
     {

@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4714119896912796}
   - component: {fileID: 212818684462757746}
-  - component: {fileID: 60751984653686200}
   - component: {fileID: 114548777181536424}
+  - component: {fileID: 70929426329323642}
   m_Layer: 16
   m_Name: Pillar
   m_TagString: Untagged
@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036017259308116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.04, y: 6.24, z: 0.61762905}
+  m_LocalPosition: {x: 50.648724, y: 18.177114, z: 0.61762905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4253798594485682}
@@ -102,8 +102,8 @@ Transform:
   m_Father: {fileID: 4714119896912796}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &60751984653686200
-PolygonCollider2D:
+--- !u!70 &70929426329323642
+CapsuleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -114,27 +114,9 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.38123894, y: -0.05531931}
-      - {x: -0.38123894, y: -0.3687606}
-      - {x: -0.41888618, y: -0.4937601}
-      - {x: -0.123846054, y: -0.7380986}
-      - {x: 0.1888609, y: -0.74538517}
-      - {x: 0.368865, y: -0.5748739}
-      - {x: 0.41878128, y: -0.4498744}
-      - {x: 0.375, y: -0.375}
-      - {x: 0.375, y: -0.061558247}
+  m_Offset: {x: -0.011281967, y: -0.35365868}
+  m_Size: {x: 0.77435684, y: 0.77435684}
+  m_Direction: 0
 --- !u!114 &114548777181536424
 MonoBehaviour:
   m_ObjectHideFlags: 1
