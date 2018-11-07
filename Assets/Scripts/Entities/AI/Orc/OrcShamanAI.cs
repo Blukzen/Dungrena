@@ -32,6 +32,9 @@ public class OrcShamanAI : AbstractEnemyAI
 
         if (canSeePlayer)
         {
+            if (GameManager.player == null)
+                return;
+
             entity.weaponHolder.transform.LookAtPoint(GameManager.player.transform.position);
         }
         else

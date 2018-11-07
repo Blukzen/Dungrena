@@ -66,6 +66,11 @@ public class Player : AbstractEntity
         GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
     }
 
+    protected override void LateUpdate() {
+        base.LateUpdate();
+        gameObject.GetComponent<UtilityFlipToMouse>().enabled = canMove;
+    }
+
     public override void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
     {
         base.ApplyAttack(damage, knockback, attacker);

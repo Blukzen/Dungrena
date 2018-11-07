@@ -48,7 +48,7 @@ public class PatrolState : AbstractEnemyState
 
     private Vector2 pickNewTarget()
     {
-        Vector2 target = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * Random.Range(maxDistance/9, maxDistance);
+        Vector2 target = enemyAI.GetCurrentRoom().GetRandomPointInRoom(2, 2);
         return target;
     }
 }

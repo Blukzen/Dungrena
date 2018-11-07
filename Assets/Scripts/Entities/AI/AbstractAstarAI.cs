@@ -26,6 +26,7 @@ public abstract class AbstractAstarAI : MonoBehaviour
 
     public void OnPathComplete(Path p) 
     {
+
         // Path pooling. To avoid unnecessary allocations paths are reference counted.
         // Calling Claim will increase the reference count by 1 and Release will reduce
         // it by one, when it reaches zero the path will be pooled and then it may be used
@@ -44,6 +45,12 @@ public abstract class AbstractAstarAI : MonoBehaviour
 
     public void AstarMoveToTarget() 
     {
+        if (AstarPath.active == null)
+            return;
+        
+        if (AstarPath.active.IsAnyGraphUpdateInProgress)
+            return;
+
         if (Time.time > lastRepath + repathRate && seeker.IsDone()) 
         {
             lastRepath = Time.time;

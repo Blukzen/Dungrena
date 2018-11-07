@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class AbstractEntity : MonoBehaviour, IDamageable
@@ -57,10 +59,11 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
         rb2d.velocity = newVel; 
     }
-
-    private void LateUpdate()
+    
+    protected virtual void LateUpdate()
     {
-        UpdateSprite();
+        if (canMove)
+            UpdateSprite();
     }
 
     protected virtual void UpdateSprite()
@@ -125,13 +128,35 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
             GetComponent<AbstractEnemyAI>().enabled = false;
 
         canMove = false;
-
-        sprite.sortingLayerName = "Default";
-        sprite.sortingOrder = -10;
-        animator.Play("Fall");
+        ResetVelocity();
 
         // TODO: Shrink scale here because animator scale overrides look to mouse in game.
+        StartCoroutine(FallingAnim().GetEnumerator());
     }
+
+    private IEnumerable FallingAnim() {
+        float yShrinkRate = 0.009f; 
+        float xShrinkRate = 0.009f;
+        float timeCount = 0;
+
+        // In case flipped
+        xShrinkRate *= transform.localScale.x;
+
+        while (transform.localScale.y > 0) {
+            transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
+            transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
+
+            yield return new WaitForSeconds(0.1f);
+            timeCount += Time.deltaTime;
+
+            if (timeCount > 0.2) {
+                sprite.sortingLayerName = "Default";
+                sprite.sortingOrder = -10;
+            }
+        }
+
+        FinishedFall();
+    } 
 
     public virtual void FinishedFall()
     {
@@ -245,9 +270,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     }
 
     public abstract void EquipItem(AbstractWeapon weapon);
-
-    public virtual void OnAttackBegin(float manaCost) { }
-    public virtual void OnAttackEnd() { }
-
+    public virtual void OnAttackBegin(float manaCost) {}
+    public virtual void OnAttackEnd() {}
     public abstract bool CanSecondaryAttack();
 }

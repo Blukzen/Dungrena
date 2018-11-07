@@ -9,10 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c957502f2378a914f9a838bcdeeb264d, type: 3}
-  m_Name: HealthPoolTile
+  m_Name: SpikeTrapTile
   m_EditorClassIdentifier: 
-  TileSprite: {fileID: 21300018, guid: 1f7e1c4db4f12d94299034489acb24eb, type: 3}
-  TileAssociatedPrefab: {fileID: 1133502997267994, guid: ce5d87ea47f884c4b87c327e0a5a7839,
+  TileSprite: {fileID: 21300006, guid: e98059bdeb8ec454087d61208db537cf, type: 3}
+  TileAssociatedPrefab: {fileID: 1915821193790874, guid: 3718b286412845c44bce71f711ed16ca,
     type: 2}
   PrefabLocalOffset: 0.5
   prefabZOffset: 0

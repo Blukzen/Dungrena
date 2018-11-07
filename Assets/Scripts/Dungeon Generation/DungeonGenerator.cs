@@ -62,16 +62,26 @@ public class DungeonGenerator : MonoBehaviour
     private float loadingProgress = 0;
     private float mazeGenProgress = 0;
     private float roomGenProgress = 0;
+    private float pathfindingProgress = 0;
+    private float enemySpawnProgress = 0;
 
     // Loading states
     private bool loadedMaze = false;
     private bool loadingMaze = false;
     private bool loadedRooms = false;
     private bool loadingRooms = false;
+    private bool loadedPathfinding = false;
+    private bool loadingPathfinding = false;
+    private bool loadedEnemies = false;
+    private bool loadingEnemies = false;
     private bool finishedLoading = false;
 
     public void Regenerate()
     {
+        // Dont regenerate if level isnt even loaded
+        if (!finishedLoading)
+            return;
+
         foreach (var room in dungeonRooms)
             Destroy(room.gameObject);
         dungeonRooms = new List<AbstractDungeonRoom>();
@@ -123,25 +133,53 @@ public class DungeonGenerator : MonoBehaviour
 
         enemies = new GameObject("Enemies");
         enemies.transform.parent = transform;
+
+        loadedEnemies = false;
+        loadedMaze = false;
+        loadedPathfinding = false;
+        loadedRooms = false;
+
+        loadingEnemies = false;
+        loadingMaze = false;
+        loadingPathfinding = false;
+        loadingRooms = false;
+
+        finishedLoading = false;
     }
 
     private void Update() {
         if (finishedLoading)
             return;
 
-        if (!loadedMaze && !loadingMaze) {
+        if (!loadingMaze) {
             Debug.Log(TAG + "Generating maze");
             StartCoroutine(GenerateMaze().GetEnumerator());
             loadingMaze = true;
         }
 
-        if (!loadedRooms && !loadingRooms && loadedMaze) {
+        if (!loadingRooms && loadedMaze) {
+            StopCoroutine(GenerateMaze().GetEnumerator());
             Debug.Log(TAG + "Generating rooms");
             loadingRooms = true;
             StartCoroutine(GenerateRooms().GetEnumerator());
         }
 
-        if (!finishedLoading && loadedMaze && loadedRooms) {
+        if (!loadingPathfinding && loadedRooms) {
+            StopCoroutine(GenerateRooms().GetEnumerator());
+            Debug.Log(TAG + "Generating enemy pathfinding");
+            loadingPathfinding = true;
+            StartCoroutine(UpdatePathfinding().GetEnumerator());
+        }
+
+        if (!loadingEnemies && loadedPathfinding) {
+            StopCoroutine(UpdatePathfinding().GetEnumerator());
+            Debug.Log(TAG + "Spawning enemies");
+            loadingEnemies = true;
+            StartCoroutine(SpawnEnemies().GetEnumerator());
+        }
+
+        if (!finishedLoading && loadedMaze && loadedRooms && loadedPathfinding && loadedEnemies) {
+            StopCoroutine(SpawnEnemies().GetEnumerator());
             finishedLoading = true;
             FinishLoading();
         }
@@ -149,17 +187,8 @@ public class DungeonGenerator : MonoBehaviour
         UpdateProgress();
     }
 
-    private void FinishLoading() {
-        // Set dungeon bounds
-        var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
-        dungeonGraph.center = dungeonBounds.center;
-        dungeonGraph.UpdateTransform();
-        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 2, (int) dungeonBounds.size.y * 2, dungeonGraph.nodeSize);
-        dungeonGraph.Scan();
-
-        // Update pathfinding
-        StartCoroutine(UpdatePathfinding().GetEnumerator());
-
+    private void FinishLoading() 
+    {
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
         shopRoom = GetComponentInChildren<DungeonShopRoom>();
         bossRoom = GetComponentInChildren<DungeonBossRoom>();
@@ -170,7 +199,10 @@ public class DungeonGenerator : MonoBehaviour
 
     private void UpdateProgress()
     {
-        loadingProgress = (mazeGenProgress + roomGenProgress) / 2;
+        loadingProgress = (mazeGenProgress + roomGenProgress + pathfindingProgress + enemySpawnProgress) / 4;
+
+        //Debug.Log(loadingProgress + " " + mazeGenProgress + " " + roomGenProgress + " " + pathfindingProgress + " " + enemySpawnProgress);
+        // In case ui isnt loaded yet
         if (UIManager.loadingScreen != null)
             UIManager.loadingScreen.Progress = loadingProgress;
     }
@@ -300,13 +332,41 @@ public class DungeonGenerator : MonoBehaviour
     {
         // Wait for a few frames so (tilemap colliders are updated) before updating pathfinding
         yield return new WaitForSeconds(0.1f);
+        float roomCount = 0;
+
+         // Set dungeon bounds
+        var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
+        dungeonGraph.center = dungeonBounds.center;
+        dungeonGraph.UpdateTransform();
+        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 2, (int) dungeonBounds.size.y * 2, dungeonGraph.nodeSize);
+        dungeonGraph.Scan();
 
         foreach (var room in dungeonRooms)
         {
             room.UpdatePathfinding();
+            roomCount++;
+
+            pathfindingProgress = roomCount/dungeonSize;
+            
+            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return null;
+        loadedPathfinding = true;
+    }
+
+    IEnumerable SpawnEnemies() 
+    {
+        float roomCount = 0;
+
+        foreach (var room in dungeonRooms) {
+            room.SpawnEnemies(roomDifficulty);
+            roomCount++;
+
+            enemySpawnProgress = roomCount/dungeonSize;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        loadedEnemies = true;
     }
 
     private Tilemap CreateTilemap(string name)

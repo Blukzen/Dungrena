@@ -13,6 +13,10 @@ public class CameraController : MonoBehaviour
         if (GameManager.player == null)
             return;
 
+        // Test level case
+        if (GameManager.player.GetCurrentRoom() == null)
+            return;
+        
         targetPosition = GameManager.player.GetCurrentRoom().transform.position;
         transform.position = Vector3.Lerp(this.transform.position, new Vector3(targetPosition.x, targetPosition.y, -10), damping);
     }

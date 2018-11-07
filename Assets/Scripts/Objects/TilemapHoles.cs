@@ -21,10 +21,16 @@ public class TilemapHoles : MonoBehaviour
 
         var entityBounds = collision.bounds;
 
+        // Check bottom edge
         if (!tilemapCollider.OverlapPoint(new Vector2(entityBounds.min.x, entityBounds.min.y)))
             return;
-
         if (!tilemapCollider.OverlapPoint(new Vector2(entityBounds.max.x, entityBounds.min.y)))
+            return;
+
+        // Check top edge
+        if (!tilemapCollider.OverlapPoint(new Vector2(entityBounds.min.x, entityBounds.max.y)))
+            return;
+        if (!tilemapCollider.OverlapPoint(new Vector2(entityBounds.max.x, entityBounds.max.y)))
             return;
 
         entity.Fall();

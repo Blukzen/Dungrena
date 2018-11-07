@@ -20,3 +20,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: b64568cfb52c71541b2dc30203689c06, type: 2}
   - color: {r: 0.18823531, g: 0.17254902, b: 0.18039216, a: 1}
     tile: {fileID: 11400000, guid: d024fd1045a621d4387d4331f83e8b7e, type: 2}
+  - color: {r: 0.6627451, g: 0.23137257, b: 0.23137257, a: 1}
+    tile: {fileID: 11400000, guid: 79ab928054895ad4ba5e66c03ee4e0da, type: 2}
+  - color: {r: 0.22352943, g: 0.47058827, b: 0.65882355, a: 1}
+    tile: {fileID: 11400000, guid: 9f18363ec97c8ab42bab8f23d3f45b2d, type: 2}
+  - color: {r: 0.8745099, g: 0.96470594, b: 0.9607844, a: 1}
+    tile: {fileID: 11400000, guid: d5f75df0e68ff864e8e409bb1fb4a1a6, type: 2}

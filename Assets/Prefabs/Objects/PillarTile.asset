@@ -15,4 +15,4 @@ MonoBehaviour:
   TileAssociatedPrefab: {fileID: 1036017259308116, guid: acbebc3b21ba1b94985f92836f253192,
     type: 2}
   PrefabLocalOffset: 0.5
-  prefabZOffset: -1
+  prefabZOffset: 0

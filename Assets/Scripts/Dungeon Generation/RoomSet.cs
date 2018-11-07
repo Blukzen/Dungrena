@@ -5,13 +5,35 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "New RoomSet", menuName = "DungeonGen/RoomSet", order = 3)]
 public class RoomSet : ScriptableObject {
 
+    public Texture2D[] spawnMaps;
+    public Texture2D[] shopMaps;
+    public Texture2D[] bossMaps;
     public Texture2D[] maps;
     public ColorMap colorMap;
     private Texture2D currentMap;
 
     public string RandomizeCurrentMap()
     {
-        currentMap = maps[Random.Range(0, maps.Length)] ;
+        currentMap = maps[GameManager.rng.Next(0, maps.Length)] ;
+        return currentMap.name;
+    }
+
+    public string RandomizeCurrentSpawnMap() 
+    {
+        int num = GameManager.rng.Next(0, spawnMaps.Length);
+        currentMap = spawnMaps[num];
+        return currentMap.name;
+    }
+
+    public string RandomizeCurrentShopMap() 
+    {
+        currentMap = shopMaps[GameManager.rng.Next(0, shopMaps.Length)];
+        return currentMap.name;
+    }
+
+    public string RandomizeCurrentBossMap() 
+    {
+        currentMap = bossMaps[GameManager.rng.Next(0, bossMaps.Length)];
         return currentMap.name;
     }
 

@@ -113,7 +113,11 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         var floor = dungeon.FloorTilemap;
         var objects = dungeon.ObjectTilemap;
 
-        dungeon.roomSet.RandomizeCurrentMap();
+        if (this is DungeonSpawnRoom)
+            dungeon.roomSet.RandomizeCurrentSpawnMap();
+        else
+            dungeon.roomSet.RandomizeCurrentMap();
+            
         PlaceTiles(dungeon.roomSet.GetFloorMap(), floor);
         PlaceTiles(dungeon.roomSet.GetObjectMap(), objects);
 
@@ -190,7 +194,7 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
         }
     }
 
-    protected void SpawnEnemies(int numEnemies)
+    public virtual void SpawnEnemies(int numEnemies)
     {
         for (int num = 0; num < numEnemies; num++)
         {
