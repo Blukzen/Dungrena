@@ -22,6 +22,8 @@ public class DungeonGenerator : MonoBehaviour
     public WeightedRandomTile floorTile;
     public Tile barrierTile;
 
+    public GameEvent GeneratedEvent;
+
     private Bounds dungeonBounds;
     private List<AbstractDungeonRoom> dungeonRooms = new List<AbstractDungeonRoom>();
     public List<AbstractDungeonRoom> DungeonRooms
@@ -61,7 +63,12 @@ public class DungeonGenerator : MonoBehaviour
     private float mazeGenProgress = 0;
     private float roomGenProgress = 0;
 
-    private bool updatedPathfinding = false;
+    // Loading states
+    private bool loadedMaze = false;
+    private bool loadingMaze = false;
+    private bool loadedRooms = false;
+    private bool loadingRooms = false;
+    private bool finishedLoading = false;
 
     public void Regenerate()
     {
@@ -116,27 +123,33 @@ public class DungeonGenerator : MonoBehaviour
 
         enemies = new GameObject("Enemies");
         enemies.transform.parent = transform;
+    }
 
-        // Generate dungeon maze
-        Debug.Log(TAG + "Generating maze");
-        foreach(float progress in GenerateMaze())
-        {
-            mazeGenProgress = progress;
-            UpdateProgress();
+    private void Update() {
+        if (finishedLoading)
+            return;
+
+        if (!loadedMaze && !loadingMaze) {
+            Debug.Log(TAG + "Generating maze");
+            StartCoroutine(GenerateMaze().GetEnumerator());
+            loadingMaze = true;
         }
 
-        mazeGenProgress = 1;
-        Debug.Log(TAG + "Maze generated");
-
-        // Create rooms
-        Debug.Log(TAG + "Generating rooms");
-        foreach(float progress in GenerateRooms())
-        {
-            roomGenProgress = progress;
-            UpdateProgress();
+        if (!loadedRooms && !loadingRooms && loadedMaze) {
+            Debug.Log(TAG + "Generating rooms");
+            loadingRooms = true;
+            StartCoroutine(GenerateRooms().GetEnumerator());
         }
-        Debug.Log(TAG + "Rooms generated");
 
+        if (!finishedLoading && loadedMaze && loadedRooms) {
+            finishedLoading = true;
+            FinishLoading();
+        }
+
+        UpdateProgress();
+    }
+
+    private void FinishLoading() {
         // Set dungeon bounds
         var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
         dungeonGraph.center = dungeonBounds.center;
@@ -150,6 +163,9 @@ public class DungeonGenerator : MonoBehaviour
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
         shopRoom = GetComponentInChildren<DungeonShopRoom>();
         bossRoom = GetComponentInChildren<DungeonBossRoom>();
+
+        Debug.Log(TAG + "Dungeon loaded");
+        GeneratedEvent.Raise();
     }
 
     private void UpdateProgress()
@@ -159,7 +175,7 @@ public class DungeonGenerator : MonoBehaviour
             UIManager.loadingScreen.Progress = loadingProgress;
     }
 
-    IEnumerable<float> GenerateMaze()
+    IEnumerable GenerateMaze()
     {
         float numberOfRooms = 0;
         bool canPlace = false;
@@ -235,14 +251,18 @@ public class DungeonGenerator : MonoBehaviour
             dungeonMaze.SetValue(RoomType.Normal, (int)pos.x, (int)pos.y);
             numberOfRooms++;
             canPlace = false;
-            yield return numberOfRooms/dungeonSize;
-            if (numberOfRooms == dungeonSize) yield return 1;
+            mazeGenProgress = numberOfRooms/dungeonSize;
+
+            yield return new WaitForSeconds(0.1f);
         }
+
+        mazeGenProgress = 1;
+        loadedMaze = true;
     }
 
-    IEnumerable<float> GenerateRooms()
+    IEnumerable GenerateRooms()
     {
-        float roomsGenerated = 0;
+        float roomCount = 0;
 
         for (int col = 0; col < dungeonMaze.GetLength(0); col++)
         {
@@ -262,14 +282,18 @@ public class DungeonGenerator : MonoBehaviour
                     else
                         dungeonBounds.Encapsulate(room.Bounds);
 
-                    roomsGenerated++;
-                    yield return roomsGenerated/dungeonSize;
+                    roomCount++;
+                    roomGenProgress = roomCount/dungeonSize;
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
         }
 
         // Expand bounds after rooms are all generated to provide padding
         dungeonBounds.Expand(5);
+
+        roomGenProgress = 1;
+        loadedRooms = true;
     }
 
     IEnumerable UpdatePathfinding()

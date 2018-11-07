@@ -54,15 +54,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomHeight: 12
   roomWidth: 20
-  roomSpacing: 6
+  roomSpacing: 4
   roomConnectionWidth: 4
-  roomDifficulty: 6
+  roomDifficulty: 5
   dungeonSize: 12
   spawnList: {fileID: 11400000, guid: 86d1ff42a01c53d4c8b037604bb3d30a, type: 2}
   roomSet: {fileID: 11400000, guid: b2405bcfbf3635b49b6e651048596c14, type: 2}
   wallTile: {fileID: 11400000, guid: ec9492e5d1226f344b9edea4683c87ee, type: 2}
   floorTile: {fileID: 11400000, guid: cb1c40182fe2dc245a2c578b0cbc61dc, type: 2}
   barrierTile: {fileID: 11400000, guid: 2c72c9fdb7641be49a8f35640761d1a4, type: 2}
+  GeneratedEvent: {fileID: 11400000, guid: 18b6a90f2a09bfb40a66b152d5917177, type: 2}
 --- !u!156049354 &2569400266799949110
 Grid:
   m_ObjectHideFlags: 1

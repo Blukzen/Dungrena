@@ -66,9 +66,6 @@ public class GameManager : Singleton<GameManager>
 
             dungeonGenerator = dungeonGeneratorGO.GetComponent<DungeonGenerator>();
             dungeonGenerator.Generate();
-            SpawnEnemies();
-            SpawnPlayer();
-            UIManager.ShowHUD();
         }
     }
 
@@ -89,7 +86,9 @@ public class GameManager : Singleton<GameManager>
 
     public void DungeonGenerated() 
     {
+        SpawnEnemies();
         SpawnPlayer();
+        UIManager.ShowHUD();
     }
 
     public void RegenerateDungeon() 

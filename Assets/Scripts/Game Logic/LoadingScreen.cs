@@ -16,7 +16,7 @@ public class LoadingScreen : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         if (isLoading)
         {

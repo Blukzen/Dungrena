@@ -20,7 +20,11 @@ public class ChaseState : AbstractEnemyState
         // If can see player update path to player and move towards.
         if (enemyAI.canSeePlayer && !enemyAI.CanAttackTarget())
         {
-            enemyAI.targetPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            if (GameManager.player == null)
+                return;
+
+            enemyAI.targetPosition = GameManager.player.transform.position;
+
             enemyAI.AstarMoveToTarget();
         }
 

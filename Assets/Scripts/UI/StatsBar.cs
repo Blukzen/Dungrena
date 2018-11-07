@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class StatsBar : MonoBehaviour
 {
-    public Transform bar;
-
+    public RectTransform bar;
+    public float fullWidth;
     public void UpdateBar(float current, float max)
     {
         if (bar == null)
@@ -14,6 +14,6 @@ public class StatsBar : MonoBehaviour
             return;
         }
 
-        bar.localScale = new Vector3(current / max, 1, 1);
+        bar.sizeDelta = new Vector2(current/max * fullWidth, bar.sizeDelta.y);
     }
 }

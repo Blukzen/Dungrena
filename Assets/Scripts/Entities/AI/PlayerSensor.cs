@@ -26,7 +26,6 @@ public class PlayerSensor : MonoBehaviour
         // If player is null keep checking the GameManager for the player
         if (player == null)
         {
-            Debug.LogWarning("[PlayerSensor] " + "No player game object");
             player = GameManager.player == null ? null : GameManager.player.gameObject;
             return;
         }

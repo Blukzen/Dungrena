@@ -32,6 +32,10 @@ public class DungeonGeneratorEditor : Editor
 
         EditorGUILayout.Space();
 
+        dungeon.GeneratedEvent = (GameEvent) EditorGUILayout.ObjectField("Generated Event", dungeon.GeneratedEvent, typeof(GameEvent), false);
+
+        EditorGUILayout.Space();
+
         if (GUILayout.Button("Regenerate Dungeon") && Application.isPlaying)
         {
             dungeon.Regenerate();
