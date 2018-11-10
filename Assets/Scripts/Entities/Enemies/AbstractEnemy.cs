@@ -81,10 +81,44 @@ public abstract class AbstractEnemy : AbstractEntity
         transform.localScale = newScale;
     }
 
-    // TODO: Death effect
-    public override void Killed()
+    protected override IEnumerable FallingAnim() {
+        float yShrinkRate = 0.009f; 
+        float xShrinkRate = 0.009f;
+        float timeCount = 0;
+
+        // In case flipped
+        xShrinkRate *= transform.localScale.x;
+
+        while (transform.localScale.y > 0) {
+            transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
+            transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
+
+            if (currentWeapon != null) {
+                currentWeapon.GetComponent<SpriteRenderer>().color = sprite.color;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+            timeCount += Time.deltaTime;
+
+            if (timeCount > 0.01) {
+                sprite.sortingLayerName = "Default";
+                sprite.sortingOrder = -10;
+            }
+        }
+
+        FinishedFall();
+    } 
+
+    public override void Killed(AbstractEntity killer)
     {
-        base.Killed();
+        base.Killed(killer);
+
+        if (killer is Player) {
+            GameManager.player.Heal((int) maxHealth/4);
+            GameManager.score += (int) maxHealth;
+        }
+
         Destroy(gameObject);
     }
 }

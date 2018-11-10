@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     private Camera mainCamera;
 
-    public int score = 0;
+    public static int score = 0;
 
     private void OnEnable()
     {

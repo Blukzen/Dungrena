@@ -117,6 +117,14 @@ public class Player : AbstractEntity
         UIManager.UpdateMana(mana, maxMana);
     }
 
+    public void Heal(int amount) {
+        Debug.Log("HEALING" + amount);
+        if (health + amount > maxHealth) health = maxHealth;
+        else health += amount;
+
+        UIManager.UpdateHealth(health, maxHealth);
+    }
+
     public override void EquipItem(AbstractWeapon weapon)
     {
         if (currentWeapon != null)
@@ -146,6 +154,39 @@ public class Player : AbstractEntity
     {
         return mana >= currentWeapon.secondaryAttackManaCost;
     }
+
+    protected override IEnumerable FallingAnim() {
+        float yShrinkRate = 0.009f; 
+        float xShrinkRate = 0.009f;
+
+        // In case flipped
+        xShrinkRate *= transform.localScale.x;
+
+        while (transform.localScale.y > 0) {
+            transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
+            transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
+
+            if (currentWeapon != null) {
+                currentWeapon.GetComponent<SpriteRenderer>().color = sprite.color;
+            }
+
+            if (transform.localScale.y < 0.9) {
+                sprite.sortingLayerName = "Default";
+                sprite.sortingOrder = -500000;
+
+                if (currentWeapon != null) {
+                    currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = sprite.sortingLayerName;
+                    currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder;
+                }
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        FinishedFall();
+    } 
+
 
     public AbstractDungeonRoom GetCurrentRoom()
     {

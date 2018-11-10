@@ -120,8 +120,6 @@ public abstract class AbstractDungeonRoom : MonoBehaviour
             
         PlaceTiles(dungeon.roomSet.GetFloorMap(), floor);
         PlaceTiles(dungeon.roomSet.GetObjectMap(), objects);
-
-        // Block off room exits
     }
 
     protected void PlaceTiles(TileBase[] tiles, Tilemap tileMap)

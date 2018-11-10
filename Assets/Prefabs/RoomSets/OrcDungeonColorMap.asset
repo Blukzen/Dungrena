@@ -24,5 +24,13 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 79ab928054895ad4ba5e66c03ee4e0da, type: 2}
   - color: {r: 0.22352943, g: 0.47058827, b: 0.65882355, a: 1}
     tile: {fileID: 11400000, guid: 9f18363ec97c8ab42bab8f23d3f45b2d, type: 2}
+  - color: {r: 0.8117648, g: 0.77647066, b: 0.72156864, a: 1}
+    tile: {fileID: 11400000, guid: 2b0306f6381a2e046a552430a2500c21, type: 2}
+  - color: {r: 0.7137255, g: 0.8352942, b: 0.23529413, a: 1}
+    tile: {fileID: 11400000, guid: 2db96301333515240876195bf9042306, type: 2}
+  - color: {r: 0.3529412, g: 0.3254902, b: 0.3254902, a: 1}
+    tile: {fileID: 11400000, guid: 4d11d42f33c77c44e9a4aa0a1d64d9f9, type: 2}
+  - color: {r: 0.4901961, g: 0.43921572, b: 0.4431373, a: 1}
+    tile: {fileID: 11400000, guid: 575512dc136d9ea4e87d82984c434962, type: 2}
   - color: {r: 0.8745099, g: 0.96470594, b: 0.9607844, a: 1}
     tile: {fileID: 11400000, guid: d5f75df0e68ff864e8e409bb1fb4a1a6, type: 2}

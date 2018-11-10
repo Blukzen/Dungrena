@@ -7,6 +7,7 @@ public class DungeonGeneratorEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
 
         DungeonGenerator dungeon = (DungeonGenerator) target;
 
@@ -21,6 +22,12 @@ public class DungeonGeneratorEditor : Editor
 
         dungeon.spawnList = (SpawnList)EditorGUILayout.ObjectField("Spawn List", dungeon.spawnList, typeof(SpawnList), false);
         dungeon.roomSet = (RoomSet)EditorGUILayout.ObjectField("Room Object List", dungeon.roomSet, typeof(RoomSet), false);
+
+        SerializedProperty starterWeapons = serializedObject.FindProperty("starterWeapons");
+        EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(starterWeapons, true);
+        if (EditorGUI.EndChangeCheck())
+            serializedObject.ApplyModifiedProperties();
 
         EditorGUILayout.Space();
 

@@ -21,6 +21,11 @@ public class ProjectileWeaponAttackState : AbstractEnemyState
 
     public override void execute(AbstractEnemyAI enemyAI)
     {
+        if (GameManager.player == null) {
+            Executing = false;
+            return;
+        }
+
         entity.StopMoving();
         entity.lookPos = GameManager.player.transform.position;
 

@@ -22,6 +22,8 @@ public class DungeonGenerator : MonoBehaviour
     public WeightedRandomTile floorTile;
     public Tile barrierTile;
 
+    public AbstractWeapon[] starterWeapons;
+
     public GameEvent GeneratedEvent;
 
     private Bounds dungeonBounds;
@@ -192,6 +194,9 @@ public class DungeonGenerator : MonoBehaviour
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
         shopRoom = GetComponentInChildren<DungeonShopRoom>();
         bossRoom = GetComponentInChildren<DungeonBossRoom>();
+
+        // Spawn a random starter weapon
+        Instantiate(starterWeapons[GameManager.rng.Next(starterWeapons.Length)], spawnRoom.GetRandomPointInRoom(1, 1), Quaternion.identity);
 
         Debug.Log(TAG + "Dungeon loaded");
         GeneratedEvent.Raise();

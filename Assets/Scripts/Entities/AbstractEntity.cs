@@ -112,8 +112,16 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         return newVel;
     }
 
-    // TODO: Handle death event.
-    public void Damage(float amount)
+    public virtual void Damage(float amount, AbstractEntity attacker)
+    {
+        health -= amount;
+
+        if (health <= 0)
+            Killed(attacker);
+
+    }
+
+    public virtual void Damage(float amount)
     {
         health -= amount;
 
@@ -134,7 +142,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         StartCoroutine(FallingAnim().GetEnumerator());
     }
 
-    private IEnumerable FallingAnim() {
+    protected virtual IEnumerable FallingAnim() {
         float yShrinkRate = 0.009f; 
         float xShrinkRate = 0.009f;
         float timeCount = 0;
@@ -145,11 +153,12 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         while (transform.localScale.y > 0) {
             transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
             transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
 
             yield return new WaitForSeconds(0.1f);
             timeCount += Time.deltaTime;
 
-            if (timeCount > 0.2) {
+            if (timeCount > 0.1) {
                 sprite.sortingLayerName = "Default";
                 sprite.sortingOrder = -10;
             }
@@ -174,6 +183,12 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         DamageEffectPlay();
 
         // Damage
+        Damage(damage, attacker);
+    }
+
+    public virtual void ApplyAttack(float damage)
+    {
+        DamageEffectPlay();
         Damage(damage);
     }
 
@@ -183,9 +198,15 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
             Instantiate(DamageEffect, transform.position, Quaternion.identity);
     }
 
-    public virtual void Killed()
+    public virtual void Killed(AbstractEntity killer)
     {
 
+    }
+
+     public virtual void Killed()
+    {
+        // TODO DEATH ANIM
+        Destroy(this.gameObject);
     }
 
     // Set movement input
