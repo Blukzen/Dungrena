@@ -57,7 +57,7 @@ MonoBehaviour:
   roomSpacing: 4
   roomConnectionWidth: 4
   roomDifficulty: 4
-  dungeonSize: 12
+  dungeonSize: 20
   spawnList: {fileID: 11400000, guid: 86d1ff42a01c53d4c8b037604bb3d30a, type: 2}
   roomSet: {fileID: 11400000, guid: b2405bcfbf3635b49b6e651048596c14, type: 2}
   wallTile: {fileID: 11400000, guid: ec9492e5d1226f344b9edea4683c87ee, type: 2}

@@ -115,7 +115,6 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public virtual void Damage(float amount, AbstractEntity attacker)
     {
         health -= amount;
-
         if (health <= 0)
             Killed(attacker);
 

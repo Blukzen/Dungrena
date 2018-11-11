@@ -39,13 +39,17 @@ public class SpikeTrap : MonoBehaviour
 	protected void SpikesOn() 
 	{
 		collider2D.enabled = true;
-		AstarPath.active.UpdateGraphs(collider2D.bounds);
+		var bounds = new Bounds(collider2D.bounds.center, collider2D.bounds.size);
+		bounds.Expand(0.6f);
+		AstarPath.active.UpdateGraphs(bounds);
 	}
 
 	protected void SpikesOff() 
 	{
 		collider2D.enabled = false;
-		AstarPath.active.UpdateGraphs(collider2D.bounds);
+		var bounds = new Bounds(collider2D.bounds.center, collider2D.bounds.size);
+		bounds.Expand(0.6f);
+		AstarPath.active.UpdateGraphs(bounds);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) 

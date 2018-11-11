@@ -343,7 +343,7 @@ public class DungeonGenerator : MonoBehaviour
         var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
         dungeonGraph.center = dungeonBounds.center;
         dungeonGraph.UpdateTransform();
-        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 2, (int) dungeonBounds.size.y * 2, dungeonGraph.nodeSize);
+        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 4, (int) dungeonBounds.size.y * 4, dungeonGraph.nodeSize);
         dungeonGraph.Scan();
 
         foreach (var room in dungeonRooms)

@@ -77,6 +77,12 @@ public class Player : AbstractEntity
         UIManager.UpdateHealth(health, maxHealth);
     }
 
+    public override void ApplyAttack(float damage) 
+    {
+        base.ApplyAttack(damage);
+        UIManager.UpdateHealth(health, maxHealth);
+    }
+
     public override void DamageEffectPlay()
     {
         base.DamageEffectPlay();

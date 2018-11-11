@@ -18,6 +18,9 @@ MonoBehaviour:
   bossMaps: []
   maps:
   - {fileID: 2800000, guid: d09020d2aee7afe4b9890fb0aedee3d5, type: 3}
+  - {fileID: 2800000, guid: adb0073248b3bfa438df46d68228fc45, type: 3}
+  - {fileID: 2800000, guid: e465d6d0e98f2fc429c31d5c9bc7327b, type: 3}
+  - {fileID: 2800000, guid: d0cd4bb22cf57d14492ebde346616e5d, type: 3}
   - {fileID: 2800000, guid: a4401735e7e13984aa170792832b12dd, type: 3}
   - {fileID: 2800000, guid: dab5c2848a67e224e9d74c5fe0f3332e, type: 3}
   - {fileID: 2800000, guid: 89c11af77140eb94a8c0c6b3c100de1f, type: 3}
@@ -26,8 +29,9 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 1f18ad3cc79440645aeff4fd168accfd, type: 3}
   - {fileID: 2800000, guid: 479d44b769a3e414d97027cc25b5555d, type: 3}
   - {fileID: 2800000, guid: 0ca5c70113a067f43b3de01f7c102e03, type: 3}
+  - {fileID: 2800000, guid: a3d8d85eeb58d7a499155338f521e139, type: 3}
   - {fileID: 2800000, guid: ac95cc76b217e844fadd44de439ad46d, type: 3}
   - {fileID: 2800000, guid: 908710fe66aae7a419fc4b55ded63bca, type: 3}
   - {fileID: 2800000, guid: 576c03990e18be84a82682906a1c6a21, type: 3}
-  - {fileID: 2800000, guid: a3d8d85eeb58d7a499155338f521e139, type: 3}
+  - {fileID: 2800000, guid: e0a763006002ad14e9906503561d3652, type: 3}
   colorMap: {fileID: 11400000, guid: c963edd32a4eec743a814be31db9278a, type: 2}
