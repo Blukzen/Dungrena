@@ -15,11 +15,14 @@ public class Player : AbstractEntity
 
     private AbstractItem selectedItem;
 
-    private void Update() 
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             if (currentWeapon != null) currentWeapon.Attack();
-        } else if (Input.GetMouseButtonDown(1)) {
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
             if (currentWeapon != null)
                 currentWeapon.SecondaryAttack();
         }
@@ -55,18 +58,19 @@ public class Player : AbstractEntity
     }
 
     // Update is called once per frame
-    void FixedUpdate () 
+    void FixedUpdate()
     {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         SetMovement(direction);
-        UpdatePhysics();    
-        
+        UpdatePhysics();
+
 
         GetComponent<Animator>().SetFloat("Movement", direction.magnitude);
     }
 
-    protected override void LateUpdate() {
+    protected override void LateUpdate()
+    {
         base.LateUpdate();
         gameObject.GetComponent<UtilityFlipToMouse>().enabled = canMove;
     }
@@ -77,7 +81,7 @@ public class Player : AbstractEntity
         UIManager.UpdateHealth(health, maxHealth);
     }
 
-    public override void ApplyAttack(float damage) 
+    public override void ApplyAttack(float damage)
     {
         base.ApplyAttack(damage);
         UIManager.UpdateHealth(health, maxHealth);
@@ -95,10 +99,10 @@ public class Player : AbstractEntity
     {
         base.UpdateSprite();
         if (currentWeapon != null)
-            currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder -1;
+            currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder - 1;
     }
 
-    public bool UseMana(float amount) 
+    public bool UseMana(float amount)
     {
         if (mana < amount)
             Debug.LogWarning("[Player] " + "Using more mana than we have!");
@@ -109,7 +113,7 @@ public class Player : AbstractEntity
 
         return true;
     }
-    
+
     protected void ManaRegen()
     {
         if (mana == maxMana)
@@ -123,8 +127,8 @@ public class Player : AbstractEntity
         UIManager.UpdateMana(mana, maxMana);
     }
 
-    public void Heal(int amount) {
-        Debug.Log("HEALING" + amount);
+    public void Heal(int amount)
+    {
         if (health + amount > maxHealth) health = maxHealth;
         else health += amount;
 
@@ -161,27 +165,32 @@ public class Player : AbstractEntity
         return mana >= currentWeapon.secondaryAttackManaCost;
     }
 
-    protected override IEnumerable FallingAnim() {
-        float yShrinkRate = 0.009f; 
+    protected override IEnumerable FallingAnim()
+    {
+        float yShrinkRate = 0.009f;
         float xShrinkRate = 0.009f;
 
         // In case flipped
         xShrinkRate *= transform.localScale.x;
 
-        while (transform.localScale.y > 0) {
+        while (transform.localScale.y > 0)
+        {
             transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
             transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
 
-            if (currentWeapon != null) {
+            if (currentWeapon != null)
+            {
                 currentWeapon.GetComponent<SpriteRenderer>().color = sprite.color;
             }
 
-            if (transform.localScale.y < 0.9) {
+            if (transform.localScale.y < 0.9)
+            {
                 sprite.sortingLayerName = "Default";
                 sprite.sortingOrder = -500000;
 
-                if (currentWeapon != null) {
+                if (currentWeapon != null)
+                {
                     currentWeapon.GetComponent<SpriteRenderer>().sortingLayerName = sprite.sortingLayerName;
                     currentWeapon.GetComponent<SpriteRenderer>().sortingOrder = sprite.sortingOrder;
                 }
@@ -191,7 +200,13 @@ public class Player : AbstractEntity
         }
 
         FinishedFall();
-    } 
+    }
+
+    public override void Killed()
+    {
+        GameManager.instance.GameOver();
+        Destroy(gameObject);
+    }
 
 
     public AbstractDungeonRoom GetCurrentRoom()

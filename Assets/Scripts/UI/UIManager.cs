@@ -10,11 +10,13 @@ public class UIManager : Singleton<UIManager>
     protected static StatsBar healthBar;
     protected static StatsBar manaBar;
     public static LoadingScreen loadingScreen;
+    public static GameoverScreen gameoverScreen;
 
     public ItemHoverInfo _itemInfo;
     public StatsBar _healthBar;
     public StatsBar _manaBar;
     public LoadingScreen _loadingScreen;
+    public GameoverScreen _gameoverScreen;
 
     private void Start()
     {
@@ -22,6 +24,7 @@ public class UIManager : Singleton<UIManager>
         healthBar = _healthBar;
         manaBar = _manaBar;
         loadingScreen = _loadingScreen;
+        gameoverScreen = _gameoverScreen;
 
         if (itemInfo != null && itemInfo.gameObject.activeSelf)
             itemInfo.gameObject.SetActive(false);
@@ -45,6 +48,12 @@ public class UIManager : Singleton<UIManager>
         manaBar.gameObject.SetActive(false);
     }
 
+    public static void ResetHUD()
+    {
+        healthBar.UpdateBar(1, 1);
+        manaBar.UpdateBar(1, 1);
+    }
+
     public static void ShowWeaponInfo(AbstractWeapon weapon)
     {
         if (itemInfo == null)
@@ -55,6 +64,16 @@ public class UIManager : Singleton<UIManager>
 
         itemInfo.gameObject.SetActive(true);
         itemInfo.ShowWeaponInfo(weapon);
+    }
+
+    public static void GameOver()
+    {
+        gameoverScreen.gameObject.SetActive(true);
+    }
+
+    public static void BackToMenu()
+    {
+        gameoverScreen.FadeOut();
     }
 
     public static void HideWeaponInfo()

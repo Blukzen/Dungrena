@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
@@ -45,6 +46,27 @@ public class GameManager : Singleton<GameManager>
         sceneToLoad = SceneManager.GetActiveScene().buildIndex + 1;
     }
 
+    public void LoadScene(string sceneName)
+    {
+        UIManager.loadingScreen.gameObject.SetActive(true);
+        sceneToLoad = SceneManager.GetSceneByName(sceneName).buildIndex;
+    }
+
+    public void ReturnToMenu()
+    {
+        UIManager.BackToMenu();
+        Destroy(astarPath.gameObject);
+        score = 0;
+        UIManager.ResetHUD();
+        SceneManager.LoadScene(0);
+    }
+
+    public void GameOver()
+    {
+        UIManager.HideHUD();
+        UIManager.GameOver();
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
     {
         Debug.Log(TAG + "Scene loaded " + scene.name);
@@ -69,7 +91,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void SpawnPlayer() 
+    private void SpawnPlayer()
     {
         if (player == null)
             player = Instantiate(playerPrefab);
@@ -84,14 +106,14 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void DungeonGenerated() 
+    public void DungeonGenerated()
     {
         SpawnEnemies();
         SpawnPlayer();
         UIManager.ShowHUD();
     }
 
-    public void RegenerateDungeon() 
+    public void RegenerateDungeon()
     {
     }
 

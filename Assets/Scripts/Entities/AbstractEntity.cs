@@ -57,9 +57,9 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
                 newVel.y = Approach(newVel.y, 0, _friction / 2);
         }
 
-        rb2d.velocity = newVel; 
+        rb2d.velocity = newVel;
     }
-    
+
     protected virtual void LateUpdate()
     {
         if (canMove)
@@ -141,15 +141,17 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
         StartCoroutine(FallingAnim().GetEnumerator());
     }
 
-    protected virtual IEnumerable FallingAnim() {
-        float yShrinkRate = 0.009f; 
+    protected virtual IEnumerable FallingAnim()
+    {
+        float yShrinkRate = 0.009f;
         float xShrinkRate = 0.009f;
         float timeCount = 0;
 
         // In case flipped
         xShrinkRate *= transform.localScale.x;
 
-        while (transform.localScale.y > 0) {
+        while (transform.localScale.y > 0)
+        {
             transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
             transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
@@ -157,18 +159,19 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(0.1f);
             timeCount += Time.deltaTime;
 
-            if (timeCount > 0.1) {
+            if (timeCount > 0.1)
+            {
                 sprite.sortingLayerName = "Default";
                 sprite.sortingOrder = -10;
             }
         }
 
         FinishedFall();
-    } 
+    }
 
     public virtual void FinishedFall()
     {
-        Destroy(gameObject);
+        Killed();
     }
 
     public virtual void ApplyAttack(float damage, float knockback, AbstractEntity attacker)
@@ -194,7 +197,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     public virtual void DamageEffectPlay()
     {
         if (DamageEffect != null) { }
-            Instantiate(DamageEffect, transform.position, Quaternion.identity);
+        Instantiate(DamageEffect, transform.position, Quaternion.identity);
     }
 
     public virtual void Killed(AbstractEntity killer)
@@ -202,7 +205,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
 
     }
 
-     public virtual void Killed()
+    public virtual void Killed()
     {
         // TODO DEATH ANIM
         Destroy(this.gameObject);
@@ -227,7 +230,8 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     }
 
     // For adding force to rb2d
-    public void AddForce(Vector2 direction, float strength) {
+    public void AddForce(Vector2 direction, float strength)
+    {
         rb2d.AddForce(direction.normalized * strength);
     }
 
@@ -290,7 +294,7 @@ public abstract class AbstractEntity : MonoBehaviour, IDamageable
     }
 
     public abstract void EquipItem(AbstractWeapon weapon);
-    public virtual void OnAttackBegin(float manaCost) {}
-    public virtual void OnAttackEnd() {}
+    public virtual void OnAttackBegin(float manaCost) { }
+    public virtual void OnAttackEnd() { }
     public abstract bool CanSecondaryAttack();
 }

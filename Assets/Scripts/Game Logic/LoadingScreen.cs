@@ -14,6 +14,7 @@ public class LoadingScreen : MonoBehaviour
     public void OnEnable()
     {
         animator = GetComponent<Animator>();
+        animator.Play("FadeToLoadingScreen");
     }
 
     public void FixedUpdate()
@@ -21,7 +22,8 @@ public class LoadingScreen : MonoBehaviour
         if (isLoading)
         {
             loadingBar.UpdateBar(progress, 1);
-        } if (progress == 1)
+        }
+        if (progress == 1)
         {
             animator.SetTrigger("isLoading");
         }
@@ -36,6 +38,7 @@ public class LoadingScreen : MonoBehaviour
     public void EndLoading()
     {
         isLoading = false;
+        progress = 0;
         loadingBar.UpdateBar(0, 1);
         gameObject.SetActive(false);
     }
