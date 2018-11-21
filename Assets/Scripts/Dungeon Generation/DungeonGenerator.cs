@@ -38,7 +38,7 @@ public class DungeonGenerator : MonoBehaviour
     private DungeonShopRoom shopRoom;
     public DungeonShopRoom ShopRoom { get { return shopRoom; } }
     private DungeonBossRoom bossRoom;
-    public DungeonBossRoom BossRoom { get { return bossRoom;  } }
+    public DungeonBossRoom BossRoom { get { return bossRoom; } }
     private GameObject enemies;
     public GameObject Enemies { get { return enemies; } }
 
@@ -149,38 +149,44 @@ public class DungeonGenerator : MonoBehaviour
         finishedLoading = false;
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (finishedLoading)
             return;
 
-        if (!loadingMaze) {
+        if (!loadingMaze)
+        {
             Debug.Log(TAG + "Generating maze");
             StartCoroutine(GenerateMaze().GetEnumerator());
             loadingMaze = true;
         }
 
-        if (!loadingRooms && loadedMaze) {
+        if (!loadingRooms && loadedMaze)
+        {
             StopCoroutine(GenerateMaze().GetEnumerator());
             Debug.Log(TAG + "Generating rooms");
             loadingRooms = true;
             StartCoroutine(GenerateRooms().GetEnumerator());
         }
 
-        if (!loadingPathfinding && loadedRooms) {
+        if (!loadingPathfinding && loadedRooms)
+        {
             StopCoroutine(GenerateRooms().GetEnumerator());
             Debug.Log(TAG + "Generating enemy pathfinding");
             loadingPathfinding = true;
             StartCoroutine(UpdatePathfinding().GetEnumerator());
         }
 
-        if (!loadingEnemies && loadedPathfinding) {
+        if (!loadingEnemies && loadedPathfinding)
+        {
             StopCoroutine(UpdatePathfinding().GetEnumerator());
             Debug.Log(TAG + "Spawning enemies");
             loadingEnemies = true;
             StartCoroutine(SpawnEnemies().GetEnumerator());
         }
 
-        if (!finishedLoading && loadedMaze && loadedRooms && loadedPathfinding && loadedEnemies) {
+        if (!finishedLoading && loadedMaze && loadedRooms && loadedPathfinding && loadedEnemies)
+        {
             StopCoroutine(SpawnEnemies().GetEnumerator());
             finishedLoading = true;
             FinishLoading();
@@ -189,7 +195,7 @@ public class DungeonGenerator : MonoBehaviour
         UpdateProgress();
     }
 
-    private void FinishLoading() 
+    private void FinishLoading()
     {
         spawnRoom = GetComponentInChildren<DungeonSpawnRoom>();
         shopRoom = GetComponentInChildren<DungeonShopRoom>();
@@ -224,7 +230,7 @@ public class DungeonGenerator : MonoBehaviour
             // Spawn room
             if (numberOfRooms == 0)
             {
-                dungeonMaze.SetValue(RoomType.Spawn, (int) pos.x, (int) pos.y);
+                dungeonMaze.SetValue(RoomType.Spawn, (int)pos.x, (int)pos.y);
                 numberOfRooms++;
             }
 
@@ -260,14 +266,14 @@ public class DungeonGenerator : MonoBehaviour
                     pos.y -= 1;
 
                 // Make sure we aren't on top of another room
-                if (dungeonMaze[(int) pos.x, (int) pos.y] == 0)
+                if (dungeonMaze[(int)pos.x, (int)pos.y] == 0)
                 {
                     canPlace = true;
                 }
             }
 
             // Shop room
-            if (numberOfRooms == dungeonSize/2)
+            if (numberOfRooms == dungeonSize / 2)
             {
                 dungeonMaze.SetValue(RoomType.Shop, (int)pos.x, (int)pos.y);
                 numberOfRooms++;
@@ -276,7 +282,7 @@ public class DungeonGenerator : MonoBehaviour
             }
 
             // Boss room
-            if (numberOfRooms == dungeonSize-1)
+            if (numberOfRooms == dungeonSize - 1)
             {
                 dungeonMaze.SetValue(RoomType.Boss, (int)pos.x, (int)pos.y);
                 numberOfRooms++;
@@ -288,7 +294,7 @@ public class DungeonGenerator : MonoBehaviour
             dungeonMaze.SetValue(RoomType.Normal, (int)pos.x, (int)pos.y);
             numberOfRooms++;
             canPlace = false;
-            mazeGenProgress = numberOfRooms/dungeonSize;
+            mazeGenProgress = numberOfRooms / dungeonSize;
 
             yield return new WaitForSeconds(0.1f);
         }
@@ -320,7 +326,7 @@ public class DungeonGenerator : MonoBehaviour
                         dungeonBounds.Encapsulate(room.Bounds);
 
                     roomCount++;
-                    roomGenProgress = roomCount/dungeonSize;
+                    roomGenProgress = roomCount / dungeonSize;
                     yield return new WaitForSeconds(0.1f);
                 }
             }
@@ -339,11 +345,11 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         float roomCount = 0;
 
-         // Set dungeon bounds
-        var dungeonGraph = (GridGraph) AstarPath.active.graphs[0];
+        // Set dungeon bounds
+        var dungeonGraph = (GridGraph)AstarPath.active.graphs[0];
         dungeonGraph.center = dungeonBounds.center;
         dungeonGraph.UpdateTransform();
-        dungeonGraph.SetDimensions((int) dungeonBounds.size.x * 4, (int) dungeonBounds.size.y * 4, dungeonGraph.nodeSize);
+        dungeonGraph.SetDimensions((int)dungeonBounds.size.x * 4, (int)dungeonBounds.size.y * 4, dungeonGraph.nodeSize);
         dungeonGraph.Scan();
 
         foreach (var room in dungeonRooms)
@@ -351,23 +357,24 @@ public class DungeonGenerator : MonoBehaviour
             room.UpdatePathfinding();
             roomCount++;
 
-            pathfindingProgress = roomCount/dungeonSize;
-            
+            pathfindingProgress = roomCount / dungeonSize;
+
             yield return new WaitForSeconds(0.1f);
         }
 
         loadedPathfinding = true;
     }
 
-    IEnumerable SpawnEnemies() 
+    IEnumerable SpawnEnemies()
     {
         float roomCount = 0;
 
-        foreach (var room in dungeonRooms) {
+        foreach (var room in dungeonRooms)
+        {
             room.SpawnEnemies(roomDifficulty);
             roomCount++;
 
-            enemySpawnProgress = roomCount/dungeonSize;
+            enemySpawnProgress = roomCount / dungeonSize;
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -386,7 +393,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         GameObject roomGO;
 
-        switch(type)
+        switch (type)
         {
             case RoomType.Spawn:
                 roomGO = new GameObject("Spawn Room", typeof(DungeonSpawnRoom));
