@@ -97,7 +97,6 @@ public class GameManager : Singleton<GameManager>
             player = Instantiate(playerPrefab);
 
         Camera.main.transform.position = dungeonGenerator.SpawnRoom.transform.position;
-        player.transform.parent = transform;
         player.transform.position = dungeonGenerator.SpawnRoom.GetRandomPointInRoom(3, 3);
     }
 

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffect: {fileID: 0}
+  tile: {fileID: 11400000, guid: c5388e5bd4917ad43bea3ac968140793, type: 2}
   openRange: 1
 --- !u!212 &212649885475036238
 SpriteRenderer:
