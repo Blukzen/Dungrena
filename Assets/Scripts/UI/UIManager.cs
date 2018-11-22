@@ -9,6 +9,7 @@ public class UIManager : Singleton<UIManager>
     protected static ItemHoverInfo itemInfo;
     protected static StatsBar healthBar;
     protected static StatsBar manaBar;
+    protected static GameObject popupNumberPrefab;
     public static LoadingScreen loadingScreen;
     public static GameoverScreen gameoverScreen;
 
@@ -25,6 +26,8 @@ public class UIManager : Singleton<UIManager>
         manaBar = _manaBar;
         loadingScreen = _loadingScreen;
         gameoverScreen = _gameoverScreen;
+
+        popupNumberPrefab = Resources.Load<GameObject>("Prefabs/Effects/Popup Number UI");
 
         if (itemInfo != null && itemInfo.gameObject.activeSelf)
             itemInfo.gameObject.SetActive(false);
@@ -105,5 +108,37 @@ public class UIManager : Singleton<UIManager>
         }
 
         healthBar.UpdateBar(current, max);
+    }
+
+    public static void PopupDamageEnemy(Vector2 position, int amount)
+    {
+        var screenPos = Camera.main.WorldToScreenPoint(position);
+        var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
+        popup.transform.parent = UIManager.instance.transform;
+        popup.GetComponentInChildren<PopupText>().DamageEnemy(amount);
+    }
+
+    public static void PopupDamagePlayer(Vector2 position, int amount)
+    {
+        var screenPos = Camera.main.WorldToScreenPoint(position);
+        var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
+        popup.transform.parent = UIManager.instance.transform;
+        popup.GetComponentInChildren<PopupText>().DamagePlayer(amount);
+    }
+
+    public static void PopupHeal(Vector2 position, int amount)
+    {
+        var screenPos = Camera.main.WorldToScreenPoint(position);
+        var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
+        popup.transform.parent = UIManager.instance.transform;
+        popup.GetComponentInChildren<PopupText>().Heal(amount);
+    }
+
+    public static void PopupManaHeal(Vector2 position, int amount)
+    {
+        var screenPos = Camera.main.WorldToScreenPoint(position);
+        var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
+        popup.transform.parent = UIManager.instance.transform;
+        popup.GetComponentInChildren<PopupText>().ManaRegen(amount);
     }
 }

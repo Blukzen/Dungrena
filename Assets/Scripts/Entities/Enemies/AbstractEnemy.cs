@@ -70,7 +70,8 @@ public abstract class AbstractEnemy : AbstractEntity
             else if (transform.position.x > lookPos.x)
                 newScale.x = -1;
 
-        } else
+        }
+        else
         {
             if (rb2d.velocity.x < -0.5)
                 newScale.x = -1;
@@ -81,44 +82,62 @@ public abstract class AbstractEnemy : AbstractEntity
         transform.localScale = newScale;
     }
 
-    protected override IEnumerable FallingAnim() {
-        float yShrinkRate = 0.009f; 
+    protected override IEnumerable FallingAnim()
+    {
+        float yShrinkRate = 0.009f;
         float xShrinkRate = 0.009f;
         float timeCount = 0;
 
         // In case flipped
         xShrinkRate *= transform.localScale.x;
 
-        while (transform.localScale.y > 0) {
+        while (transform.localScale.y > 0)
+        {
             transform.localScale = new Vector3(transform.localScale.x - xShrinkRate, transform.localScale.y - yShrinkRate);
             transform.position = new Vector2(transform.position.x, transform.position.y - yShrinkRate);
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - yShrinkRate);
 
-            if (currentWeapon != null) {
+            if (currentWeapon != null)
+            {
                 currentWeapon.GetComponent<SpriteRenderer>().color = sprite.color;
             }
 
             yield return new WaitForSeconds(0.1f);
             timeCount += Time.deltaTime;
 
-            if (timeCount > 0.01) {
+            if (timeCount > 0.01)
+            {
                 sprite.sortingLayerName = "Default";
                 sprite.sortingOrder = -10;
             }
         }
 
         FinishedFall();
-    } 
+    }
 
+    public override void Damage(float amount)
+    {
+        base.Damage(amount);
+        UIManager.PopupDamageEnemy(transform.position, (int)amount);
+    }
+
+    public override void Damage(float amount, AbstractEntity attacker)
+    {
+        base.Damage(amount, attacker);
+        if (attacker is Player)
+        {
+            GameManager.score += (int)amount;
+        }
+        UIManager.PopupDamageEnemy(transform.position, (int)amount);
+    }
     public override void Killed(AbstractEntity killer)
     {
         base.Killed(killer);
-
-        if (killer is Player) {
-            GameManager.player.Heal((int) maxHealth/4);
-            GameManager.score += (int) maxHealth;
+        if (killer is Player)
+        {
+            GameManager.player.Heal((int)maxHealth / 4);
+            GameManager.score += (int)maxHealth;
         }
-
         Destroy(gameObject);
     }
 }

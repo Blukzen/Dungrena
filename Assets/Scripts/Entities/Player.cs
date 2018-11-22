@@ -125,6 +125,7 @@ public class Player : AbstractEntity
         mana += 1;
         lastManaRegen = Time.time;
         UIManager.UpdateMana(mana, maxMana);
+        UIManager.PopupManaHeal(transform.position, 1);
     }
 
     public void Heal(int amount)
@@ -133,6 +134,19 @@ public class Player : AbstractEntity
         else health += amount;
 
         UIManager.UpdateHealth(health, maxHealth);
+        UIManager.PopupHeal(transform.position, amount);
+    }
+
+    public override void Damage(float amount)
+    {
+        base.Damage(amount);
+        UIManager.PopupDamagePlayer(transform.position, (int)amount);
+    }
+
+    public override void Damage(float amount, AbstractEntity attacker)
+    {
+        base.Damage(amount, attacker);
+        UIManager.PopupDamagePlayer(transform.position, (int)amount);
     }
 
     public override void EquipItem(AbstractWeapon weapon)
