@@ -65,6 +65,8 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.HideHUD();
         UIManager.GameOver();
+        Debug.Log("[Kongregate] Sending highscore " + score);
+        Application.ExternalCall("kongregate.stats.submit", "Highscore", score);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
