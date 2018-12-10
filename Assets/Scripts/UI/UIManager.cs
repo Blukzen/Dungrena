@@ -114,7 +114,7 @@ public class UIManager : Singleton<UIManager>
     {
         var screenPos = Camera.main.WorldToScreenPoint(position);
         var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
-        popup.transform.parent = UIManager.instance.transform;
+        popup.transform.SetParent(UIManager.instance.transform);
         popup.GetComponentInChildren<PopupText>().DamageEnemy(amount);
     }
 
@@ -122,7 +122,7 @@ public class UIManager : Singleton<UIManager>
     {
         var screenPos = Camera.main.WorldToScreenPoint(position);
         var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
-        popup.transform.parent = UIManager.instance.transform;
+        popup.transform.SetParent(UIManager.instance.transform);
         popup.GetComponentInChildren<PopupText>().DamagePlayer(amount);
     }
 
@@ -130,7 +130,7 @@ public class UIManager : Singleton<UIManager>
     {
         var screenPos = Camera.main.WorldToScreenPoint(position);
         var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
-        popup.transform.parent = UIManager.instance.transform;
+        popup.transform.SetParent(UIManager.instance.transform);
         popup.GetComponentInChildren<PopupText>().Heal(amount);
     }
 
@@ -138,7 +138,7 @@ public class UIManager : Singleton<UIManager>
     {
         var screenPos = Camera.main.WorldToScreenPoint(position);
         var popup = Instantiate(popupNumberPrefab, screenPos, Quaternion.identity);
-        popup.transform.parent = UIManager.instance.transform;
+        popup.transform.SetParent(UIManager.instance.transform);
         popup.GetComponentInChildren<PopupText>().ManaRegen(amount);
     }
 }

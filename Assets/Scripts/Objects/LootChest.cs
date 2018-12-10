@@ -31,11 +31,11 @@ public class LootChest : MonoBehaviour
             Instantiate(spawnEffect, transform.position, Quaternion.identity);
 
         Instantiate(ItemDatabase.instance.items.RandomIndex(), transform.position, Quaternion.identity);
-        var tilePos = transform.position;
-        //tilemap.SetTile(new Vector3Int((int)tilePos.x, (int)tilePos.y, (int)tilePos.z), tile);
+    }
 
-        Debug.Log(tilemap.GetTile(new Vector3Int((int)tilePos.x, (int)tilePos.y, (int)tilePos.z)).name);
-        Destroy(gameObject);
+    public void DestroySelf()
+    {
+        Destroy(this.gameObject);
     }
 
     private void OnMouseEnter()

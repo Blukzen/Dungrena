@@ -16,7 +16,8 @@ public class DungeonSpawnRoom : AbstractDungeonRoom
 
     }
 
-    public override void SpawnEnemies(int numEnemies) {
+    public override void SpawnEnemies(int numEnemies)
+    {
         return;
     }
 }
