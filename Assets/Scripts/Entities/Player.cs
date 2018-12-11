@@ -222,6 +222,11 @@ public class Player : AbstractEntity
         Destroy(gameObject);
     }
 
+    public override void Killed(AbstractEntity killer)
+    {
+        Killed();
+    }
+
 
     public AbstractDungeonRoom GetCurrentRoom()
     {
