@@ -7,4 +7,4 @@ Disclaimer:
 First attempt at making a game.
 
 [Play it here](https://www.kongregate.com/games/xpuresurf/dungrena?sfa=permalink&referrer=xpuresurf)
-[Screenshot](https://github.com/BradenRobertsL/Dungrena/blob/master/gifs/Dungrena1.gif);
+[Screenshot](https://github.com/BradenRobertsL/Dungrena/blob/master/gifs/Dungrena1.gif)
